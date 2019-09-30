@@ -2,21 +2,14 @@
 <div class="modal" id="jobModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title" id="jobModalTitle"></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <div class="modal-body" id="jobModalBody"></div>
 
-            <!-- Modal body -->
-            <div class="modal-body" id="jobModalBody">
-
-            </div>
-
-            <!-- Modal footer -->
             <div class="modal-footer">
-                {{--<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>--}}
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
 
         </div>
@@ -49,9 +42,7 @@
                         @if(isset($applyjob) && $applyjob != null)
                         @foreach($applyjob as $aj)
                         @if($job->jobId ==  $aj->fkjobId)
-
-                                <h5><span class="badge badge-success">Applied</span></h5>
-
+                            <h5><span class="badge badge-success">Applied</span></h5>
                             @php
                             $flag= "True"
                             @endphp
@@ -64,43 +55,31 @@
                             @if(isset($cvStatus) && $cvStatus == null)
                                  <label style="color: red">Please complete your cv to apply job</label>
                              @else
+                                @php
+                                    if (Auth::check()){
+                                        $au = true;
+                                    }else{
+                                        $au = false;
+                                    }
+                                @endphp
                         {{--<a href="{{route('candidate.ApplyJob',$job->jobId)}}"><button type="button" class="btn btn-primary">Apply Now</button></a>--}}
-                                <button type="button" class="btn btn-info btn-lg" data-job-title="{{$job->title}}" data-panel-id="{{$job->jobId}}" onclick="applyJob(this)">Apply Now</button>
+                                <button type="button" class="btn btn-info btn-lg" data-job-title="{{$job->title}}" data-panel-id="{{$job->jobId}}" data-auth="{{$au}}" onclick="applyJob(this)">Apply Now</button>
                             @endif
-
                         @endif
-
                     </div>
-
-
                 </div>
             </div>
         </div>
-        <!-- end col -->
     </div>
-
-
 @endforeach
 
-
 <ul class="pagination">
-
-
-        <li class="page-item @if($jobs->currentPage()== 1) disabled @endif"> <a data-id="{{$jobs->previousPageUrl()}}" href="javascript:void(0)" class="page-link pagiNextPrevBtn"><i class="ion-ios-arrow-left"></i>Prev</a></li>
-
-
+    <li class="page-item @if($jobs->currentPage()== 1) disabled @endif"> <a data-id="{{$jobs->previousPageUrl()}}" href="javascript:void(0)" class="page-link pagiNextPrevBtn"><i class="ion-ios-arrow-left"></i>Prev</a></li>
     @for($i=$jobs->perPage(); $i <= $jobs->total();$i=($i+$jobs->perPage()))
         <li  @if($jobs->currentPage() == $i) class="page-item active " @else class="page-item" @endif> <a class="page-link pagiNextPrevBtn" data-id="{{$jobs->url($i)}}" href="javascript:void(0)">{{$i}}</a></li>
     @endfor
-
         <li  class="page-item @if($jobs->lastPage()==$jobs->currentPage()) disabled @endif"><a data-id="{{$jobs->nextPageUrl()}}" href="javascript:void(0)"  class="page-link pagiNextPrevBtn">Next<i class="ion-ios-arrow-right"></i></a></li>
-
 </ul>
-
-
-
-
-
 
 <script>
     $(".pagiNextPrevBtn").on("click",function() {
@@ -112,26 +91,36 @@
         var id=$(x).data('panel-id');
         var title=$(x).data('job-title');
 
-        $.ajax({
-            type: 'POST',
-            url: "{!! route('job.applyJobModal') !!}",
-            cache: false,
-            data: {_token: "{{csrf_token()}}",jobId:id,jobTitle:title},
-            success: function (data) {
-//                console.log(data);
-                $('#jobModalTitle').html(title);
-                $('#jobModalBody').html(data);
-                $('#jobModal').modal();
-
-            }
-        });
+        if($(x).data('auth')){
+            $.ajax({
+                type: 'POST',
+                url: "{!! route('job.applyJobModal') !!}",
+                cache: false,
+                data: {_token: "{{csrf_token()}}",jobId:id,jobTitle:title},
+                success: function (data) {
+                    $('#jobModalTitle').html(title);
+                    $('#jobModalBody').html(data);
+                    $('#jobModal').modal();
+                }
+            });
+        }else{
+            $.alert({
+                title: 'Alert!',
+                type: 'Red',
+                content: 'You need to Sing up/ Sing in first',
+                buttons: {
+                    tryAgain: {
+                        text: 'Ok',
+                        btnClass: 'btn-red',
+                        action: function () {
+                            window.location.assign("{{url('/login')}}");
+                        }
+                    }
+                }
+            });
+        }
     }
-
-
 </script>
-
-
-
 {{--<div class="row">--}}
     {{--<div class="col-lg-12">--}}
         {{--<div class="card m-b-30">--}}

@@ -19,7 +19,7 @@ class GuestController extends Controller
     {
         $allZone=Zone::where('status',1)->get();
 
-        $jobs=Job::select('job.jobId','job.title','job.details','job.details','job.deadline','job.pdflink')
+        $jobs=Job::leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')
             ->where('job.status',1)
             ->where('job.deadline','>=',date('Y-m-d'));
         if($r->search !=""){
@@ -31,6 +31,6 @@ class GuestController extends Controller
 
         $jobs=$jobs->paginate(10);
 
-        return view('job.getAllJob',compact('jobs','allZone'));
+        return view('guest.getAvailableJobs',compact('jobs','allZone'));
     }
 }

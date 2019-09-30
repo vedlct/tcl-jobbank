@@ -398,7 +398,7 @@ Route::get('manage/Type-of-employment','Admin\SettingsController@typeOfEmploymen
     ->name('manage.typeOfEmployment');
 Route::post('manage/Type-of-employment/insert','Admin\SettingsController@inserttypeOfEmployment')->name('manage.typeOfEmployment.insert');
 Route::post('manage/Type-of-employment/edit','Admin\SettingsController@edittypeOfEmployment')->name('manage.typeOfEmployment.edit');
-Route::post('manage/Type-of-employment/update/{id}','Admin\SettingsController@updatetypeOfEmployment')->name('manage.typeOfEmployment.update');
+Route::post('manage/Type-/Admin-Add-New-Jobof-employment/update/{id}','Admin\SettingsController@updatetypeOfEmployment')->name('manage.typeOfEmployment.update');
 
 /*change email template*/
 Route::get('change-template/interview-card','Admin\SettingsController@changeinterviewcard')->name('changeemailtemplate.interviewcard');
@@ -411,5 +411,6 @@ Route::get('/email-template-settings','Admin\SettingsController@emailTemplateSet
 Route::post('change-template/update-template','Admin\SettingsController@updateemailtemplate')->name('changeemailtemplate.updateemailtemplate');
 
 /* Guest */
-//Route::get('/available-job','GuestController@guestAvailablejob');
-//Route::post('/available-job/all','GuestController@guestGetJobData');
+Route::get('/available-job','GuestController@guestAvailablejob');
+Route::post('/available-job/all','GuestController@guestGetJobData');
+Route::get('/withdraw-application/{id}','EmployeeApplicationController@withdrawApplication');

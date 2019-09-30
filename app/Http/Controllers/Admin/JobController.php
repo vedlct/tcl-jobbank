@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\JobQuestion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Job;
@@ -17,48 +18,27 @@ class JobController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-
             if (Auth::check()){
-
                 if(Auth::user()->fkuserTypeId==USER_TYPE['Admin'] || Auth::user()->fkuserTypeId==USER_TYPE['Emp'] ){
-
                     return $next($request);
-
                 }else{
-
                     return redirect('/');
                 }
-
             }else{
-
                 return redirect('/');
             }
-
-
-
-
-
         });
     }
-
-   public function index(){
-
-
-   }
 
    public function addNewJob(){
 
        if(Auth::user()->fkuserTypeId==USER_TYPE['Emp']){
            $myZone=HR::where('fkuserId',Auth::user()->userId)->first();
            $allZone=DB::table('zone')->where('zoneId',$myZone->fkzoneId)->where('status',1)->get();
-
-
        }elseif(Auth::user()->fkuserTypeId==USER_TYPE['Admin']){
            $allZone=DB::table('zone')->where('status',1)->get();
        }
-       
        return view('Admin.job.addJob',compact('allZone'));
 
    }
@@ -73,8 +53,6 @@ class JobController extends Controller
 
    public function getManageJobData(Request $r){
 
-
-
        $allJobList=Job::select('job.jobId','job.title as jobTitle','job.position as jobPosition','job.deadline','u1.name as createBy','job.createDate','u2.name as updateBy',
            'job.updateTime','job.status','job.pdflink','zone.zoneName',DB::raw("DATE(job.postDate) as postDate"))
            ->leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')
@@ -82,7 +60,6 @@ class JobController extends Controller
            ->leftJoin('user as u2', 'u2.userId', '=', 'job.updateBy')
            ->where('job.status', '!=',0)
            ->orderBy('job.postDate','desc');
-
 
        if ($r->zonefilter){
            $allJobList= $allJobList->where('job.fkzoneId',$r->zonefilter);
@@ -113,21 +90,19 @@ class JobController extends Controller
    }
    public function jobEdit($jobId){
 
-       $jobInfo=Job::leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')->where('jobId',$jobId)
-           ->get();
+       $info=Job::leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')
+           ->leftJoin('jobquestion', 'jobquestion.jobId', '=', 'job.jobId')
+           ->where('job.jobId',$jobId)
+           ->first();
 
        if(Auth::user()->fkuserTypeId==USER_TYPE['Emp']){
            $myZone=HR::where('fkuserId',Auth::user()->userId)->first();
            $allZone=DB::table('zone')->where('zoneId',$myZone->fkzoneId)->where('status',1)->get();
-
-
        }elseif(Auth::user()->fkuserTypeId==USER_TYPE['Admin']){
            $allZone=DB::table('zone')->where('status',1)->get();
        }
 
-      // $allZone=DB::table('zone')->get();
-
-       return view('Admin.job.editJob',compact('jobInfo','allZone'));
+       return view('Admin.job.editJob',compact('info','allZone'));
 
    }
    public function jobStatusUpdate(Request $r){
@@ -177,8 +152,20 @@ class JobController extends Controller
            'deadline' => 'required|date',
            'zone' => 'required',
            'status' => 'required',
-
-
+           'question1' => 'required',
+           'question2' => 'required',
+           'question3' => 'required',
+           'question4' => 'required',
+           'question5' => 'required',
+           'answer5' => 'required',
+           'question6' => 'required',
+           'answer6' => 'required',
+           'question7' => 'required',
+           'answer7' => 'required',
+           'question8' => 'required',
+           'answer8' => 'required',
+           'question9' => 'required',
+           'question10' => 'required',
        ];
 
        $customMessages = [
@@ -196,10 +183,8 @@ class JobController extends Controller
        $jobInfo->status=$r->status;
        $jobInfo->jobstatus=$r->jobStatus;
        $jobInfo->fkzoneId=$r->zone;
-
        $jobInfo->updateBy=Auth::user()->userId;
        $jobInfo->updateTime=Carbon::now();
-
 
        if($r->hasFile('jobPdf')){
            $img = $r->file('jobPdf');
@@ -209,7 +194,24 @@ class JobController extends Controller
            $upload_success = $img->move($location, $filename);
        }
 
-       $jobInfo->save();
+       if($jobInfo->save()){
+           $jobquestion = jobquestion::where('jobId',$r->jobId)->first();
+           $jobquestion->question1 = $r->question1;
+           $jobquestion->question2 = $r->question2;
+           $jobquestion->question3 = $r->question3;
+           $jobquestion->question4 = $r->question4;
+           $jobquestion->question5 = $r->question5;
+           $jobquestion->question5Answer = $r->answer5;
+           $jobquestion->question6 = $r->question6;
+           $jobquestion->question6Answer = $r->answer6;
+           $jobquestion->question7 = $r->question7;
+           $jobquestion->question7Answer = $r->answer7;
+           $jobquestion->question8 = $r->question8;
+           $jobquestion->question8Answer = $r->answer8;
+           $jobquestion->question9 = $r->question9;
+           $jobquestion->question10 = $r->question10;
+           $jobquestion->save();
+       }
 
        Session::flash('message', 'Job Edited Successfully');
        return redirect()->route('job.admin.manage');
@@ -217,26 +219,32 @@ class JobController extends Controller
    }
    public function jobInsert(Request $r){
 
-       $rules = [
-
+        $rules = [
            'title' => 'required',
            'position' => 'required',
            'salary' => 'required|max:45',
            'jobStatus' => 'required',
            'deadline' => 'required|date',
+           'jobDetails' => 'required',
            'zone' => 'required',
            'status' => 'required',
-
-
+           'question1' => 'required',
+           'question2' => 'required',
+           'question3' => 'required',
+           'question4' => 'required',
+           'question5' => 'required',
+           'answer5' => 'required',
+           'question6' => 'required',
+           'answer6' => 'required',
+           'question7' => 'required',
+           'answer7' => 'required',
+           'question8' => 'required',
+           'answer8' => 'required',
+           'question9' => 'required',
+           'question10' => 'required',
        ];
 
-       $customMessages = [
-//            'unique' => 'This User is already been registered.Please Login !'
-       ];
-
-       $this->validate($r, $rules, $customMessages);
-
-
+       $this->validate($r, $rules);
 
        $jobInfo= new Job();
 
@@ -250,8 +258,6 @@ class JobController extends Controller
        $jobInfo->fkzoneId=$r->zone;
        $jobInfo->createBy=Auth::user()->userId;
        $jobInfo->createDate=Carbon::now();
-
-
        $jobInfo->updateBy=Auth::user()->userId;
        $jobInfo->updateTime=Carbon::now();
 
@@ -269,7 +275,25 @@ class JobController extends Controller
            $upload_success = $img->move($location, $filename);
        }
 
-       $jobInfo->save();
+       if($jobInfo->save()){
+           $jobquestion = new jobquestion();
+           $jobquestion->jobId = $jobInfo->jobId;
+           $jobquestion->question1 = $r->question1;
+           $jobquestion->question2 = $r->question2;
+           $jobquestion->question3 = $r->question3;
+           $jobquestion->question4 = $r->question4;
+           $jobquestion->question5 = $r->question5;
+           $jobquestion->question5Answer = $r->answer5;
+           $jobquestion->question6 = $r->question6;
+           $jobquestion->question6Answer = $r->answer6;
+           $jobquestion->question7 = $r->question7;
+           $jobquestion->question7Answer = $r->answer7;
+           $jobquestion->question8 = $r->question8;
+           $jobquestion->question8Answer = $r->answer8;
+           $jobquestion->question9 = $r->question9;
+           $jobquestion->question10 = $r->question10;
+           $jobquestion->save();
+       }
 
        Session::flash('message', 'Job Added Successfully');
        return redirect()->route('job.admin.manage');

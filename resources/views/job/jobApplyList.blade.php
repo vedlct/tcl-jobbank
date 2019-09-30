@@ -19,6 +19,7 @@
                             <th>Zone</th>
                             <th>Apply Date</th>
                             <th>Detailes</th>
+                            <th>Action</th>
 
                         </tr>
                         </thead>
@@ -32,8 +33,10 @@
                             <td>
                                 @if($applyList->pdflink != null)
                                     <a target="_blank" href="{{url('public/jobPdf').'/'.$applyList->pdflink}}">Download</a>
-                                    @endif
-
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{url('/withdraw-application/'.$applyList->jobapply)}}">Withdraw</a>
                             </td>
 
                         </tr>
