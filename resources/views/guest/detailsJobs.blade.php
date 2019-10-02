@@ -1,6 +1,7 @@
 @include('layouts/header')
 
 {{--@section('header')--}}
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <style>
     html
@@ -433,7 +434,7 @@
 
 
 </style>
-{{--@endsection--}}
+
 <div class="container" >
     <div class="card">
 
@@ -445,39 +446,7 @@
                 <img alt="banner" src="{{asset('public/App_Themes/Background/Image/banner.png')}}" />
             </div>
         </div>
-        {{--<div class="card-header">--}}
-            {{--<div style="margin-bottom: 20px;" class="row">--}}
 
-                {{--<div class="col-md-1">--}}
-                    {{--<h5 >Zone</h5>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-2">--}}
-                    {{--<select name="zonefilter" id="zonefilter" class="form-control">--}}
-                        {{--<option value="">Select a Zone</option>--}}
-                        {{--@foreach($allZone as $zone)--}}
-                            {{--<option  value="{{$zone->zoneId}}">{{$zone->zoneName}}</option>--}}
-                        {{--@endforeach--}}
-
-                    {{--</select>--}}
-
-                {{--</div>--}}
-
-                {{--<div class="col-md-2">--}}
-                    {{--<h5>Job Search: </h5>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-7">--}}
-                    {{--<form class="navbar-form" role="search">--}}
-                        {{--<div class="input-group add-on">--}}
-                            {{--<input class="form-control" placeholder="Search" name="srch-term" id="search-job" type="text">--}}
-                            {{--<div style="color: black;" class="input-group-btn">--}}
-                                {{--<button style="background: #a3a3a4; color: white;" class="btn btn-default" onclick="getAllJob()"><i style="font-size: 18px;" class="ti-arrow-circle-right"></i></button>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</form>--}}
-                {{--</div>--}}
-                {{--<!-- end col -->--}}
-            {{--</div>--}}
-        {{--</div>--}}
         <div class="main-content">
             <div class="ui-layout-center">
 
@@ -486,13 +455,57 @@
                         <div id="AvailableInternationalJob" class="AvJobs">
 
                             <fieldset class="fieldset">
-                                <legend class="legend">Available Jobs</legend>
-                                <div class="fieldsetDiv" id="allJobs">
-
+                                <legend class="legend" style="font-weight: bold;">Job Details</legend>
+                                <div class="fieldsetDiv">
+                             <p style="color: #6CA047;font-size: 18px;font-weight: bold;">Software Engineer</p>
+                                    <p style="color: #333333;font-size: 14px;font-weight: bold;">DataSoft Systems Bangladesh Limited</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;">Vacancy</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-left: 2%;">3</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Job Responsibilities</p>
+                                    <ul style="margin-top: 1%;margin-left: -1%;">
+                                        <li><p style="color: #5C5C5C;">Requirement Analysis, design and develop according to SDLC.</p></li>
+                                        <li><p style="color: #5C5C5C;">Design and implement client projects by analyzing system requirements.</p></li>
+                                        <li><p style="color: #5C5C5C;">Designing and developing complex web-based applications.</p></li>
+                                        <li><p style="color: #5C5C5C;">Perform code review, Unit Testing.</p></li>
+                                    </ul>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Employment Status</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">Full-time</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Educational Requirements</p>
+                                    <ul style="margin-top: 1%;margin-left: -1%;">
+                                        <li><p style="color: #5C5C5C;">Bachelor of Science (BSc) in Computer Science, Bachelor of Science (BSc) in Computer Science & Engineering, Bachelor of Science (BSc) in Applied Physics, Bachelor of Science (BSc) in EEE, Bachelor of Science (BSc) in Physics.</p></li>
+                                    </ul>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Experience Requirements</p>
+                                    <ul style="margin-top: 1%;margin-left: -1%;">
+                                        <li><p style="color: #5C5C5C;">4 to 8 year(s)</p></li>
+                                    </ul>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Additional Requirements</p>
+                                    <ul style="margin-top: 1%;margin-left: -1%;">
+                                        <li><p style="color: #5C5C5C;">4+ years of Sound knowledge and practical work experience in C#, ASP .NET</p></li>
+                                        <li><p style="color: #5C5C5C;">JavaScript, Angular/React, HTML, CSS knowledge is preferable.</p></li>
+                                        <li><p style="color: #5C5C5C;">Good understanding on Queue management and socket programming.</p></li>
+                                        <li><p style="color: #5C5C5C;">Strong in MySQL/ PostgreSQL/MS SQL.</p></li>
+                                    </ul>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Job Location</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">Dhaka</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Salary</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">Tk. 52000 - 72000 (Monthly)</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Compensation & Other Benefits</p>
+                                    <ul style="margin-top: 1%;margin-left: -1%;">
+                                        <li><p style="color: #5C5C5C;">Provident fund, Weekly 2 holiday</p></li>
+                                        <li><p style="color: #5C5C5C;">Lunch Facilities: Partially Subsidize</p></li>
+                                        <li><p style="color: #5C5C5C;">Salary Review: Yearly</p></li>
+                                        <li><p style="color: #5C5C5C;">Festival Bonus: 3</p></li>
+                                    </ul>
                                 </div>
+                                <div class="fieldsetDiv">
+                                    <legend class="legend" style="font-weight: bold;text-align: center;margin-left: 6%;color: #5C5C5C;">Read Before Apply</legend>
+                                    <p style="color: #5C5C5C;font-size: 16px;font-weight: bold;text-align: center;margin-left: 7%;color: #5C5C5C;"><span style="color:red;">*Photograph</span> must be enclosed with the resume.</p>
+                                    <p style="color: #5C5C5C;font-size: 16px;font-weight: bold;text-align: center;margin-left: 8%;color: #5C5C5C;">Apply Procedures</p>
+                                </div>
+                                <button type="submit" value="submit" style="margin-left: 47%;"><strong style="color: white;">Apply Online</strong></button>
                             </fieldset>
+                            <br><br>
                         </div>
-
                         <div class="right">
                             <div class="card-body">
 
@@ -648,7 +661,6 @@
                             </div>
                         </div>
 
-
                     </div>
                 </div>
 
@@ -658,79 +670,10 @@
 
     <!-- end row -->
 
-{{--    <div id="allJob">--}}
+    {{--    <div id="allJob">--}}
 
-{{--    </div>--}}
+    {{--    </div>--}}
 </div>
-@section('foot-js')
-    <script>
 
-
-        $(function () {
-
-            getAllJob();
-
-        });
-
-        // $("#search-job").on('keyup', function (e) {
-        //     if($("#search-job").val()==""){
-        //         getAllJob();
-        //     }
-        //     if (e.keyCode == 13) {
-        //         getAllJob();
-        //     }
-        //
-        //     if (e.keyCode == 32) {
-        //         getAllJob();
-        //     }
-        // });
-        //
-        // $('#zonefilter').change(function(){ //button filter event click
-        //     getAllJob();
-        // });
-
-        function getAllJob() {
-            var search=$("#search-job").val();
-            var zone=$("#zonefilter").val();
-            $.ajax({
-                type: 'POST',
-                url: "{{url('/available-job/all')}}",
-                cache: false,
-                data: {_token: "{{csrf_token()}}",search:search,zonefilter:zone},
-                success: function (data) {
-                    $('#allJobs').html(data);
-                }
-            });
-        }
-
-        function getData(page){
-            var search=$("#search-job").val();
-
-            $.ajax(
-                {
-                    url: '?page=' + page,
-                    type: "get",
-                    data: {search:search},
-                    datatype: "html",
-                    // beforeSend: function()
-                    // {
-                    //     you can show your loader
-                    // }
-                })
-                .done(function(data)
-                {
-                    $("#allJob").html(data);
-                    location.hash ='?page='+page;
-
-                })
-                .fail(function(jqXHR, ajaxOptions, thrownError)
-                {
-                    alert('No response from server');
-                });
-        }
-
-
-    </script>
-@endsection
 
 @include('layouts/footer')

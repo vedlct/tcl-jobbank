@@ -33,4 +33,8 @@ class GuestController extends Controller
 
         return view('guest.getAvailableJobs',compact('jobs','allZone'));
     }
+    public function jobDetails()
+    {
+      return view('guest.detailsJobs');
+    }
 }

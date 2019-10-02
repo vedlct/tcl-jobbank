@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>caritas job bank</title>
+    <title>TCL job bank</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Themesdesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -39,7 +39,7 @@
     <div class="card">
         <div class="card-header">
             <h4 class="text-center">
-                <b class="waves-effect waves-light">caritas job bank</b>
+                <b class="waves-effect waves-light">TCL job bank</b>
             </h4>
 
         </div>
@@ -47,7 +47,7 @@
 
 
             <div align="center">
-                <img src="{{url('public/logo/Final_Logo_Caritas_2010.jpg')}}" height="180" width="200">
+                <img src="{{url('public/logo/tcl-logo_60_70.png')}}" height="180" width="200">
             </div>
             <div>
                 @if(Session::has('notActive'))

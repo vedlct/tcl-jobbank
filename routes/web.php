@@ -414,3 +414,4 @@ Route::post('change-template/update-template','Admin\SettingsController@updateem
 Route::get('/available-job','GuestController@guestAvailablejob');
 Route::post('/available-job/all','GuestController@guestGetJobData');
 Route::get('/withdraw-application/{id}','EmployeeApplicationController@withdrawApplication');
+Route::get('/job-details','GuestController@jobDetails');

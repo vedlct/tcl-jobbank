@@ -10,12 +10,18 @@
 @endsection
 
 @section('content')
-
-
+<style>
+    div.ex3 {
+        background-color: lightblue;
+        width: 100%;
+        height: 600px;
+        overflow: auto;
+    }
+</style>
     <div class="row">
         <div class="col-md-2">
 
-            <div style="background-color: white;margin-bottom: 20px;" class="card-body">
+            <div style="background-color: white;margin-bottom: 20px;" class="card-body ex3">
 
                 <!-- Modal -->
                 <div class="modal fade" id="mail_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

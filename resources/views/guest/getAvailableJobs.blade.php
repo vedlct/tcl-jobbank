@@ -14,7 +14,9 @@
         <td class="TextAlignRight">{{$job->salary}}</td>
         <td class="TextAlignRight">{{$job->deadline}}</td>
         <td>
-            <a class="btn btn-mini" href="{{url('/job-details/'.$job->jobId)}}" target="_blank">
+            {{--<a class="btn btn-mini" href="{{url('/job-details/'.$job->jobId)}}" target="_blank">--}}
+                {{--<i class="glyphicon glyphicon-zoom-in"></i>View</a>--}}
+            <a class="btn btn-mini" href="{{url('/job-details')}}" target="_blank">
                 <i class="glyphicon glyphicon-zoom-in"></i>View</a>
         </td>
     </tr>
