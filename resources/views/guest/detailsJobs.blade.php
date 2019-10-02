@@ -14,35 +14,6 @@
         max-width: 1150px;
         height: auto;
     }
-    /*.clear*/
-    /*{*/
-    /*clear:both;*/
-    /*float:left;*/
-    /*}*/
-    /*.error*/
-    /*{*/
-    /*color: #FF0000;*/
-    /*}*/
-    /*.badge*/
-    /*{*/
-    /*border-radius: 3px;*/
-    /*color: #FFFFFF;*/
-    /*display: inline-block;*/
-    /*font-size: 11.844px;*/
-    /*font-weight: bold;*/
-    /*line-height: 14px;*/
-    /*padding: 2px 4px;*/
-    /*margin-bottom: 5px;*/
-    /*}*/
-    /*.badge-warning*/
-    /*{*/
-    /*background-color: #F89406;*/
-    /*}*/
-    /*.badge-info*/
-    /*{*/
-    /*background-color: #3A87AD;*/
-    /*}*/
-
     a
     {
         color: #15c;
@@ -64,11 +35,6 @@
     {
         margin: 18px 0 0;
     }
-
-
-
-
-
     .signin-box input[type=text], .signin-box input[type=password]
     {
         padding: 8px;
@@ -106,13 +72,6 @@
         text-align: justify;
         padding: 5px;
     }
-
-
-
-
-
-
-
     .main.login .right
     {
         top: 0px;
@@ -142,10 +101,6 @@
     {
         color: #006600;
     }
-
-    /*CSS From Master Page */
-
-
     .btn
     {
         -moz-border-colors: none;
@@ -416,9 +371,6 @@
         {
             padding: 0px;
         }
-
-
-
     }
 
     /* Landscape Orientation */
@@ -431,8 +383,6 @@
     @media screen and (orientation: portrait)
     {
     }
-
-
 </style>
 
 <div class="container" >
@@ -457,223 +407,173 @@
                             <fieldset class="fieldset">
                                 <legend class="legend" style="font-weight: bold;">Job Details</legend>
                                 <div class="fieldsetDiv">
-                             <p style="color: #6CA047;font-size: 18px;font-weight: bold;">Software Engineer</p>
-                                    <p style="color: #333333;font-size: 14px;font-weight: bold;">DataSoft Systems Bangladesh Limited</p>
-                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;">Vacancy</p>
-                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-left: 2%;">3</p>
+                                    <p style="color: #6CA047;font-size: 18px;font-weight: bold;">{{$jobDetails->title}}</p>
+                                    <p style="color: #333333;font-size: 14px;font-weight: bold;">{{$jobDetails->position}}</p>
                                     <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Job Responsibilities</p>
-                                    <ul style="margin-top: 1%;margin-left: -1%;">
-                                        <li><p style="color: #5C5C5C;">Requirement Analysis, design and develop according to SDLC.</p></li>
-                                        <li><p style="color: #5C5C5C;">Design and implement client projects by analyzing system requirements.</p></li>
-                                        <li><p style="color: #5C5C5C;">Designing and developing complex web-based applications.</p></li>
-                                        <li><p style="color: #5C5C5C;">Perform code review, Unit Testing.</p></li>
-                                    </ul>
+                                    <span>{!! $jobDetails->details  !!}</span>
                                     <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Employment Status</p>
-                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">Full-time</p>
-                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Educational Requirements</p>
-                                    <ul style="margin-top: 1%;margin-left: -1%;">
-                                        <li><p style="color: #5C5C5C;">Bachelor of Science (BSc) in Computer Science, Bachelor of Science (BSc) in Computer Science & Engineering, Bachelor of Science (BSc) in Applied Physics, Bachelor of Science (BSc) in EEE, Bachelor of Science (BSc) in Physics.</p></li>
-                                    </ul>
-                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Experience Requirements</p>
-                                    <ul style="margin-top: 1%;margin-left: -1%;">
-                                        <li><p style="color: #5C5C5C;">4 to 8 year(s)</p></li>
-                                    </ul>
-                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Additional Requirements</p>
-                                    <ul style="margin-top: 1%;margin-left: -1%;">
-                                        <li><p style="color: #5C5C5C;">4+ years of Sound knowledge and practical work experience in C#, ASP .NET</p></li>
-                                        <li><p style="color: #5C5C5C;">JavaScript, Angular/React, HTML, CSS knowledge is preferable.</p></li>
-                                        <li><p style="color: #5C5C5C;">Good understanding on Queue management and socket programming.</p></li>
-                                        <li><p style="color: #5C5C5C;">Strong in MySQL/ PostgreSQL/MS SQL.</p></li>
-                                    </ul>
+                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">
+                                        @if($jobDetails->jobstatus===1)
+                                            {{'Part time'}}
+                                            @elseif($jobDetails->jobstatus===2)
+                                            {{'Full time'}}
+                                            @elseif($jobDetails->jobstatus===3)
+                                            {{'Other'}}
+                                            @elseif($jobDetails->jobstatus===4)
+                                            {{'Internship'}}
+                                            @elseif($jobDetails->jobstatus===5)
+                                            {{'Contractual'}}
+                                            @elseif($jobDetails->jobstatus===6)
+                                            {{'Remote Work'}}
+                                        @endif
+                                    </p>
                                     <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Job Location</p>
-                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">Dhaka</p>
+                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">{{$jobDetails->zoneName}}</p>
                                     <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Salary</p>
-                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">Tk. 52000 - 72000 (Monthly)</p>
-                                    <p style="color: #5C5C5C;font-size: 14px;font-weight: bold;margin-top: 2%;">Compensation & Other Benefits</p>
-                                    <ul style="margin-top: 1%;margin-left: -1%;">
-                                        <li><p style="color: #5C5C5C;">Provident fund, Weekly 2 holiday</p></li>
-                                        <li><p style="color: #5C5C5C;">Lunch Facilities: Partially Subsidize</p></li>
-                                        <li><p style="color: #5C5C5C;">Salary Review: Yearly</p></li>
-                                        <li><p style="color: #5C5C5C;">Festival Bonus: 3</p></li>
-                                    </ul>
+                                    <p style="color: #5C5C5C;font-size: 14px;margin-left: 2%;">{{$jobDetails->salary}}</p>
+                                    <p style="color: #5C5C5C;font-size: 16px;font-weight: bold;margin-top: 2%;"><span style="color:red;">Deadline</span></p>
+                                    <p style="color: #5C5C5C;font-size: 16px;margin-left: 2%;">{{\Carbon\Carbon::parse($jobDetails->deadline)->format('d-F-Y')}}</p>
                                 </div>
                                 <div class="fieldsetDiv">
                                     <legend class="legend" style="font-weight: bold;text-align: center;margin-left: 6%;color: #5C5C5C;">Read Before Apply</legend>
                                     <p style="color: #5C5C5C;font-size: 16px;font-weight: bold;text-align: center;margin-left: 7%;color: #5C5C5C;"><span style="color:red;">*Photograph</span> must be enclosed with the resume.</p>
                                     <p style="color: #5C5C5C;font-size: 16px;font-weight: bold;text-align: center;margin-left: 8%;color: #5C5C5C;">Apply Procedures</p>
                                 </div>
-                                <button type="submit" value="submit" style="margin-left: 47%;"><strong style="color: white;">Apply Online</strong></button>
+                                @php
+                                    if (Auth::check()){
+                                        if(Auth::user()->fkuserTypeId=='admin'){
+                                            $au = 'admin';
+                                        }elseif(Auth::user()->fkuserTypeId=='cbEmp'){
+                                            $au = 'employee';
+                                        }elseif(Auth::user()->fkuserTypeId=='user'){
+                                            $au = 'user';
+                                        }
+                                    }else{
+                                        $au = 'guest';
+                                    }
+                                @endphp
+                                @if($applyData>0)
+                                    <h5><span class="btn btn-lg badge-success" style="margin-left: 50%; background-color: Green;color:white;">Already Applied</span></h5>
+                                @else
+                                    <a class="btn btn-lg btn-success" style="margin-left: 50%; background-color: Green;color:white;" data-auth="{{$au}}" data-title="{{$jobDetails->title}}" onclick="apply(this,{{$jobDetails->jobId}})">Apply Online</a>
+                                @endif
                             </fieldset>
                             <br><br>
                         </div>
-                        <div class="right">
-                            <div class="card-body">
-
-                                <legend class="legend">Log In</legend>
-
-                                <div>
-                                    @if(Session::has('notActive'))
-                                        <p class="alert alert-info">{{ Session::get('notActive') }}</p>
-                                    @endif
-                                </div>
-
-                                <div class="p-3">
-                                    <form method="POST" class="form-horizontal m-t-20" action="{{ route('login') }}">
-                                        {{csrf_field()}}
-
-                                        <div class="form-group row">
-                                            <div class="col-12">
-                                                {{--<input class="form-control" name="loginId" type="text" placeholder="login id" required>--}}
-                                                <input id="email" type="text" placeholder="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-
-                                                @if ($errors->has('email'))
-
-                                                    <span class="">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-12">
-                                                {{--<input class="form-control" name="password" type="password" placeholder="Password" required>--}}
-                                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                                @if ($errors->has('password'))
-
-                                                    <span class="">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group text-center row m-t-20">
-                                            <div class="col-12">
-                                                <button class="btn btn-success btn-block waves-effect waves-light" style="background-color: #006DCC;" type="submit"><strong style="color:white;">Log In</strong></button>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group m-t-10 mb-0 row">
-                                            <div class="col-sm-7 m-t-20">
-                                                <a href="{{route('account.forgetPass')}}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a></div>
-                                            <div class="col-sm-5 m-t-20">
-                                                <a href="{{route('register')}}" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</a>
-                                            </div>
-                                        </div>
-                                        <div align="center" class="form-group m-t-10 mb-0">
-                                            <a href="{{route('account.activationResend')}}" class="text-muted"><i class="mdi mdi-email"></i> Resend activation Mail</a>
-                                        </div>
-
-
-                                    </form>
-                                </div>
-
-                            </div>
-                            {{--<div>--}}
-                                {{--<div class="signin-box">--}}
-                                    {{--<div class="legendWithBorder">--}}
-                                        {{--<fieldset class="fieldset">--}}
-                                            {{--<legend class="legend">Log In</legend>--}}
-                                            {{--<div class="fieldsetDiv">--}}
-                                                {{--<table class="table">--}}
-                                                    {{--<tr class="noscript">--}}
-                                                        {{--<td>--}}
-                                                            {{--<input name="ctl00$ContentPlaceHolder2$txtUserID" type="text" id="ContentPlaceHolder2_txtUserID" placeholder="Type Your Email ID as User ID" />--}}
-                                                        {{--</td>--}}
-                                                    {{--</tr>--}}
-                                                    {{--<tr class="noscript">--}}
-                                                        {{--<td>--}}
-                                                            {{--<input name="ctl00$ContentPlaceHolder2$txtPassword" type="password" id="ContentPlaceHolder2_txtPassword" placeholder="Type your password" maxlength="30" />--}}
-                                                        {{--</td>--}}
-                                                    {{--</tr>--}}
-                                                    {{--<tr>--}}
-                                                        {{--<td>--}}
-                                                            {{--<label class="clear">--}}
-                                                                {{--<span id="ContentPlaceHolder2_lblWarningMessage" style="color:Red;"></span>--}}
-                                                            {{--</label>--}}
-                                                            {{--<input type="submit" name="ctl00$ContentPlaceHolder2$btnsignIn" value="Log In" onclick="return Validate();" id="ContentPlaceHolder2_btnsignIn" class="btn btn-primary noscript clear" />--}}
-                                                            {{--<input name="rmShown" value="1" type="hidden" />--}}
-                                                        {{--</td>--}}
-                                                    {{--</tr>--}}
-                                                    {{--<tr>--}}
-                                                        {{--<td>--}}
-                                                            {{--<ul class="login-links ul">--}}
-                                                                {{--<li class="li"><a id="link-forgot-passwd" href="UserAccount.html" target="_top" class="reset noscript">Create Account?</a></li>--}}
-                                                                {{--<li class="li"><a id="linkforgotpassword" class="reset" href="eRecruitmentForgotPassword.html"--}}
-                                                                                  {{--target="_top">Forgot Password?</a></li>--}}
-                                                                {{--<li class="li">--}}
-                                                                    {{--<div id="divVersion" style="text-decoration: blink; text-align: center">--}}
-                                                                        {{--<span class="error noscript">Firefox is recommended(version 3.6+)</span>--}}
-                                                                    {{--</div>--}}
-                                                                {{--</li>--}}
-                                                                {{--<br />--}}
-                                                                {{--<li class="li">--}}
-                                                                    {{--<div id="fb-root">--}}
-                                                                    {{--</div>--}}
-                                                                    {{--<script type="text/javascript" language="javascript">--}}
-                                                                        {{--//$(document).ready(function () {--}}
-                                                                        {{--(function (d, s, id) {--}}
-                                                                            {{--var js, fjs = d.getElementsByTagName(s)[0];--}}
-                                                                            {{--if (d.getElementById(id)) return;--}}
-                                                                            {{--js = d.createElement(s); js.id = id;--}}
-                                                                            {{--js.src = "../../connect.facebook.net/en_US/all.js#xfbml=1";--}}
-                                                                            {{--fjs.parentNode.insertBefore(js, fjs);--}}
-                                                                        {{--}(document, 'script', 'facebook-jssdk'));--}}
-                                                                        {{--//});--}}
-                                                                    {{--</script>--}}
-                                                                    {{--<div class="fb-like" data-href="http://careers.brac.net/Presentation/Landing.aspx"--}}
-                                                                         {{--data-send="true" data-width="200" data-show-faces="false">--}}
-                                                                    {{--</div>--}}
-                                                                {{--</li>--}}
-                                                                {{--<li class="li">--}}
-                                                                    {{--<div>--}}
-                                                                        {{--<noscript>--}}
-                                                                            {{--<span class="badge-warning badge">Warning</span> <span class="error">Sorry, javascript--}}
-                                                                    {{--is not enabled!</span><br />--}}
-                                                                            {{--<span class="badge badge-info">Info</span> <span>Enable javascript</span>--}}
-                                                                        {{--</noscript>--}}
-                                                                        {{--<a href="eRecruitmentFeedback.html">To give your valuable feedback<span class="italic">--}}
-                                                                {{--Click Here</span></a>--}}
-                                                                    {{--</div>--}}
-                                                                {{--</li>--}}
-                                                            {{--</ul>--}}
-                                                        {{--</td>--}}
-                                                    {{--</tr>--}}
-                                                {{--</table>--}}
-                                            {{--</div>--}}
-                                        {{--</fieldset>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            <div class="about">
-                                <fieldset class="fieldset">
-                                    <legend class="legend redlegend" style="color: #0785CE">About TCL </legend>
-                                    <div class="fieldsetDiv">
-                                        <!--<img align="left" src="../Images/reporting.jpg" alt="" /> -->
-                                        Tech Cloud Ltd. is a global Information Technology Enabled Services (ITES) – outsource service provider. We have an excellent global market experience and with well infrastructure and up to date technology in terms of software and hardware and are capable to handle any array of clients.
+                        @if(Auth::guest())
+                            <div class="right">
+                                <div class="card-body">
+                                    <legend class="legend">Log In</legend>
+                                    <div>
+                                        @if(Session::has('notActive'))
+                                            <p class="alert alert-info">{{ Session::get('notActive') }}</p>
+                                        @endif
                                     </div>
-                                </fieldset>
-                            </div>
-                        </div>
+                                    <div class="p-3">
+                                        <form method="POST" class="form-horizontal m-t-20" action="{{ route('login') }}">
+                                            {{csrf_field()}}
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <input id="email" type="text" placeholder="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                                    @if ($errors->has('email'))
+                                                        <span class="">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                                    @if ($errors->has('password'))
+                                                        <span class="">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-center row m-t-20">
+                                                <div class="col-12">
+                                                    <button class="btn btn-success btn-block waves-effect waves-light" style="background-color: #006DCC;" type="submit"><strong style="color:white;">Log In</strong></button>
+                                                </div>
+                                            </div>
 
+                                            <div class="form-group m-t-10 mb-0 row">
+                                                <div class="col-sm-7 m-t-20">
+                                                    <a href="{{route('account.forgetPass')}}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a></div>
+                                                <div class="col-sm-5 m-t-20">
+                                                    <a href="{{route('register')}}" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</a>
+                                                </div>
+                                            </div>
+                                            <div align="center" class="form-group m-t-10 mb-0">
+                                                <a href="{{route('account.activationResend')}}" class="text-muted"><i class="mdi mdi-email"></i> Resend activation Mail</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                @endif
+                                <div class="about">
+                                    <fieldset class="fieldset">
+                                        <legend class="legend redlegend" style="color: #0785CE">About TCL </legend>
+                                        <div class="fieldsetDiv">
+                                            <span>Tech Cloud Ltd. is a global Information Technology Enabled Services (ITES) – outsource service provider. We have an excellent global market experience and with well infrastructure and up to date technology in terms of software and hardware and are capable to handle any array of clients.</span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
-    <!-- end row -->
-
-    {{--    <div id="allJob">--}}
-
-    {{--    </div>--}}
 </div>
 
+<div class="modal" id="jobModal"></div>
+@section('foot-js')
+    <script>
+        function apply(x,y) {
+            var auth=$(x).data('auth');
+            var title=$(x).data('title');
+
+            if(auth==='guest'){
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'You need to Sing up/ Sing in first',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-green'
+                        }
+                    }
+                });
+            }else if(auth !== 'user'){
+                $.alert({
+                    title: 'Alert!',
+                    type: 'Red',
+                    content: 'You have no permission to apply job',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-green'
+                        }
+                    }
+                });
+            }else{
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('job.applyJobModal') !!}",
+                    cache: false,
+                    data: {_token: "{{csrf_token()}}",jobId:y,jobTitle:title},
+                    success: function (data) {
+                        $('#jobModal').html(data);
+                        $('#jobModalTitle').html(title);
+                        $('#jobModal').modal();
+                    }
+                });
+            }
+        }
+    </script>
+@endsection
 
 @include('layouts/footer')

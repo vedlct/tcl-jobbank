@@ -7,20 +7,20 @@
         <th>Action</th>
     </tr>
     <tbody>
-    @foreach($jobs as $job)
-    <tr>
-        <td class="TextAlignLeft">{{$job->title}}</td>
-        <td class="TextAlignCenter">{{$job->zoneName}}</td>
-        <td class="TextAlignRight">{{$job->salary}}</td>
-        <td class="TextAlignRight">{{$job->deadline}}</td>
-        <td>
-            {{--<a class="btn btn-mini" href="{{url('/job-details/'.$job->jobId)}}" target="_blank">--}}
-                {{--<i class="glyphicon glyphicon-zoom-in"></i>View</a>--}}
-            <a class="btn btn-mini" href="{{url('/job-details')}}" target="_blank">
-                <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-        </td>
-    </tr>
-    @endforeach
+    @if($jobs && count($jobs)>0)
+        @foreach($jobs as $job)
+        <tr>
+            <td class="TextAlignLeft">{{$job->title}}</td>
+            <td class="TextAlignCenter">{{$job->zoneName}}</td>
+            <td class="TextAlignRight">{{$job->salary}}</td>
+            <td class="TextAlignRight">{{$job->deadline}}</td>
+            <td>
+                <a class="btn btn-mini" href="{{url('/job-details/'.$job->jobId)}}" target="_blank">
+                    <i class="glyphicon glyphicon-zoom-in"></i>View</a>
+            </td>
+        </tr>
+        @endforeach
+    @endif
     </tbody>
 </table>
 

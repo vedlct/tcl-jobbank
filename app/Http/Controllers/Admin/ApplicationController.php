@@ -55,43 +55,18 @@ class ApplicationController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
-
         $this->middleware(function ($request, $next) {
-
             if (Auth::check()){
-
                 if(Auth::user()->fkuserTypeId==USER_TYPE['Admin'] || Auth::user()->fkuserTypeId==USER_TYPE['Emp'] ){
-
                     return $next($request);
-
                 }else{
-
                     return redirect('/');
                 }
-
             }else{
-
                 return redirect('/');
             }
-
-
-
-
-
         });
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
 
     public function manageApplication()
     {
@@ -240,22 +215,14 @@ class ApplicationController extends Controller
             $myZone=HR::where('fkuserId',Auth::user()->userId)
                 ->first();
             $application= $application->where('job.fkzoneId',$myZone->fkzoneId);
-
-
-
         }
 
         $datatables = DataTables::of($application);
         return $datatables->make(true);
-
-
-
     }
 
     public function exportAppliedCandidate(Request $r)
     {
-
-
         $appliedList=$r->jobApply;
         $excelName=$r->excelName;
         $jobTitle=$r->jobTitle;

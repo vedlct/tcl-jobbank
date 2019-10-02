@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Job;
+use App\Jobapply;
 use App\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
@@ -17,24 +20,26 @@ class GuestController extends Controller
 
     public function guestGetJobData(Request $r)
     {
-        $allZone=Zone::where('status',1)->get();
-
+//        $allZone=Zone::where('status',1)->get();
         $jobs=Job::leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')
             ->where('job.status',1)
             ->where('job.deadline','>=',date('Y-m-d'));
-        if($r->search !=""){
-            $jobs=$jobs->where('job.title', 'like', '%' . $r->search . '%');
-        }
-        if ($r->zonefilter){
-            $jobs= $jobs->where('job.fkzoneId',$r->zonefilter);
-        }
-
+//        if($r->search !=""){
+//            $jobs=$jobs->where('job.title', 'like', '%' . $r->search . '%');
+//        }
+//        if ($r->zonefilter){
+//            $jobs= $jobs->where('job.fkzoneId',$r->zonefilter);
+//        }
         $jobs=$jobs->paginate(10);
 
-        return view('guest.getAvailableJobs',compact('jobs','allZone'));
+//        return view('guest.getAvailableJobs',compact('jobs','allZone'));
+        return view('guest.getAvailableJobs',compact('jobs'));
     }
-    public function jobDetails()
+    public function jobDetails($jobId)
     {
-      return view('guest.detailsJobs');
+        $employee = Employee::where('fkuserId',Auth::user()->userId)->first();
+        $jobDetails = Job::find($jobId)->leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')->first();
+        $applyData = Jobapply::where('fkjobId',$jobId)->where('fkemployeeId',$employee->employeeId)->count();
+        return view('guest.detailsJobs',compact('jobDetails','applyData'));
     }
 }
