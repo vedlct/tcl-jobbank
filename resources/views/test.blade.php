@@ -1,4 +1,4 @@
-
+@php error_reporting(0); @endphp
 <html lang="en">
 <head>
     <title>Curriculam Vitae of {{$personalInfo->firstName}} {{$personalInfo->lastName}}</title>
@@ -24,12 +24,12 @@
         }
 
         @page {
-            margin-bottom:0px;margin-top: 5px;
+            margin-bottom:5px;margin-top: 15px;
         }
     </style>
 
 </head>
-<body style="margin-bottom:0px;">
+<body style="margin-bottom:5px;">
 <div style="margin-bottom:0px;" class="">
     <div style="background: #fff;margin-bottom:0px; " class="">
 
@@ -56,16 +56,16 @@
 
 
         @if($personalInfo->objective)
-        <table border="0" style="width:100%;border: none;">
-            <tr>
-                <td class="label" style="text-align: left; border: none; border-bottom: 1px solid #000"> <b>Objective</b> </td>
-            </tr>
-        </table>
-        <table border="0" style="width:100%; margin-top: 10px; border: none;">
-            <tr>
-                <td style="width: 100%;border: none;">{{$personalInfo->objective}}</td>
-            </tr>
-        </table>
+            <table border="0" style="width:100%;border: none;">
+                <tr>
+                    <td class="label" style="text-align: left; border: none; border-bottom: 1px solid #000"> <b>Objective</b> </td>
+                </tr>
+            </table>
+            <table border="0" style="width:100%; margin-top: 10px; border: none;">
+                <tr>
+                    <td style="width: 100%;border: none;text-align: justify">{{$personalInfo->objective}}</td>
+                </tr>
+            </table>
 
         @endif
 
@@ -87,19 +87,40 @@
             </tr>
             </thead>
             <tbody >
+            @foreach($education as $Key => $edu)
+                @if($edu->passingYear==null)
+                    <tr>
+                        <td style="text-align: center">{{$edu->educationLevelName}} in {{$edu->degreeName}} </td>
+                        {{--                        <td style="text-align: center">{{$edu->educationLevelName}} </td>--}}
+                        <td style="text-align: center">{{$edu->institutionName}}
+                            @if($edu->boardName)
+                                /{{$edu->boardName}}
+                            @endif
+                        </td>
+                        <td style="text-align: center">
+                            {{$edu->passingYear}}
+                        </td>
+
+                        <td style="text-align: center"> {{$edu->result}}</td>
+                    </tr>
+                    @unset($education[$Key])
+                    @break
+                @endif
+            @endforeach
+
             @foreach($education as $edu)
                 <tr>
                     <td style="text-align: center">{{$edu->educationLevelName}} in {{$edu->degreeName}} </td>
+                    {{--                    <td style="text-align: center">{{$edu->educationLevelName}} </td>--}}
                     <td style="text-align: center">{{$edu->institutionName}}
                         @if($edu->boardName)
-                            /
-                            {{$edu->boardName}}
-
+                            /{{$edu->boardName}}
                         @endif
-
                     </td>
 
-                    <td style="text-align: center">{{$edu->passingYear}} </td>
+                    <td style="text-align: center">
+                        {{$edu->passingYear}}
+                    </td>
 
                     <td style="text-align: center"> {{$edu->result}}</td>
                 </tr>
@@ -107,11 +128,9 @@
 
             </tbody>
 
+        </table>
 
-        </table >
-
-
-        <table border="0" style="width:100%; margin-top: 15px; border: none;">
+        <table border="0" style="width:100%; margin-top: 25px; border: none;">
             <tr>
                 <td class="label" style="text-align: left; border: none; border-bottom: 1px solid #000"><b>Job Experience</b> </td>
             </tr>
@@ -120,53 +139,59 @@
         <table border="0" style="width:100%; margin-top: 10px; border: none;">
             @if($jobExperience->isEmpty())<tr><td style=" border: none; text-align: center"> <strong>None </strong> </td> </tr>@else
 
-            @php $count=1;$flag=0;@endphp
-            @foreach($jobExperience as $exp)
+                @php $count=1;$flag=0;@endphp
+                @foreach($jobExperience as $exp)
+                    <tr>
+                        <td width="5%" style="border: none; vertical-align: top">
+                            <span class="bold">{{$count++}}.</span>
+                        </td>
+                        <td>
 
-                <tr>
-                    <td width="5%" style="border: none; vertical-align: top">
-                        <span class="bold">{{$count++}}.</span>
-                    </td>
+                            <span class="bold"> Company Name : </span> &nbsp;&nbsp; {{$exp->organization}}  &nbsp;&nbsp;
+                            <div class="pull-right"><span class="bold">Position:</span>&nbsp;{{$exp->degisnation}} </div><br>
+                            <p><span class="bold" > Major Responsibilities :</span>&nbsp;&nbsp;
+                                <span style="text-align: justify">{!! $exp->majorResponsibilities !!}</span> <br></p>
+                            <span class="bold"> Address:</span>&nbsp;&nbsp;&nbsp; {{$exp->address}} <br>
+                            <span class="bold"> Duration:</span>&nbsp;&nbsp;&nbsp; {{$exp->startDate}} -  @if($exp->endDate) {{$exp->endDate}} @else
+                                Continuing
+                            @endif
+                            <br>
 
-                    <td style="border: none;">
+                            <span class="bold"> Total job experience:</span>
 
-                        <span class="bold"> Company Name : </span> &nbsp;&nbsp; {{$exp->organization}}  &nbsp;&nbsp;
-                        <div class="pull-right"><span class="bold">Position:</span>&nbsp;{{$exp->degisnation}} </div><br>
-                        <span class="bold"> Major Responsibilities :</span>&nbsp;&nbsp;{{$exp->majorResponsibilities}} <br>
-                        <span class="bold"> Address:</span>&nbsp;&nbsp;&nbsp; {{$exp->address}} <br>
-                        <span class="bold"> Duration:</span>&nbsp;&nbsp;&nbsp; {{$exp->startDate}} -  @if($exp->endDate) {{$exp->endDate}} @else
-                            Continuing
-                        @endif
-                        <br>
-
-                        <span class="bold"> Total job experience:</span>
-
-                        @if ($exp->startDate!=null && $exp->endDate==null)
-
-                            {{$sub_struct=\Carbon\Carbon::parse($exp->startDate)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days')}}
-                        @else
-                            {{$sub_struct=\Carbon\Carbon::parse($exp->startDate)->diff(\Carbon\Carbon::parse($exp->endDate))->format('%y years, %m months and %d days')}}
-                        @endif
-
-
+                            @if ($exp->startDate!=null && $exp->endDate==null)
+                                {{$sub_struct=\Carbon\Carbon::parse($exp->startDate)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days')}}
+                            @else
+                                {{$sub_struct=\Carbon\Carbon::parse($exp->startDate)->diff(\Carbon\Carbon::parse($exp->endDate))->format('%y years, %m months and %d days')}}
+                            @endif
+                        </td>
+                    </tr>
 
 
-
-                    </td>
-                </tr>
-
-            @endforeach
-    @endif
+                @endforeach
+            @endif
         </table>
 
-        @if(!$jobExperience->isEmpty() && count($jobExperience) >=2)
-            <p style="page-break-after: always;"></p>
-        @elseif(!$jobExperience->isEmpty())
-            <p style="page-break-after: always;"></p>
-        @elseif($jobExperience->isEmpty()&& count($trainingCertificate)>=2)
-            <p style="page-break-after: always;"></p>
-        @endif
+        {{--        @if(!$jobExperience->isEmpty() && count($jobExperience) >=2)--}}
+        {{--            <p style="page-break-after: always;"></p>--}}
+        {{--        @elseif(!$jobExperience->isEmpty())--}}
+        {{--            <p style="page-break-after: always;"></p>--}}
+        {{--        @elseif($jobExperience->isEmpty()&& count($trainingCertificate)>=2)--}}
+        {{--            <p style="page-break-after: always;"></p>--}}
+        {{--        @endif--}}
 
+        {{--        @if(!empty($exp->keyAchivement))--}}
+        {{--        <table border="0" style="width:100%; margin-top: 15px; border: none;">--}}
+        {{--            <tr>--}}
+        {{--                <td class="label" style="text-align: left; border: none; border-bottom: 1px solid #000; background-color: #eff0f1;" ><b>Key achievement</b> </td>--}}
+        {{--            </tr>--}}
+        {{--        </table>--}}
+
+        {{--        <table border="0" style="width:100%; margin-top: 10px; border: none;">--}}
+        {{--            @if($exp->keyAchivement==null)<tr><td style=" border: none; text-align: center"> <strong>None </strong> </td> </tr>@else--}}
+        {{--            <br><span style="text-align: justify">{!! $exp->keyAchivement !!}</span>@endif--}}
+        {{--        </table>--}}
+        {{--        @endif--}}
 
 
         <table border="0" style="width:100%; margin-top: 15px; border: none;">
@@ -202,9 +227,9 @@
 
         </table>
 
-        @if($trainingCertificate->isEmpty()&& $jobExperience->isEmpty() )
-        <p style="page-break-after: always;"></p>
-        @endif
+        {{--        @if($trainingCertificate->isEmpty()&& $jobExperience->isEmpty() )--}}
+        {{--        <p style="page-break-after: always;"></p>--}}
+        {{--        @endif--}}
 
         <table border="0" style="width:100%;border: none;">
             <tr>
@@ -217,7 +242,7 @@
         <table border="0" style="width:100%; margin-top: 10px; border: none;">
             @if($professionalCertificate->isEmpty())<tr><td style=" border: none; text-align: center"> <strong>None </strong> </td></tr> @endif
 
-        @foreach($professionalCertificate as $certificate)
+            @foreach($professionalCertificate as $certificate)
                 <tr>
 
                     <td style="border: none; width: 20%">Certificate Name</td>
@@ -265,31 +290,31 @@
         {{--<p style="page-break-after: always"></p>--}}
 
         {{--<table border="0" style="width:100%; margin-top: 5px; border: none;">--}}
-            {{--<tr>--}}
-                {{--<td class="label" style="text-align: left; border: none; border-bottom: 1px solid #000"><b>Other Skill</b> </td>--}}
-            {{--</tr>--}}
+        {{--<tr>--}}
+        {{--<td class="label" style="text-align: left; border: none; border-bottom: 1px solid #000"><b>Other Skill</b> </td>--}}
+        {{--</tr>--}}
         {{--</table>--}}
         {{--<table border="0" style="width:100%; margin-top: 10px; border: none;">--}}
         {{--</table>--}}
 
         {{--<table border="0"  style="width:100%;margin-top:10px; border: none;">--}}
-            {{--@if($empOtherSkillls->isEmpty())--}}
-                {{--<tr>--}}
-                {{--<td style=" border: none; text-align: center"> <strong>None </strong> </td> </tr>@else--}}
-            {{--<tr>--}}
-            {{--<th style="width: 70%;text-align: center" >Skill</th>--}}
-            {{--<th style="width: 30%;text-align: center">Rating</th>--}}
-            {{--</tr>--}}
-            {{--@foreach($empOtherSkillls as $skills)--}}
-                {{--<tr>--}}
+        {{--@if($empOtherSkillls->isEmpty())--}}
+        {{--<tr>--}}
+        {{--<td style=" border: none; text-align: center"> <strong>None </strong> </td> </tr>@else--}}
+        {{--<tr>--}}
+        {{--<th style="width: 70%;text-align: center" >Skill</th>--}}
+        {{--<th style="width: 30%;text-align: center">Rating</th>--}}
+        {{--</tr>--}}
+        {{--@foreach($empOtherSkillls as $skills)--}}
+        {{--<tr>--}}
 
-                    {{--<td style="text-align: center">{{$skills->skillName}}</td>--}}
+        {{--<td style="text-align: center">{{$skills->skillName}}</td>--}}
 
-                    {{--<td style="text-align: center">{{$skills->ratiing}}</td>--}}
+        {{--<td style="text-align: center">{{$skills->ratiing}}</td>--}}
 
-                {{--</tr>--}}
-            {{--@endforeach--}}
-            {{--@endif--}}
+        {{--</tr>--}}
+        {{--@endforeach--}}
+        {{--@endif--}}
         {{--</table>--}}
 
 
@@ -326,7 +351,7 @@
 
 
 
-{{--        <p style="page-break-after: always"></p><br>--}}
+        {{--        <p style="page-break-after: always"></p><br>--}}
         <table border="0" style="width:100%; margin-top: 5px; border: none;">
             <tr>
                 <td class="label" style="text-align: left; border: none; border-bottom: 1px solid #000"><b>Personal Info</b> </td>
@@ -396,7 +421,7 @@
 
                 <td style="border: none;">
                     @if(!is_null($personalInfo->nationalId))
-                    <label>National Id :</label> {{$personalInfo->nationalId}}
+                        <label>National Id :</label> {{$personalInfo->nationalId}}
                     @elseif(!is_null($personalInfo->birthID))
                         <label>Birth Id :</label> {{$personalInfo->birthID}}
 
@@ -409,11 +434,11 @@
                 </td>
             </tr>
 
-            <tr>
-                <td  style="border: none;" >
-                    <label>Expected salary :</label> {{$salary->expectedSalary}}
-                </td>
-            </tr>
+            {{--            <tr>--}}
+            {{--                <td  style="border: none;" >--}}
+            {{--                    <label>Expected salary :</label> {{$salary->expectedSalary}}--}}
+            {{--                </td>--}}
+            {{--            </tr>--}}
 
 
 
@@ -453,14 +478,14 @@
         @endif
 
         {{--@if($trainingCertificate->isEmpty()&& $jobExperience->isEmpty() )--}}
-            {{--<p style="page-break-after: always;"></p>--}}
+        {{--<p style="page-break-after: always;"></p>--}}
         {{--@elseif($trainingCertificate->isEmpty()&& count($jobExperience)<2)--}}
-            {{--<p style="page-break-after: always;"></p>--}}
+        {{--<p style="page-break-after: always;"></p>--}}
         {{--@elseif(count($jobExperience)<2 && count($trainingCertificate)<2)--}}
-            {{--<p style="page-break-after: always;"></p>--}}
+        {{--<p style="page-break-after: always;"></p>--}}
         {{--@endif--}}
 
-        <p style="page-break-after: always;"></p>
+        {{--        <p style="page-break-after: always;"></p>--}}
 
         <table border="0" style="width:100%; margin-top: 25px; border: none;">
             <tr>
@@ -593,11 +618,5 @@
                 <td style="width: 13%; border: none; ">&nbsp;&nbsp;Signature</td>
             </tr>
         </table>
-
-
-
-
-    {{--</div>--}}
-{{--</div>--}}
 </body>
 </html>

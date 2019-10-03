@@ -182,7 +182,7 @@ Route::post('/Candidate-CV-Membership-In-Social-Network/Delete','MembershipInSoc
 Route::get('job/all','JobController@index')->name('job.all');
 Route::post('job/all','JobController@getJobData')->name('job.getJobData');
 Route::post('job/applyJobModal','JobController@applyJobModal')->name('job.applyJobModal');
-//Route::get('Candidate-Job-Apply/{jobId}','EmployeeController@applyJob')->name('candidate.ApplyJob');
+Route::post('job/appliedJobModal','JobController@appliedJobModal')->name('job.appliedJobModal');
 Route::post('Candidate-Job-Apply/{jobId}','EmployeeController@applyJob')->name('candidate.ApplyJob');
 
 

@@ -476,7 +476,6 @@
                 <div class="main login">
                     <div>
                         <div id="AvailableInternationalJob" class="AvJobs">
-
                             <fieldset class="fieldset">
                                 <legend class="legend">Available Jobs</legend>
                                 <div class="fieldsetDiv" id="allJobs">

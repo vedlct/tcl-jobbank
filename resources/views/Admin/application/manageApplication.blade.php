@@ -460,42 +460,29 @@
                     {{--</div>--}}
                     <br>
                     <div class="table table-responsive">
-                    <table id="manageapplication" class="table table-striped table-bordered" style="width:100%" >
-                        <thead>
-                        <tr>
-
-                            <th style="width: 4%">Select</th>
-                            <th>Given name</th>
-                            <th>Surname</th>
-
-                            <th>Job Title</th>
-                            <th>Zone</th>
-                            <th>Apply Date</th>
-                            <th>Status</th>
-                            <th>Schedule Date</th>
-                            <th>Schedule Time</th>
-
-                            <th>Action</th>
-
-
-                        </tr>
-                        </thead>
-                    </table>
+                        <table id="manageapplication" class="table table-striped table-bordered" style="width:100%" >
+                            <thead>
+                            <tr>
+                                <th style="width: 4%">Select</th>
+                                <th>Given name</th>
+                                <th>Surname</th>
+                                <th>Job Title</th>
+                                <th>Zone</th>
+                                <th>Apply Date</th>
+                                <th>Status</th>
+                                <th>Schedule Date</th>
+                                <th>Schedule Time</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                        </table>
                     </div>
-
-
-
-
                 </div>
-
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
+        </div>
+    </div>
 
-
-
-
-
+    <div class="modal" id="jobModal"></div>
 
 @endsection
 @section('foot-js')
@@ -525,6 +512,35 @@
     </script>
 
     <script>
+
+        function qusview(employeeId,jId){
+
+            if ($('#jobTitle').val()===""){
+                $.alert({
+                    title: 'Alert!',
+                    type: 'red',
+                    content: 'Please Select Job Title First',
+                    buttons: {
+                        tryAgain: {
+                            text: 'Ok',
+                            btnClass: 'btn-blue',
+                        }
+                    }
+                });
+            }else{
+                $.ajax({
+                    type: 'POST',
+                    url: "{!! route('job.appliedJobModal') !!}",
+                    cache: false,
+                    data: {_token: "{{csrf_token()}}",jobId:jId,employeeId:employeeId},
+                    success: function (data) {
+                        $('#jobModal').html(data);
+                        $('#jobModalTitle').html($('#jobTitle').val());
+                        $('#jobModal').modal();
+                    }
+                });
+            }
+        }
 
         $(document).ready(function() {
 
@@ -645,7 +661,8 @@
 
 
                     { "data": function(data){
-                        return '<button class="btn btn-smbtn-info" onclick="getEmpCv('+data.employeeId+')"><i class="fa fa-file-pdf-o"></i></button>'
+                        return '<button class="btn btn-primary" onclick="qusview('+data.employeeId+','+data.jId+')"><i class="fa fa-eye"></i></button>'
+                            +'&nbsp;' +'<button class="btn btn-smbtn-info" onclick="getEmpCv('+data.employeeId+')"><i class="fa fa-file-pdf-o"></i></button>'
                             +'&nbsp;' +'<button class="btn btn-sm btn-danger" onclick="empReject('+data.employeeId+')"><i class="fa fa-trash-o"></i></button>'
                             ;},
                         "orderable": false, "searchable":false

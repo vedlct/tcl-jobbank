@@ -37,9 +37,13 @@ class GuestController extends Controller
     }
     public function jobDetails($jobId)
     {
-        $employee = Employee::where('fkuserId',Auth::user()->userId)->first();
+        if (Auth::check()){
+            $employee = Employee::where('fkuserId',Auth::user()->userId)->first();
+            $applyData = Jobapply::where('fkjobId',$jobId)->where('fkemployeeId',$employee->employeeId)->count();
+        }else{
+            $applyData = false;
+        }
         $jobDetails = Job::find($jobId)->leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')->first();
-        $applyData = Jobapply::where('fkjobId',$jobId)->where('fkemployeeId',$employee->employeeId)->count();
         return view('guest.detailsJobs',compact('jobDetails','applyData'));
     }
 }

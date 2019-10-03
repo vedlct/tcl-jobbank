@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Employee;
 use App\Ethnicity;
 use App\Jobapply;
+use App\Jobapplyanswer;
 use App\Nationality;
 use App\Religion;
 use Illuminate\Http\Request;
@@ -39,7 +40,9 @@ class EmployeeApplicationController extends Controller
 
     public function withdrawApplication($id)
     {
-        Jobapply::find($id)->delete();
+        if (Jobapplyanswer::where('jobapplyId',$id)->delete()){
+            Jobapply::find($id)->delete();
+        }
         return redirect()->back();
     }
 }

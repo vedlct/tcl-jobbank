@@ -13,6 +13,7 @@ use App\EmpOtherSkill;
 use App\EmpQuestionObj;
 use App\Ethnicity;
 use App\Jobapply;
+use App\Jobapplyanswer;
 use App\JobExperience;
 use App\MembershipInSocialNetwork;
 use App\Nationality;
@@ -76,27 +77,40 @@ class EmployeeController extends Controller
     }
     public function applyJob($jobId,Request $r)
     {
-
         $empId=Employee::where('fkuserId',Auth::user()->userId)->first()->employeeId;
-
-        $jobApply=new Jobapply();
-        $jobApply->applydate=date('Y-m-d');
-        $jobApply->fkjobId=$jobId;
-        $jobApply->fkemployeeId=$empId;
-        $jobApply->currentSalary=$r->currentSalary;
-        $jobApply->expectedSalary=$r->expectedSalary;
-//        $jobApply->status=JOB_STATUS['Pending'];
-//        $jobApply->save();
-        if ($jobApply->save())
-        {
-            $email = Auth::user()->email;
-            $customBody = email::where('emailfor','Acknowledgement')->first();
-            Mail::send('mail.jobApplySuccess',['email' => $email,'customBody' => $customBody->emailbody], function($message) use ($customBody,$email)
+        $applyData = Jobapply::where('fkjobId',$jobId)->where('fkemployeeId',$empId)->count();
+        if ($applyData===0){
+            $jobApply=new Jobapply();
+            $jobApply->applydate=date('Y-m-d');
+            $jobApply->fkjobId=$jobId;
+            $jobApply->fkemployeeId=$empId;
+            $jobApply->currentSalary=$r->currentSalary;
+            $jobApply->expectedSalary=$r->expectedSalary;
+            if ($jobApply->save())
             {
-                $message->to($email)->subject('APPLY SUCCESSFUL');
-            });
+                $Jobapplyanswer = new Jobapplyanswer;
+                $Jobapplyanswer->jobId = $jobId;
+                $Jobapplyanswer->jobapplyId = $jobApply->jobapply;
+                $Jobapplyanswer->qa1 = $r->qa1;
+                $Jobapplyanswer->qa2 = $r->qa2;
+                $Jobapplyanswer->qa3 = $r->qa3;
+                $Jobapplyanswer->qa4 = $r->qa4;
+                $Jobapplyanswer->qa5 = $r->qa5;
+                $Jobapplyanswer->qa6 = $r->qa6;
+                $Jobapplyanswer->qa7 = $r->qa7;
+                $Jobapplyanswer->qa8 = $r->qa8;
+                $Jobapplyanswer->qa9 = $r->qa9;
+                $Jobapplyanswer->qa10 = $r->qa10;
+                if ($Jobapplyanswer->save()){
+                    $email = Auth::user()->email;
+                    $customBody = email::where('emailfor','Acknowledgement')->first();
+                    Mail::send('mail.jobApplySuccess',['email' => $email,'customBody' => $customBody->emailbody], function($message) use ($customBody,$email)
+                    {
+                        $message->to($email)->subject('APPLY SUCCESSFUL');
+                    });
+                }
+            }
         }
-
         return redirect()->route('job.all');
     }
 

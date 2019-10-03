@@ -493,347 +493,73 @@
         <div class="main login">
             <div>
                 <div id="AvailableInternationalJob" class="AvJobs">
-
                     <fieldset class="fieldset">
                         <legend class="legend">Available Jobs</legend>
-                        <div class="fieldsetDiv">
-                            <table class="table-bordered" width="99%" align="center">
-                                <tr>
-                                    <th class="TextAlignLeft">Job Title
-                                    </th>
-                                    <th class="TextAlignCenter">Location
-                                    </th>
-                                    <th class="TextAlignRight">Salary
-                                    </th>
-                                    <th class="TextAlignRight">Deadline
-                                    </th>
-                                    <th></th>
-                                </tr>
-                                <tbody>
+                        <div class="fieldsetDiv" id="allJobs">
 
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Psychosocial Specialist, Psychosocial Counseling Unit, HR & Learning Division (Contractual)
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        BRAC Head Office
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        03 Oct 2019
-                                    </td>
-                                    <td>
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Deputy Manager, Marketing, Skills Development Programme (Contractual)
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        BRAC-ISD, Dhaka
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        30 Sep 2019
-                                    </td>
-                                    <td>
-
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Deputy Manager, Marketing, Skills Development Programme (Contractual)
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        BRAC-ISD, Dhaka
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        30 Sep 2019
-                                    </td>
-                                    <td>
-
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Deputy Manager, Marketing, Skills Development Programme (Contractual)
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        BRAC-ISD, Dhaka
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        30 Sep 2019
-                                    </td>
-                                    <td>
-
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Team Lead, Communications (Contractual); Humanitarian Crisis Management Programme
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        Cox's Bazar
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        30 Sep 2019
-                                    </td>
-                                    <td>
-
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Innovation Ecosystem and Partnerships Manager , Social Innovation Lab (Contractual)
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        BRAC Head Office
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        01 Oct 2019
-                                    </td>
-                                    <td>
-
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Head of Finance, BRAC Tanzania
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        Dar es Salam, Tanzania
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        30 Sep 2019
-                                    </td>
-                                    <td>
-
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="TextAlignLeft">
-                                        Chief of Party
-                                    </td>
-                                    <td class="TextAlignCenter">
-                                        South Sudan, Juba
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        Negotiable
-                                    </td>
-                                    <td class="TextAlignRight">
-                                        01 Oct 2019
-                                    </td>
-                                    <td>
-
-
-
-                                        <a class="btn btn-mini" href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>View</a>
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-
-
-
-
-                                </tbody>
-                            </table>
                         </div>
                     </fieldset>
                 </div>
+                @if(Auth::guest())
                 <div class="right">
-                    <div>
-                        <div class="signin-box">
-                            <div class="legendWithBorder">
-                                <fieldset class="fieldset">
-                                    <legend class="legend">Log In</legend>
-                                    <div class="fieldsetDiv">
-                                        <table class="table">
-                                            <tr class="noscript">
-                                                <td>
-                                                    <input name="ctl00$ContentPlaceHolder2$txtUserID" type="text" id="ContentPlaceHolder2_txtUserID" placeholder="Type Your Email ID as User ID" />
-                                                </td>
-                                            </tr>
-                                            <tr class="noscript">
-                                                <td>
-                                                    <input name="ctl00$ContentPlaceHolder2$txtPassword" type="password" id="ContentPlaceHolder2_txtPassword" placeholder="Type your password" maxlength="30" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="clear">
-                                                        <span id="ContentPlaceHolder2_lblWarningMessage" style="color:Red;"></span>
-                                                    </label>
-                                                    <input type="submit" name="ctl00$ContentPlaceHolder2$btnsignIn" value="Log In" onclick="return Validate();" id="ContentPlaceHolder2_btnsignIn" class="btn btn-primary noscript clear" />
-                                                    <input name="rmShown" value="1" type="hidden" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <ul class="login-links ul">
-                                                        <li class="li"><a id="link-forgot-passwd" href="UserAccount.html" target="_top" class="reset noscript">Create Account?</a></li>
-                                                        <li class="li"><a id="linkforgotpassword" class="reset" href="eRecruitmentForgotPassword.html"
-                                                                          target="_top">Forgot Password?</a></li>
-                                                        <li class="li">
-                                                            <div id="divVersion" style="text-decoration: blink; text-align: center">
-                                                                <span class="error noscript">Firefox is recommended(version 3.6+)</span>
-                                                            </div>
-                                                        </li>
-                                                        <br />
-                                                        <li class="li">
-                                                            <div id="fb-root">
-                                                            </div>
-                                                            <script type="text/javascript" language="javascript">
-                                                                //$(document).ready(function () {
-                                                                (function (d, s, id) {
-                                                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                                                    if (d.getElementById(id)) return;
-                                                                    js = d.createElement(s); js.id = id;
-                                                                    js.src = "../../connect.facebook.net/en_US/all.js#xfbml=1";
-                                                                    fjs.parentNode.insertBefore(js, fjs);
-                                                                }(document, 'script', 'facebook-jssdk'));
-                                                                //});
-                                                            </script>
-                                                            <div class="fb-like" data-href="http://careers.brac.net/Presentation/Landing.aspx"
-                                                                 data-send="true" data-width="200" data-show-faces="false">
-                                                            </div>
-                                                        </li>
-                                                        <li class="li">
-                                                            <div>
-                                                                <noscript>
-                                                                    <span class="badge-warning badge">Warning</span> <span class="error">Sorry, javascript
-                                                                    is not enabled!</span><br />
-                                                                    <span class="badge badge-info">Info</span> <span>Enable javascript</span>
-                                                                </noscript>
-                                                                <a href="eRecruitmentFeedback.html">To give your valuable feedback<span class="italic">
-                                                                Click Here</span></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </table>
+                    <div class="card-body">
+                        <legend class="legend">Log In</legend>
+                        <div>
+                            @if(Session::has('notActive'))
+                                <p class="alert alert-info">{{ Session::get('notActive') }}</p>
+                            @endif
+                        </div>
+                        <div class="p-3">
+                            <form method="POST" class="form-horizontal m-t-20" action="{{ route('login') }}">
+                                {{csrf_field()}}
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input id="email" type="text" placeholder="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                        @if ($errors->has('email'))
+                                            <span class="">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                        @endif
                                     </div>
-                                </fieldset>
-                            </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                        @if ($errors->has('password'))
+                                            <span class="">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group text-center row m-t-20">
+                                    <div class="col-12">
+                                        <button class="btn btn-success btn-block waves-effect waves-light" style="background-color: #006DCC;" type="submit"><strong style="color:white;">Log In</strong></button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-t-10 mb-0 row">
+                                    <div class="col-sm-7 m-t-20">
+                                        <a href="{{route('account.forgetPass')}}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a></div>
+                                    <div class="col-sm-5 m-t-20">
+                                        <a href="{{route('register')}}" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</a>
+                                    </div>
+                                </div>
+                                <div align="center" class="form-group m-t-10 mb-0">
+                                    <a href="{{route('account.activationResend')}}" class="text-muted"><i class="mdi mdi-email"></i> Resend activation Mail</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                    @endif
                     <div class="about">
                         <fieldset class="fieldset">
-                            <legend class="legend redlegend" style="color: #E6006D">About BRAC </legend>
+                            <legend class="legend redlegend" style="color: #0785CE">About TCL </legend>
                             <div class="fieldsetDiv">
-                                <!--<img align="left" src="../Images/reporting.jpg" alt="" /> -->
-                                BRAC is a development success story, spreading solutions born in Bangladesh to 10
-                                other countries around the world – a global leader in creating opportunity for the
-                                world’s poor. What started out as a limited relief operation in 1972 in a remote
-                                village of Bangladesh, has turned into the largest development organization in the
-                                world. Organizing the poor using communities’ own human and material resources,
-                                it catalyses lasting change, creating an ecosystem in which the poor have the chance
-                                to seize control of their own lives.
+                                <span>Tech Cloud Ltd. is a global Information Technology Enabled Services (ITES) – outsource service provider. We have an excellent global market experience and with well infrastructure and up to date technology in terms of software and hardware and are capable to handle any array of clients.</span>
                             </div>
                         </fieldset>
                     </div>
-                </div>
-
             </div>
         </div>
 
@@ -842,95 +568,24 @@
 
 
 @endsection
+
 @section('foot-js')
-<script>
-
-
- $(function () {
-
-     getAllJob();
-
-    });
-
- $("#search-job").on('keyup', function (e) {
-     if($("#search-job").val()==""){
-         getAllJob();
-     }
-     if (e.keyCode == 13) {
-         getAllJob();
-     }
-
-     if (e.keyCode == 32) {
-         getAllJob();
-     }
- });
-
- $('#zonefilter').change(function(){ //button filter event click
-     getAllJob();
- });
-
- function getAllJob() {
-     var search=$("#search-job").val();
-     var zone=$("#zonefilter").val();
-     $.ajax({
-         type: 'POST',
-         url: "{!! route('job.getJobData') !!}",
-         cache: false,
-         data: {_token: "{{csrf_token()}}",search:search,zonefilter:zone},
-         success: function (data) {
-             $('#allJob').html(data);
-
-         }
-     });
- }
-
- function getData(page){
-     var search=$("#search-job").val();
-
-     $.ajax(
-         {
-             url: '?page=' + page,
-             type: "get",
-             data: {search:search},
-             datatype: "html",
-             // beforeSend: function()
-             // {
-             //     you can show your loader
-             // }
-         })
-         .done(function(data)
-         {
-             $("#allJob").html(data);
-             location.hash ='?page='+page;
-
-         })
-         .fail(function(jqXHR, ajaxOptions, thrownError)
-         {
-             alert('No response from server');
-         });
- }
- @if($applyjob == null)
-
- $.alert({
-     title: 'Error',
-     type: 'red',
-     content: 'Your CV information is not found ,please make your CV first',
-     buttons: {
-         tryAgain: {
-             text: 'Ok',
-             btnClass: 'btn-green',
-             action: function () {
-
-             }
-         }
-     }
- });
-
-    @endif
-
-
-</script>
-
-
+    <script>
+        $(function () {
+            getAllJob();
+        });
+        function getAllJob() {
+            var search=$("#search-job").val();
+            var zone=$("#zonefilter").val();
+            $.ajax({
+                type: 'POST',
+                url: "{{url('/available-job/all')}}",
+                cache: false,
+                data: {_token: "{{csrf_token()}}",search:search,zonefilter:zone},
+                success: function (data) {
+                    $('#allJobs').html(data);
+                }
+            });
+        }
+    </script>
 @endsection
-
