@@ -120,10 +120,10 @@ class ApplicationController extends Controller
 
     public function showAllApplication(Request $r)
     {
-        $application = Jobapply::select('job.jobId as jId','jobapply.jobapply as applyId',DB::raw('DATE_FORMAT(jobapply.applydate, "%d-%m-%Y") as applydate'),'jobapply.status',DB::raw('DATE_FORMAT(jobapply.interviewCallDate, "%d-%m-%Y") as interviewCallDate'),DB::raw('TIME_FORMAT(jobapply.interviewCallDateTime, "%H:%i") as interviewCallDateTime'), 'zone.zoneName','employee.employeeId', 'employee.firstName', 'employee.lastName', 'job.title', 'employee.maritalStatus')
-
+        $application = Jobapply::select('job.jobId as jId','jobapply.jobapply as applyId',DB::raw('DATE_FORMAT(jobapply.applydate, "%d-%m-%Y") as applydate'),'jobapply.status',DB::raw('DATE_FORMAT(jobapply.interviewCallDate, "%d-%m-%Y") as interviewCallDate'),DB::raw('TIME_FORMAT(jobapply.interviewCallDateTime, "%H:%i") as interviewCallDateTime'), 'zone.zoneName','employee.employeeId', 'employee.firstName', 'employee.lastName', 'job.title', 'employee.maritalStatus', 'jobapplyanswer.qa5', 'jobapplyanswer.qa6', 'jobapplyanswer.qa7', 'jobapplyanswer.qa8')
             ->leftJoin('employee', 'employee.employeeId', '=', 'jobapply.fkemployeeId')
             ->leftJoin('job', 'job.jobId', '=', 'jobapply.fkjobId')
+            ->leftJoin('jobapplyanswer', 'jobapplyanswer.jobapplyId', '=', 'jobapply.jobapply')
             ->leftJoin('education', 'education.fkemployeeId', '=', 'employee.employeeId')
             ->leftJoin('degree', 'degree.degreeId', '=', 'education.fkdegreeId')
             ->leftJoin('educationlevel', 'educationlevel.educationLevelId', '=', 'degree.educationLevelId')
@@ -132,14 +132,28 @@ class ApplicationController extends Controller
             ->leftJoin('jobexperience', 'jobexperience.fkemployeeId', '=', 'employee.employeeId')
             ->leftJoin('traning', 'traning.fkemployeeId', '=', 'employee.employeeId')
             ->leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')
-            ->distinct('educationmajor.fkDegreeId')
-        ;
+            ->distinct('educationmajor.fkDegreeId');
 
         if ($r->maritalStatusFilter){
             $application= $application->where('employee.maritalStatus',$r->maritalStatusFilter);
         }
+        if ($r->jobTitle){
+            $application= $application->where('job.title',$r->jobTitle);
+        }
         if ($r->applicant_Status){
             $application= $application->where('jobapply.status',$r->applicant_Status);
+        }
+        if ($r->q5ans){
+            $application= $application->where('jobapplyanswer.qa5',$r->q5ans);
+        }
+        if ($r->q6ans){
+            $application= $application->where('jobapplyanswer.qa6',$r->q6ans);
+        }
+        if ($r->q7ans){
+            $application= $application->where('jobapplyanswer.qa7',$r->q7ans);
+        }
+        if ($r->q8ans){
+            $application= $application->where('jobapplyanswer.qa8',$r->q8ans);
         }
         if ($r->genderFilter){
             $application= $application->where('employee.gender',$r->genderFilter);
@@ -188,9 +202,6 @@ class ApplicationController extends Controller
         }
         if ($r->ageToFilter){
             $application= $application->where(DB::raw("TIMESTAMPDIFF(YEAR,`employee`.`dateOfBirth`,CURDATE())"),'<=',$r->ageToFilter);
-        }
-        if ($r->jobTitle){
-            $application= $application->where('job.title',$r->jobTitle);
         }
         if ($r->applyDate){
             $application= $application->where('jobapply.applydate',$r->applyDate);;
@@ -781,73 +792,71 @@ class ApplicationController extends Controller
     }
     public function sendMailtoAppliedCandidate(Request $r)
     {
-        $start = $r->start;
-        $end = $r->end;
-
-        if (empty($r->interval) && $r->tamplateId=='1'){
-            $arr = array('msg' => 'interval field is required.', 'status' => 'error');
-            return Response()->json($arr);
-        }
-
-        if($start < $end){
-            $avail_time  = (strtotime($end)-strtotime($start))/60;
-            $avail_interval =  ($avail_time/$r->interval)+1;
-//            echo $avail_interval.' ---- '.$r->interval;
-//            exit();
-//            $totaltime = (strtotime($end)-strtotime($start))/$r->selected;
-//            $availabletime = date("i",$totaltime);
-            if ($avail_interval >= $r->numberofapplicant)
-            {
-                $possible=true;
-            }else{
-                $arr = array('msg' => 'Not possible interval time.', 'status' => 'error');
-                return Response()->json($arr);
-            }
-
-        } else {
-            $arr = array('msg' => 'Invalid start and end time.', 'status' => 'error');
-            return Response()->json($arr);
-        }
+//        $start = $r->start;
+//        $end = $r->end;
+//
+//        if (empty($r->interval) && $r->tamplateId=='1'){
+//            $arr = array('msg' => 'interval field is required.', 'status' => 'error');
+//            return Response()->json($arr);
+//        }
+//
+//        if($start < $end){
+//            $avail_time  = (strtotime($end)-strtotime($start))/60;
+//            $avail_interval =  ($avail_time/$r->interval)+1;
+////            echo $avail_interval.' ---- '.$r->interval;
+////            exit();
+////            $totaltime = (strtotime($end)-strtotime($start))/$r->selected;
+////            $availabletime = date("i",$totaltime);
+//            if ($avail_interval >= $r->numberofapplicant)
+//            {
+//                $possible=true;
+//            }else{
+//                $arr = array('msg' => 'Not possible interval time.', 'status' => 'error');
+//                return Response()->json($arr);
+//            }
+//
+//        } else {
+//            $arr = array('msg' => 'Invalid start and end time.', 'status' => 'error');
+//            return Response()->json($arr);
+//        }
         $appliedList=$r->jobApply;
-        $template=$r->tamplateId;
-        $testDate=$r->testDate;
-        $testAddress=$r->testAddress;
-        $testDetails=$r->testDetails;
+//        $template=$r->tamplateId;
+//        $testDate=$r->testDate;
+//        $testAddress=$r->testAddress;
+//        $testDetails=$r->testDetails;
         $footerAndSign=$r->footerAndSign;
         $subjectLine=$r->subjectLine;
-        $refNo=$r->refNo;
+//        $refNo=$r->refNo;
 
-        if ($template=='1') {
-            $custom_template = email::where('emailfor','interview')->first();
-        }elseif ($template=='2') {
-            $custom_template = email::where('emailfor','panellisted')->first();
-        }elseif ($template=='3') {
-            $custom_template = email::where('emailfor','notselected')->first();
-        }
+//        if ($template=='1') {
+//            $custom_template = email::where('emailfor','interview')->first();
+//        }elseif ($template=='2') {
+//            $custom_template = email::where('emailfor','panellisted')->first();
+//        }elseif ($template=='3') {
+//            $custom_template = email::where('emailfor','notselected')->first();
+//        }
 //        $list=array();
         $error=array();
         for ($i=0;$i<count($appliedList);$i++) {
 
-            if ($possible){
-                if ($i==0){
-                    $intv = 0;
-                }else{
-                    $intv = $r->interval*($i+1);
-                }
-                $nexttime = strtotime("+".$intv." minutes", strtotime($start));
-                $intviewTime = date("H:i",$nexttime);
-            }
+//            if ($possible){
+//                if ($i==0){
+//                    $intv = 0;
+//                }else{
+//                    $intv = $r->interval*($i+1);
+//                }
+//                $nexttime = strtotime("+".$intv." minutes", strtotime($start));
+//                $intviewTime = date("H:i",$nexttime);
+//            }
 
             $appliedId = $appliedList[$i];
 
-
-//            $jobInfo=Jobapply::select('job.title','job.position','jobapply.fkemployeeId','interviewCallDate')->where('jobapply',$appliedId)
             $jobInfo=Jobapply::leftJoin('job', 'job.jobId', '=', 'jobapply.fkjobId')->findOrFail($appliedId);
 
             $add_data = Jobapply::where('fkemployeeId',$jobInfo->fkemployeeId)->first();
             $add_data->status = 'Called';
-            $add_data->interviewCallDate = $testDate;
-            $add_data->interviewCallDateTime = $intviewTime;
+//            $add_data->interviewCallDate = $testDate;
+//            $add_data->interviewCallDateTime = $intviewTime;
             $add_data->save();
 
 
@@ -855,126 +864,28 @@ class ApplicationController extends Controller
                 ->where('employee.employeeId',$jobInfo->fkemployeeId)
                 ->first();
 
-          //  return $template;
+            try{
+                $pdf = PDF::loadView('mail.interviewCard',['empInfo' => $employeeInfo,'footerAndSign'=>$footerAndSign,'subjectLine'=>$subjectLine,'jobInfo'=>$jobInfo]);
 
+                Mail::send('mail.MailBody',['employeeInfo' => $employeeInfo], function($message) use ($pdf,$employeeInfo)
+                {
+                    $message->to($employeeInfo->email,$employeeInfo->firstName.' '.$employeeInfo->lastName)->subject('INTERVIEW CARD From CARITAS BD');
+                    $message->attachData($pdf->output(),'INTERVIEW-CARD.pdf',['mime' => 'application/pdf']);
 
-
-            /* make invoice pdf*/
-
-            if ($template=='1'){
-
-                $jobInfo->interviewCallDate=$testDate;
-                $jobInfo->save();
-
-
-
-
-                try{
-//                    if($templateversion=='regular'){
-                        $pdf = PDF::loadView('mail.interviewCard',['empInfo' => $employeeInfo,'testDate'=>$jobInfo->interviewCallDate,'testAddress'=>$testAddress,
-                            'testDetails'=>$testDetails,'footerAndSign'=>$footerAndSign,'subjectLine'=>$subjectLine,'refNo'=>$refNo,'jobInfo'=>$jobInfo,'intviewTime'=>$intviewTime,'customBody'=>$custom_template->emailbody]);
-//                    }elseif($templateversion=='custom'){
-//                        echo 'custom';
-//                    }
-
-                    Mail::send('mail.MailBody',['employeeInfo' => $employeeInfo], function($message) use ($pdf,$employeeInfo)
-                    {
-
-//                        $message->from('support@caritasbd.com', 'CARITAS BD');
-
-                        $message->to($employeeInfo->email,$employeeInfo->firstName.' '.$employeeInfo->lastName)->subject('INTERVIEW CARD From CARITAS BD');
-
-                        $message->attachData($pdf->output(),'INTERVIEW-CARD.pdf',['mime' => 'application/pdf']);
-
-
-
-                    });
-                }
-                catch (\Exception $ex) {
-                     $error[$i]=$ex;
-                }
-
+                });
+            }catch (\Exception $ex) {
+                $error[$i]=$ex;
             }
-            if ($template=='2'){
-
-//                if($templateversion=='regular'){
-                    $pdf = PDF::loadView('mail.notSelected',['empInfo' => $employeeInfo,'testDate'=>$jobInfo->interviewCallDate,'testAddress'=>$testAddress,
-                        'testDetails'=>$testDetails,'footerAndSign'=>$footerAndSign,'subjectLine'=>$subjectLine,'refNo'=>$refNo,'jobInfo'=>$jobInfo,'customBody'=>$custom_template->emailbody]);
-//                }elseif($templateversion=='custom'){
-//                    echo 'custom';
-//                }
-
-                try{
-
-                    Mail::send('mail.MailBody',['employeeInfo' => $employeeInfo], function($message) use ($pdf,$employeeInfo)
-                    {
-
-//                        $message->from('support@caritasbd.com', 'CARITAS BD');
-
-                        $message->to($employeeInfo->email,$employeeInfo->firstName.' '.$employeeInfo->lastName)->subject('APOLOGY LETTER From CARITAS BD');
-
-                        $message->attachData($pdf->output(),'NOTSELECTED-CARD.pdf',['mime' => 'application/pdf']);
-
-
-
-                    });
-                }
-                catch (\Exception $ex) {
-
-//                    return 0;
-                     $error[$i]=$ex;
-                }
-
-            }
-            if ($template=='3'){
-
-//                if($templateversion=='regular'){
-                    $pdf = PDF::loadView('mail.panelListed',['empInfo' => $employeeInfo,'testDate'=>$jobInfo->interviewCallDate,'testAddress'=>$testAddress,
-                        'testDetails'=>$testDetails,'footerAndSign'=>$footerAndSign,'subjectLine'=>$subjectLine,'refNo'=>$refNo,'jobInfo'=>$jobInfo,'customBody'=>$custom_template->emailbody]);
-//                }elseif($templateversion=='custom'){
-//                    echo 'custom';
-//                }
-
-                try{
-
-                    Mail::send('mail.MailBody',['employeeInfo' => $employeeInfo], function($message) use ($pdf,$employeeInfo)
-                    {
-
-//                        $message->from('support@caritasbd.com', 'CARITAS BD');
-
-                        $message->to($employeeInfo->email,$employeeInfo->firstName.' '.$employeeInfo->lastName)->subject('PANEL-LIST LETTER From CARITAS BD');
-
-                        $message->attachData($pdf->output(),'PANEL-LIST.pdf',['mime' => 'application/pdf']);
-
-
-
-                    });
-//                    sleep(1);
-//                    return 1;
-                }
-                catch (\Exception $ex) {
-
-//                    return 0;
-                     $error[$i]=$ex;
-                }
-
-            }
-
-
         }
         if(!empty($error))
         {
-
             return $error;
-
         }else{
             return 1;
         }
-
-
     }
-    public function downloadMailDoc(Request $r){
 
+    public function downloadMailDoc(Request $r){
 
         $appliedList=$r->jobApply;
         $template=$r->tamplateId;

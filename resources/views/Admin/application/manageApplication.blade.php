@@ -1,29 +1,19 @@
 @extends('main')
 
-@section('header')
-
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--}}
-{{--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>--}}
-
-{{--<link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" rel="stylesheet">--}}
-
-@endsection
-
 @section('content')
 <style>
     div.ex3 {
         background-color: lightblue;
         width: 100%;
-        height: 600px;
+        height: 700px;
         overflow: auto;
     }
 </style>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
 
             <div style="background-color: white;margin-bottom: 20px;" class="card-body ex3">
 
-                <!-- Modal -->
                 <div class="modal fade" id="mail_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -35,95 +25,20 @@
 
                             <div class="modal-body">
 
-                                <div class="row">
-                                    <div  class="col-md-6">
-
-                                            <label for="mailTamplate" class="control-label">Mail Tamplate</label>
-
-                                            <select class="form-control" id="mailTamplate">
-                                                <option selected value="" selected>Select Tamplate</option>
-                                                @foreach($mailTamplate as $mT)
-                                                    <option value="{{$mT->tamplateId}}">{{$mT->tamplateName}}</option>
-                                                @endforeach
-
-                                            </select>
-
-                                        </div>
-                                </div>
-                                <div class="row">
-
-                                    <div class="col-md-6">
-
-                                        <label for="refNo">Ref No:</label>
-                                        <input class="form-control" id="refNo" name="refNo" value="">
-
-                                    </div>
-                                    <div id="testDateDiv" class="col-md-6">
-
-                                        <label for="">Test Date</label>
-                                        <input class="form-control date1" id="testDate" name="testDate" value="">
-
-                                    </div>
-
-                                </div>
-
-                                <div class="row" id="forinterview">
-
-                                    <div class="col-md-3">
-
-                                        <label for="refNo">Selected applicant:</label>
-                                        <input type="text" id="totalSelected" name="numberofapplicant" class="form-control" readonly>
-
-                                    </div>
-                                    <div class="col-md-3">
-
-                                        <label for="">Start Time</label>
-                                        <input type="time" class="form-control" id="StartTime">
-
-                                    </div>
-                                    <div class="col-md-3">
-
-                                        <label for="">End Time</label>
-                                        <input type="time" class="form-control" id="EndTime">
-
-                                    </div>
-                                    <div class="col-md-3">
-
-                                        <label for="">Interval Time</label>
-                                        <input class="form-control" id="IntervalTime">
-
-                                    </div>
-
-                                </div>
-
                                 <div id="subjectLineDiv" class="form-group">
                                     <label for="">Subject line</label>
                                     <input type="text" class="form-control" id="subjectLine" placeholder="subject line" value="" name="subjectLine">
                                 </div>
+                                <div class="form-group">
+                                    <label for="">Mail Body</label>
+                                    <textarea class="form-control ckeditor" id="ckBox" value="" name="tamplateFooterAndSign" rows="6" ></textarea>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="">Test Details</label>
+                                <div class="form-group">
 
-                                        <textarea class="form-control" id="tamplateBody" name="testDetails" rows="2" ></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="">Test Address</label>
-                                        <textarea class="form-control" id="testAddress" name="testAddress" rows="2" ></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Mail Footer</label>
-                                        <textarea class="form-control ckeditor" id="ckBox" value="" name="tamplateFooterAndSign" rows="6" ></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <button type="submit" onclick="sendMailToJobApplied()" class="btn btn-success">Submit</button>
-                                        <button type="button" onclick="downloadmailDoc()" class="btn btn-success">Download as doc</button>
-                                    </div>
-
-                                {{--</form>--}}
-
+                                    <button type="submit" onclick="sendMailToJobApplied()" class="btn btn-success">Submit</button>
+{{--                                    <button type="button" onclick="downloadmailDoc()" class="btn btn-success">Download as doc</button>--}}
+                                </div>
                             </div>
 
 
@@ -142,18 +57,12 @@
                             </div>
 
                             <div class="modal-body">
-
-
-
-
                                     <div class="form-group">
 
                                         <label for="excelName">Excel Name:</label>
                                         <input class="form-control" id="excelName" name="excelName" value="">
 
                                     </div>
-
-
 
                                 <div style="display: none" id="HRfullreport" class="form-group">
 
@@ -168,11 +77,7 @@
                                     <a href="#" onclick="return myfunchrreport03()" ><button type="submit" class="btn btn-success">Submit</button></a>
                                 </div>
 
-
-
                             </div>
-
-
 
                         </div>
                     </div>
@@ -210,7 +115,6 @@
                         @foreach($allJobTitle as $jobTitle)
                             <option value="{{$jobTitle->title}}">{{$jobTitle->title}}</option>
                         @endforeach
-
                     </select>
                 </div>
                 <div class=" form-group ">
@@ -223,6 +127,32 @@
                         <option value="Rejected">Rejected</option>
                     </select>
                 </div>
+                <div id="ques">
+                    <div class=" form-group ">
+                        <label id="q1"></label>
+                        <select name="q1ans" id="q1ans" class="form-control">
+                            <option value="">Select a Answer</option>
+                        </select>
+                    </div>
+                    <div class=" form-group ">
+                        <label id="q2"></label>
+                        <select name="q2ans" id="q2ans" class="form-control">
+                            <option value="">Select a Answer</option>
+                        </select>
+                    </div>
+                    <div class=" form-group ">
+                        <label id="q3"></label>
+                        <select name="q3ans" id="q3ans" class="form-control">
+                            <option value="">Select a Answer</option>
+                        </select>
+                    </div>
+                    <div class=" form-group ">
+                        <label id="q4"></label>
+                        <select name="q4ans" id="q4ans" class="form-control">
+                            <option value="">Select a Answer</option>
+                        </select>
+                    </div>
+                </div>
                 <div class=" form-group ">
                     <label>Religion</label>
                     <select name="religionFilter" id="religionFilter" class="form-control">
@@ -230,7 +160,6 @@
                         @foreach($religion as $reli)
                             <option value="{{$reli->religionId}}">{{$reli->religionName}}</option>
                         @endforeach
-
                     </select>
                 </div>
                 <div class=" form-group ">
@@ -240,7 +169,6 @@
                         @foreach($ethnicity as $ethi)
                             <option value="{{$ethi->ethnicityId}}">{{$ethi->ethnicityName}}</option>
                         @endforeach
-
                     </select>
                 </div>
                 <div class=" form-group ">
@@ -250,7 +178,6 @@
                         @foreach(DISABILITY as $key=>$value)
                             <option value="{{$value}}">{{$key}}</option>
                         @endforeach
-
                     </select>
                 </div>
 
@@ -264,7 +191,6 @@
                     </select>
                 </div>
 
-
                 <div class=" form-group ">
                     <label>Nationality</label>
                     <select name="nationalityFilter" id="nationalityFilter" class="form-control">
@@ -272,7 +198,6 @@
                         @foreach($natinality as $natio)
                             <option value="{{$natio->nationalityId}}">{{$natio->nationalityName}}</option>
                         @endforeach
-
                     </select>
                 </div>
                 <div class=" form-group">
@@ -282,23 +207,20 @@
                         @foreach($allZone as $zone)
                             <option  value="{{$zone->zoneId}}">{{$zone->zoneName}}</option>
                         @endforeach
-
                     </select>
                 </div>
                 <hr>
                 <div class="form-group">
                     <label style="text-align: center" class="col-12">Education</label>
-                <div class=" form-group ">
-                    <label>Educational Qualification</label>
-                    <select id="educationLvlFilter" name="educationLvlFilter" class="form-control">
-                        <option value="">Select a Qualification</option>
-                        @foreach($allEducationLevel as $eduLvl)
-                            <option  value="{{$eduLvl->educationLevelId}}">{{$eduLvl->educationLevelName}}</option>
-                        @endforeach
-
-
-                    </select>
-                </div>
+                    <div class=" form-group ">
+                        <label>Educational Qualification</label>
+                        <select id="educationLvlFilter" name="educationLvlFilter" class="form-control">
+                            <option value="">Select a Qualification</option>
+                            @foreach($allEducationLevel as $eduLvl)
+                                <option  value="{{$eduLvl->educationLevelId}}">{{$eduLvl->educationLevelName}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class=" form-group ">
                         <label>Degree</label>
@@ -307,44 +229,24 @@
                             @foreach($degree as $de)
                                 <option  value="{{$de->degreeId}}">{{$de->degreeName}}</option>
                             @endforeach
-
                         </select>
                     </div>
-
-{{--                    <div class="example">--}}
-{{--                        <script type="text/javascript">--}}
-{{--                            $(document).ready(function() {--}}
-{{--                                $('#educationMajorFilter').multiselect();--}}
-{{--                            });--}}
-{{--                        </script>--}}
-{{--                        <select id="multi-select-demo" multiple="multiple">--}}
-{{--                            <option value="jQuery">jQuery tutorial</option>--}}
-{{--                            <option value="Bootstrap">Bootstrap Tips</option>--}}
-{{--                            <option value="HTML">HTML</option>--}}
-{{--                            <option value="CSS">CSS tricks</option>--}}
-{{--                            <option value="angular">Angular JS</option>--}}
-{{--                        </select>--}}
-{{--                    </div>--}}
-
-
 
                     <div class=" form-group ">
                         <label>Major</label>
-{{--                        <select data-placeholder="Choose a Country..."id="educationMajorFilter" class="chosen-select" multiple style="width:350px;" tabindex="4">--}}
                         <select id="educationMajorFilter" name="educationMajorFilter" class="form-control" multiple>
                             <option value="">Select a Major</option>
                         </select>
+                    </div>`
+                    <div class=" form-group ">
+                        <label>Status of completion</label>
+                        <select id="educationCompletingFilter" name="educationCompletingFilter" class="form-control">
+                            <option value="">Select a Status</option>
+                            @foreach(COMPLETING_STATUS as $key=>$value)
+                                <option value="{{$value}}">{{$key}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                <div class=" form-group ">
-                    <label>Status of completion</label>
-                    <select id="educationCompletingFilter" name="educationCompletingFilter" class="form-control">
-                        <option value="">Select a Status</option>
-                        @foreach(COMPLETING_STATUS as $key=>$value)
-                            <option value="{{$value}}">{{$key}}</option>
-                        @endforeach
-
-                    </select>
-                </div>
                 </div>
                 <hr>
                 <div class="form-group">
@@ -360,7 +262,6 @@
                             @foreach(COMPLETING_STATUS as $key=>$value)
                                 <option value="{{$value}}">{{$key}}</option>
                             @endforeach
-
                         </select>
                     </div>
                 </div>
@@ -378,7 +279,6 @@
                             @foreach(COMPLETING_STATUS as $key=>$value)
                                 <option value="{{$value}}">{{$key}}</option>
                             @endforeach
-
                         </select>
                     </div>
                 </div>
@@ -402,27 +302,19 @@
                             @foreach($organizationType as $type)
                                 <option value="{{$type->organizationTypeId}}">{{$type->organizationTypeName}}</option>
                             @endforeach
-
                         </select>
-
-
                     </div>
-
                 </div>
                 <hr>
-
-
             </div>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="card m-b-30">
                 <div class="card-header">
                     <h4 class="pull-left">Manage All Application</h4>
-
                 </div>
                 <div class="card-body">
-
 
                     <div style="margin-top: 10px;" class="row">
                         <label class="checkbox-inline"><input style="width: auto;" type="checkbox" id="selectall2" value="">Select all</label>
@@ -430,52 +322,21 @@
                         <div class="col-md-3">
                             <a onclick="excelInfomationSubmit()"><button class="btn btn-danger btn-sm">Export candidates excel</button></a>
                         </div>
-                        <div class="col-md-3">
-                            <a onclick="excelReport03InfomationSubmit()"><button class="btn btn-primary btn-sm">Export HR report-02</button></a>
-                        </div>
-                        <div class="col-md-3">
-                            <a onclick="excelReport02InfomationSubmit()"><button class="btn btn-primary btn-sm">Export HR report-03</button></a>
-                        </div>
-
-
-
-
-
-
+{{--                        <div class="col-md-3">--}}
+{{--                            <a onclick="excelReport03InfomationSubmit()"><button class="btn btn-primary btn-sm">Export HR report-02</button></a>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-3">--}}
+{{--                            <a onclick="excelReport02InfomationSubmit()"><button class="btn btn-primary btn-sm">Export HR report-03</button></a>--}}
+{{--                        </div>--}}
                     </div>
                     <div style="margin-top: 10px;" class="row">
-
                         <div class="col-md-3">
                             <a onclick="sendMail()"><button class="btn btn-danger btn-sm">Send Mail</button></a>
                         </div>
-
                     </div>
-                    {{--<div class="row">--}}
-
-                        {{--<div class="col-md-1">--}}
-                            {{--<a onclick="return sendMail()"><button class="btn btn-danger btn-sm">Send Mail</button></a>--}}
-                        {{--</div>--}}
-
-
-                    {{--</div>--}}
                     <br>
                     <div class="table table-responsive">
-                        <table id="manageapplication" class="table table-striped table-bordered" style="width:100%" >
-                            <thead>
-                            <tr>
-                                <th style="width: 4%">Select</th>
-                                <th>Given name</th>
-                                <th>Surname</th>
-                                <th>Job Title</th>
-                                <th>Zone</th>
-                                <th>Apply Date</th>
-                                <th>Status</th>
-                                <th>Schedule Date</th>
-                                <th>Schedule Time</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <table id="manageapplication" class="table table-striped table-bordered" style="width:100%" ></table>
                     </div>
                 </div>
             </div>
@@ -487,29 +348,25 @@
 @endsection
 @section('foot-js')
 
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>--}}
-
-    <script src="{{url('public/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url('public/assets/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('public/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('public/assets/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
     <script type="text/javascript" src="{{url('public/assets/ckeditor/ckeditor.js')}}"></script>
-{{--    <script type="text/javascript" src="{{url('public/assets/js/moment.js')}}"></script>--}}
 
-    <script>
+{{--    <script>--}}
+{{--        CKEDITOR.config.autoParagraph = false;--}}
 
-        CKEDITOR.config.autoParagraph = false;
+{{--        CKEDITOR.config.toolbar = [--}}
+{{--            { name: 'document', items: [ 'Source', '-', 'Preview', '-'] },--}}
+{{--            { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },--}}
+{{--            '/',--}}
+{{--            { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },--}}
+{{--            { name: 'paragraph',   items: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },--}}
+{{--            { name: 'styles', items: [ 'Format', 'Styles', 'blocks', 'align', 'bidi' ]},--}}
+{{--            { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ]},--}}
+{{--            { name: 'paragraph', items: [ 'Outdent', 'Indent', 'Blockquote' ]}--}}
 
-        CKEDITOR.config.toolbar = [
-            { name: 'document', items: [ 'Source', '-', 'Preview', '-'] },
-            { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-            '/',
-            { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
-            { name: 'paragraph',   items: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-            { name: 'styles', items: [ 'Format', 'Styles', 'blocks', 'align', 'bidi' ]},
-            { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ]},
-            { name: 'paragraph', items: [ 'Outdent', 'Indent', 'Blockquote' ]}
-
-        ];
-    </script>
+{{--        ];--}}
+{{--    </script>--}}
 
     <script>
 
@@ -545,7 +402,7 @@
         $(document).ready(function() {
 
             $("#applicant_Status").attr("disabled", true);
-
+            $("#ques").css("display", "none");
             $('.date').datepicker({
                 format: 'yyyy-m-d',
                 todayHighlight: true,
@@ -605,6 +462,18 @@
                         if ($('#applicant_Status').val()!=""){
                             d.applicant_Status=$('#applicant_Status').val();
                         }
+                        if ($('#q1ans').val()!=""){
+                            d.q5ans=$('#q1ans').val();
+                        }
+                        if ($('#q2ans').val()!=""){
+                            d.q6ans=$('#q2ans').val();
+                        }
+                        if ($('#q3ans').val()!=""){
+                            d.q7ans=$('#q3ans').val();
+                        }
+                        if ($('#q4ans').val()!=""){
+                            d.q8ans=$('#q4ans').val();
+                        }
                         if ($('#applyDate').val()!=""){
                             d.applyDate=$('#applyDate').val();
                         }
@@ -640,43 +509,37 @@
                         if ($('#jobExperienceFilter').val()!=""){
                             d.jobExperienceFilter=$('#jobExperienceFilter').val();
                         }
-
-                    },
+                    }
                 },
                 columns: [
 
-                    { "data": function(data){
+                    { title:'Select', "data": function(data){
                         return '<input  data-panel-id="'+data.applyId+'"onclick="selected_rows(this)" type="checkbox" class="chk" name="selected_rows[]" value="'+ data.applyId +'" />'
                             ;},
                         "orderable": false, "searchable":false
                     },
-                    { data: 'firstName', name: 'employee.firstName',"orderable": false, "searchable":true },
-                    { data: 'lastName', name: 'employee.lastName',"orderable": false, "searchable":true },
-                    { data: 'title', name: 'job.title', "orderable": false, "searchable":true },
-                    { data: 'zoneName', name: 'zone.zoneName', "orderable": false, "searchable":true },
-                    { data: 'applydate', name: 'jobapply.applydate', "orderable": true, "searchable":true },
-                    { data: 'status', name: 'jobapply.status', "orderable": true, "searchable":true },
-                    { data: 'interviewCallDate', name: 'jobapply.interviewCallDate', "orderable": true, "searchable":true },
-                    { data: 'interviewCallDateTime', name: 'jobapply.interviewCallDateTime', "orderable": true, "searchable":true },
-
-
-                    { "data": function(data){
-                        return '<button class="btn btn-primary" onclick="qusview('+data.employeeId+','+data.jId+')"><i class="fa fa-eye"></i></button>'
-                            +'&nbsp;' +'<button class="btn btn-smbtn-info" onclick="getEmpCv('+data.employeeId+')"><i class="fa fa-file-pdf-o"></i></button>'
+                    { title:'Given name', data: 'firstName', name: 'employee.firstName',"orderable": false, "searchable":true },
+                    { title:'Surname', data: 'lastName', name: 'employee.lastName',"orderable": false, "searchable":true },
+                    { title:'Job Title', data: 'title', name: 'job.title', "orderable": false, "searchable":true },
+                    { title:'Zone', data: 'zoneName', name: 'zone.zoneName', "orderable": false, "searchable":true },
+                    { title:'Apply Date', data: 'applydate', name: 'jobapply.applydate', "orderable": true, "searchable":true },
+                    { title:'Status', data: 'status', name: 'jobapply.status', "orderable": true, "searchable":true },
+                    // { title:'Schedule Date', data: 'interviewCallDate', name: 'jobapply.interviewCallDate', "orderable": true, "searchable":true },
+                    // { title:'Schedule Time', data: 'interviewCallDateTime', name: 'jobapply.interviewCallDateTime', "orderable": true, "searchable":true },
+                    { title:'Action',"data": function(data){
+                        return '<button class="btn btn-sm btn-primary" onclick="qusview('+data.employeeId+','+data.jId+')"><i class="fa fa-eye"></i></button>'
+                            +'&nbsp;' +'<button class="btn btn-sm btn-smbtn-info" onclick="getEmpCv('+data.employeeId+')"><i class="fa fa-file-pdf-o"></i></button>'
                             +'&nbsp;' +'<button class="btn btn-sm btn-danger" onclick="empReject('+data.employeeId+')"><i class="fa fa-trash-o"></i></button>'
                             ;},
                         "orderable": false, "searchable":false
-                    },
-
-
-                ],
+                    }
+                ]
             });
 
             $('#applicant_Status').change(function(){
                 table.ajax.reload();
             });
 
-            // maritial status
             $('#maritalStatusFilter').change(function(){
                 table.ajax.reload();
                 emptySelect();
@@ -688,9 +551,8 @@
                 }
             });
 
-            $('#genderFilter').change(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
-                table.ajax.reload();  //just reload table
+            $('#genderFilter').change(function(){
+                table.ajax.reload();
                 emptySelect();
                 if ($('#genderFilter').val()!=""){
 
@@ -699,10 +561,8 @@
                     $('#genderFilter').css("background-color", "#FFF").css('color', 'black');
                 }
             });
-            $('#religionFilter').change(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
-
-                table.ajax.reload();  //just reload table
+            $('#religionFilter').change(function(){
+                table.ajax.reload();
                 emptySelect();
                 if ($('#religionFilter').val()!=""){
 
@@ -710,13 +570,9 @@
                 }else {
                     $('#religionFilter').css("background-color", "#FFF").css('color', 'black');
                 }
-
-
             });
-            $('#ethnicityFilter').change(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
-
-                table.ajax.reload();  //just reload table
+            $('#ethnicityFilter').change(function(){
+                table.ajax.reload();
                 emptySelect();
                 if ($('#ethnicityFilter').val()!=""){
 
@@ -726,10 +582,8 @@
                 }
 
             });
-            $('#disabilityFilter').change(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
-
-                table.ajax.reload();  //just reload table
+            $('#disabilityFilter').change(function(){
+                table.ajax.reload();
                 emptySelect();
                 if ($('#disabilityFilter').val()!=""){
 
@@ -739,9 +593,8 @@
                 }
 
             });
-            $('#nationalityFilter').change(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
-                table.ajax.reload();  //just reload table
+            $('#nationalityFilter').change(function(){
+                table.ajax.reload();
                 emptySelect();
                 if ($('#nationalityFilter').val()!=""){
 
@@ -750,9 +603,8 @@
                     $('#nationalityFilter').css("background-color", "#FFF").css('color', 'black');
                 }
             });
-            $('#zonefilter').change(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
-                table.ajax.reload();  //just reload table
+            $('#zonefilter').change(function(){
+                table.ajax.reload();
                 emptySelect();
                 if ($('#zonefilter').val()!=""){
 
@@ -768,15 +620,73 @@
                 if ($('#jobTitle').val()!=""){
                     $('#jobTitle').css("background-color", "#7c9").css('color', 'white');
                     $("#applicant_Status").attr("disabled", false);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{!! route('job.question') !!}",
+                        cache: false,
+                        data: {_token:"{{csrf_token()}}",jobTitle:$('#jobTitle').val()},
+                        success: function (data) {
+                            $("#q1").html(data.question5);
+                            $('#q1ans').find('option').remove().end();
+                            $('#q1ans').append($("<option></option>").attr("value",'').text('Select'));
+                            $.each(data.question5Answer.split(','), function(key, value) {
+                                $('#q1ans').append($("<option></option>").attr("value",value).text(value));
+                            });
+                            $("#q2").html(data.question6);
+                            $('#q2ans').find('option').remove().end();
+                            $('#q2ans').append($("<option></option>").attr("value",'').text('Select'));
+                            $.each(data.question6Answer.split(','), function(key, value) {
+                                $('#q2ans').append($("<option></option>").attr("value",value).text(value));
+                            });
+                            $("#q3").html(data.question7);
+                            $('#q3ans').find('option').remove().end();
+                            $('#q3ans').append($("<option></option>").attr("value",'').text('Select'));
+                            $.each(data.question7Answer.split(','), function(key, value) {
+                                $('#q3ans').append($("<option></option>").attr("value",value).text(value));
+                            });
+                            $("#q4").html(data.question8);
+                            $('#q4ans').find('option').remove().end();
+                            $('#q4ans').append($("<option></option>").attr("value",'').text('Select'));
+                            $.each(data.question8Answer.split(','), function(key, value) {
+                                $('#q4ans').append($("<option></option>").attr("value",value).text(value));
+                            });
+                            $("#ques").css("display", "block");
+                        }
+                    });
                 }else {
                     $('#jobTitle').css("background-color", "#FFF").css('color', 'black');
                     $("#applicant_Status").attr("disabled", true);
+                    $("#ques").css("display", "none");
+                    $('#q1ans').prop('selectedIndex',0);
+                    $('#q2ans').prop('selectedIndex',0);
+                    $('#q3ans').prop('selectedIndex',0);
+                    $('#q4ans').prop('selectedIndex',0);
                 }
-
             });
-            $('#applyDate').change(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
-                table.ajax.reload();  //just reload table
+
+            $('#q1ans').change(function(){
+                table.ajax.reload();
+                emptySelect();
+            });
+
+            $('#q2ans').change(function(){
+                table.ajax.reload();
+                emptySelect();
+            });
+
+            $('#q3ans').change(function(){
+                table.ajax.reload();
+                emptySelect();
+            });
+
+            $('#q4ans').change(function(){
+                table.ajax.reload();
+                emptySelect();
+            });
+
+            $('#applyDate').change(function(){
+                table.ajax.reload();
                 emptySelect();
                 if ($('#applyDate').val()!=""){
 
@@ -785,8 +695,7 @@
                     $('#applyDate').css("background-color", "#FFF").css('color', 'black');
                 }
             });
-            $('#jobExperienceFromFilter').keyup(function(){ //button filter event click
-//                table.search("").draw(); //just redraw myTableFilter
+            $('#jobExperienceFromFilter').keyup(function(){
                 emptySelect();
                 if ($('#jobExperienceFromFilter').val()!="") {
 
@@ -1077,19 +986,13 @@
             if (index == "-1"){
                 selecteds.push(btn);
             }else {
-
                 selecteds.splice(index, 1);
             }
-
-
-
         }
 
         function myfunc() {
 
-
             if ($('#jobTitle').val()!=""){
-
 
                 var products=selecteds;
 
@@ -1101,19 +1004,11 @@
                         cache: false,
                         data: {'jobApply': products,'excelName':$('#excelName').val(),_token:"{{csrf_token()}}",jobTitle:$('#jobTitle').val()},
                         success: function (data) {
-                           // console.log(data);
 
                             $('#SessionMessage').load(document.URL +  ' #SessionMessage');
-                            table.ajax.reload();  //just reload table
-
+                            table.ajax.reload();
                             selecteds=[];
-
                             $(':checkbox:checked').prop('checked',false);
-
-                            //alert(data);
-
-//                            location.reload();
-
                             if (data.success=='1'){
 
                                 $.alert({
@@ -1136,9 +1031,6 @@
                                                 delete link;
 
                                                 location.reload();
-
-
-
 
                                             }
                                         }
@@ -1489,9 +1381,7 @@
         }
         function sendMail() {
 
-
             if ($('#jobTitle').val()!=""){
-
 
                 var products=selecteds;
 
@@ -1500,8 +1390,6 @@
                     $("#totalSelected").val(products.length);
                 }
                 else {
-
-
                     $.alert({
                         title: 'Alert!',
                         type: 'Red',
@@ -1510,18 +1398,11 @@
                             tryAgain: {
                                 text: 'Ok',
                                 btnClass: 'btn-red',
-                                action: function () {
-
-
-                                }
                             }
-
                         }
                     });
                 }
-
-            }
-            else {
+            }else {
 
                 $.alert({
                     title: 'Alert!',
@@ -1531,45 +1412,32 @@
                         tryAgain: {
                             text: 'Ok',
                             btnClass: 'btn-blue',
-                            action: function () {
-
-
-                            }
                         }
-
                     }
                 });
-
             }
-
         }
 
         function sendMailToJobApplied() {
 
 
-            if ($('#mailTamplate').val() !=""){
+            if ($('#subjectLine').val() !=""){
 
                 $("#wait").css("display", "block");
 
                 var products=selecteds;
 
-
                     $.ajax({
                         type: 'POST',
                         url: "{!! route('jobAppliedCadidate.admin.sendMail') !!}",
                         cache: false,
-                        data: {'jobApply': products,_token:"{{csrf_token()}}",'tamplateId':$('#mailTamplate').val(),'tamplateversion':$('#TamplateVersion').val(),'testDate':$('#testDate').val(),
-                            'testAddress':$('#testAddress').val(),'testDetails':$('#tamplateBody').val(),'footerAndSign':CKEDITOR.instances['ckBox'].getData(),
-                            'subjectLine':$('#subjectLine').val(),'refNo':$('#refNo').val(),'selected':$('#totalSelected').val(),'start':$('#StartTime').val(),'end':$('#EndTime').val(),'interval':$('#IntervalTime').val()},
+                        data: {'jobApply': products,_token:"{{csrf_token()}}",'footerAndSign':CKEDITOR.instances['ckBox'].getData(),
+                            'subjectLine':$('#subjectLine').val()},
                         success: function (data) {
-
-                            $("#wait").css("display", "none");
-//
+                            $("#wait").css("display", "none");//
                             $('#SessionMessage').load(document.URL +  ' #SessionMessage');
-                            table.ajax.reload();  //just reload table
-
+                            table.ajax.reload();
                             selecteds=[];
-
                            if(data.status=='error'){
                                $.alert({
                                    title: 'Alert!',
@@ -1584,32 +1452,24 @@
                                });
                            }
 
-                            $(':checkbox:checked').prop('checked',false);
+                           $(':checkbox:checked').prop('checked',false);
 
-
-
-                            if (data =='1'){
-
-                                $.alert({
-                                    title: 'Alert!',
-                                    type: 'green',
-                                    content: 'Mail Send successfully',
-                                    buttons: {
-                                        tryAgain: {
-                                            text: 'Ok',
-                                            btnClass: 'btn-blue',
-                                            action: function(){
-
-                                                location.reload();
-                                            }
+                           if (data =='1'){
+                            $.alert({
+                                title: 'Alert!',
+                                type: 'green',
+                                content: 'Mail Send successfully',
+                                buttons: {
+                                    tryAgain: {
+                                        text: 'Ok',
+                                        btnClass: 'btn-blue',
+                                        action: function(){
+                                            location.reload();
                                         }
                                     }
-                                });
-
-
-                            }
-                            else if(data=='0'){
-
+                                }
+                            });
+                           }else if(data=='0'){
                                 $.alert({
                                     title: 'Alert!',
                                     type: 'Red',
@@ -1620,48 +1480,26 @@
                                             btnClass: 'btn-red',
                                             action: function () {
                                                 location.reload();
-
                                             }
                                         }
-
                                     }
                                 });
-
-
                             }
-
-
                         }
-
                     });
-
-
-
-            }
-
-            else {
-
+            }else {
                 $.alert({
                     title: 'Alert!',
                     type: 'red',
-                    content: 'Please Select a Tamplate First',
+                    content: 'Please Insert Email Subject',
                     buttons: {
                         tryAgain: {
                             text: 'Ok',
                             btnClass: 'btn-blue',
-                            action: function () {
-
-
-                            }
                         }
-
                     }
                 });
-
             }
-
-
-
         }
         function downloadmailDoc() {
 

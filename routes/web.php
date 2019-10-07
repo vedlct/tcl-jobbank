@@ -184,6 +184,7 @@ Route::post('job/all','JobController@getJobData')->name('job.getJobData');
 Route::post('job/applyJobModal','JobController@applyJobModal')->name('job.applyJobModal');
 Route::post('job/appliedJobModal','JobController@appliedJobModal')->name('job.appliedJobModal');
 Route::post('Candidate-Job-Apply/{jobId}','EmployeeController@applyJob')->name('candidate.ApplyJob');
+Route::post('job-question','JobController@job_question')->name('job.question');
 
 
 //candidate Application

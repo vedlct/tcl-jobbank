@@ -6,12 +6,9 @@
     <style>
 
         #footer {
-
             position:absolute;
             bottom:0;
             font-size: 10px;
-
-
         }
 
         body{
@@ -28,9 +25,6 @@
         b{
             10;
         }
-
-
-
     </style>
 
 
@@ -94,10 +88,9 @@
 
     <table style="width: 100%;border-top: 1px solid black;border-bottom: 1px solid black" >
         <tr>
-            <td align="left" style="width: 50%;">
-                <b>Ref No: </b>{{$refNo}}
-
-            </td>
+{{--            <td align="left" style="width: 50%;">--}}
+{{--                <b>Ref No: </b>{{$refNo}}--}}
+{{--            </td>--}}
             <td style="width: 50%;" align="center">
                 <b>Date: </b>{{date('d-m-Y')}}
             </td>
@@ -107,35 +100,25 @@
 </div>
 
 <div style="margin: 30px 30px 30px 30px;">
-
-
-
-            <table style="width: 50%" >
-                <tr >
-                    <td align="left"> {{$empInfo->firstName.' '.$empInfo->lastName}}<br>
-                        {{$empInfo->presentAddress}}<br>
-                        Email: {{$empInfo->email}}<br>
-                        Cell: {{$empInfo->personalMobile}}
-                    </td>
-                </tr>
-            </table>
-
-
-
-
+    <table style="width: 50%" >
+        <tr >
+            <td align="left"> {{$empInfo->firstName.' '.$empInfo->lastName}}<br>
+                {{$empInfo->presentAddress}}<br>
+                Email: {{$empInfo->email}}<br>
+                Cell: {{$empInfo->personalMobile}}
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div style="margin: 0px 30px 30px 30px;">
-
     <table style="width: 100%">
         <tr>
-        <td style="width: 100%" align="left">
-            <b>Subject: {{$subjectLine.' for the post of '}}{{$jobInfo->position}}</b>
-        </td>
+            <td style="width: 100%" align="left">
+                <b>Subject: {{$subjectLine.' for the post of '}}{{$jobInfo->position}}</b>
+            </td>
         </tr>
-
     </table>
-
 </div>
 
 <div style="margin: 0px 30px 0px 30px;">
@@ -149,19 +132,10 @@
         <tr>
             <td align="left" width="100%">
 
-
-
-With reference to your application for the post of {{$jobInfo->position}}, we would like to invite you for {{$testDetails}} to be held on the {{date('dS F Y (l)',strtotime($testDate))}} at {{$intviewTime}} in {{$testAddress}}.
-<br>
-<br>
-                <span>
-{{--                        Please take note of the following information for attending the interview:<br>--}}
-{{--                        1. That you are requested to be present for the interview on time.<br>--}}
-{{--                        2. That no TA/DA will be provided for attending the above interview.<br>--}}
-{{--                        3. That you are requested to bring original copies of all certificates during interview.<br>--}}
-                    {!! $customBody !!}
-
-               </span>
+{{--With reference to your application for the post of {{$jobInfo->position}}, we would like to invite you for test to be held on the {{date('dS F Y (l)',strtotime($testDate))}} at {{$intviewTime}} in {{$testAddress}}.--}}
+{{--<br>--}}
+{{--<br>--}}
+                <span>{!! $footerAndSign !!}</span>
             </td>
 
         </tr>
@@ -172,18 +146,18 @@ With reference to your application for the post of {{$jobInfo->position}}, we wo
 <div style="margin: 30px 30px 0px 30px;">
 
     <table style="width: 100%">
+{{--        <tr>--}}
+{{--            <td>--}}
+{{--                With best regards,--}}
+{{--            </td>--}}
+{{--        </tr>--}}
+{{--        <tr>--}}
+{{--            <td style="width: 100%" align="left">--}}
+{{--                {!! $footerAndSign !!}--}}
+{{--            </td>--}}
+{{--        </tr>--}}
         <tr>
-            <td>
-                With best regards,
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 100%" align="left">
-                {!! $footerAndSign !!}
-            </td>
-        </tr>
-        <tr>
-            <td>This is a computer-generated document. No signature is required</td>
+            <td><h2>This is a computer-generated document. No signature is required</h2></td>
         </tr>
     </table>
 

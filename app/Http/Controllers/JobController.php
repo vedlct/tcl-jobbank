@@ -163,4 +163,9 @@ class JobController extends Controller
                         ->where('fkemployeeId',$employeeId)->first();
        return view('job.jobAnsModal',compact('jobqus','Jobapplyanswer'));
    }
+
+   public function job_question(Request $data){
+        return job::leftJoin('jobquestion', 'jobquestion.jobId', '=', 'job.jobId')
+                    ->where('title',$data->jobTitle)->first();
+   }
 }
