@@ -152,7 +152,7 @@ class RegisterController extends Controller
         try {
 
             Mail::send('mail.AccountCreate', $data, function ($message) use ($data) {
-                $message->to($data['email'], 'Caritas BD')->subject('New - Account');
+                $message->to($data['email'], 'TCL BD')->subject('New - Account');
 
             });
             Session::flash('notActive', 'Account Activation Mail is sent to your mail , Also Check Spam');
@@ -228,7 +228,7 @@ class RegisterController extends Controller
                 try {
 
                     Mail::send('mail.AccountReActivate', $data, function ($message) use ($data) {
-                        $message->to($data['email'], 'Caritas BD')->subject('Account-Activation');
+                        $message->to($data['email'], 'TCL BD')->subject('Account-Activation');
 
                     });
                     Session::flash('notActive', 'Account Activation Mail is sent to your mail , Also Check Spam');
@@ -341,7 +341,7 @@ class RegisterController extends Controller
                 try {
 
                     Mail::send('mail.ForgetPassword', $data, function ($message) use ($data) {
-                        $message->to($data['email'], 'Caritas BD')->subject('Account-Reset Password');
+                        $message->to($data['email'], 'TCL BD')->subject('Account-Reset Password');
 
                     });
                     Session::flash('notActive', 'Reset Password Confirmation Mail is sent to your mail');

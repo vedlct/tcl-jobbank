@@ -10,7 +10,7 @@ Thanks.
 
 
 <hr>
-For any kind of inquiry please contact support@caritasbd.com.
+For any kind of inquiry please contact support@techcloudltd.com.
 
 
 

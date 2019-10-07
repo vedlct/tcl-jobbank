@@ -124,7 +124,7 @@
         <div class="card-footer">
 
             <div style="text-align: center">
-                © {{date('Y')}} caritas job bank
+                © {{date('Y')}} TCL job bank
             </div>
 
 

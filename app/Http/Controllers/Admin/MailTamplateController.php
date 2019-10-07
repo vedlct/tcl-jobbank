@@ -64,7 +64,7 @@ class MailTamplateController extends Controller
         $refNo="sadaewfd";
         $footerAndSign='Sebastian Rozario
 Assistant Executive Director (Finance and Admin.)
-Caritas Bangladesh
+TCL Bangladesh
 
 CC: ED/ AED (P)
 : Convener, Selection Committee

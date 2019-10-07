@@ -33,7 +33,7 @@
 <p style="margin-top: 100pt;"></p>
 <table >
     <tr>
-        <td width="100%" align="left">Cordial Greetings from Caritas Bangladesh!
+        <td width="100%" align="left">Cordial Greetings from TCL Bangladesh!
         </td>
     </tr>
 
@@ -42,7 +42,7 @@
 <table >
     <tr><td align="left" width="100%">This has reference to your recent application for the post of {{$jobInfo->position}} and the subsequent formal {{$testDetails}} held on {{date('dS F Y (l)',strtotime($testDate))}}.</td></tr>
     <tr><td>Please be informed that you have been enlisted in the panel of future recruitment as determined by the Recruitment Committee upon careful assessment of candidate's applications and the results of the {{$testDetails}}. Kindly note that you will be communicated if any scope arises in future.</td></tr>
-    <tr><td>Thank you very much for your interest in working with Caritas Bangladesh.</td></tr>
+    <tr><td>Thank you very much for your interest in working with TCL Bangladesh.</td></tr>
 </table>
 <p style="margin-top: 100pt;"></p>
 <table width="100%">

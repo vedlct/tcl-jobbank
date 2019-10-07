@@ -39,10 +39,10 @@
                             <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
                             <a href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a href="{{route('candidate.previousWorkInCB.index')}}">Previous work information in Caritas Bangladesh</a>
+                            <a href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
                             <a href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
                             <a class="activeNav"  href="{{route('refree.index')}}">Referee</a>
-                            <a href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working in Caritas Bangladesh</a>
+                            <a href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
                         </div>
 
                     </div>

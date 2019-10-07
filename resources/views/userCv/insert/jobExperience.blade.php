@@ -33,10 +33,10 @@
                             <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
                             <a href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a class="activeNav" href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a <?php if ($hasProfCertificate!='0'){?> onclick="return false;" class="incomplete" <?php } ?> href="{{route('candidate.previousWorkInCB.index')}}">Previous work information in Caritas Bangladesh</a>
+                            <a <?php if ($hasProfCertificate!='0'){?> onclick="return false;" class="incomplete" <?php } ?> href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
                             <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
                             <a onclick="return false;" class="incomplete" href="{{route('refree.index')}}">Referee</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working in Caritas Bangladesh</a>
+                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
                         </div>
 
                     </div>

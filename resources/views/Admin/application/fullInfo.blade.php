@@ -15,7 +15,7 @@
 
     </tr>
     <tr >
-        <td class="Border"colspan="34" style="text-align: center;vertical-align: top;height: 20"><span style="font-weight: bold">CARITAS BANGLADESH</span></td>
+        <td class="Border"colspan="34" style="text-align: center;vertical-align: top;height: 20"><span style="font-weight: bold">TCL BANGLADESH</span></td>
     </tr>
 
     <tr>
@@ -281,10 +281,10 @@
 
 
 
-            Previous work information in Caritas Bangladesh (If )<br>
+            Previous work information in TCL Bangladesh (If )<br>
 
                 @foreach($previousWorkExperienceInCB->where('fkemployeeId',$emp->employeeId) as $pExp)
-                            Position in Caritas: {{$pExp->designation}}<br>
+                            Position in TCL: {{$pExp->designation}}<br>
                             Served from/to: {{$pExp->startDate}}  To {{$pExp->endDate}}<br>
                 @endforeach
         </td>
@@ -319,7 +319,7 @@
 
             </span></td>
         <td colspan="4" class="Border" height="550" style="text-align: left;">
-            Do you have any relatives working in Caritas Bangladesh?*<br>
+            Do you have any relatives working in TCL Bangladesh?*<br>
 
             @foreach($relative->where('fkemployeeId',$emp->employeeId) as $rel)
                 {{$rel->firstName}}

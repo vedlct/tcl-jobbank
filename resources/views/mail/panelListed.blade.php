@@ -59,7 +59,7 @@
                 <table width="100%" >
                     <tr>
                         <td style="font-size: 25px;text-align: justify">
-                            <b>Caritas Bangladesh</b>
+                            <b>TCL Bangladesh</b>
                         </td>
                     </tr>
                     <tr>
@@ -139,7 +139,7 @@
     <table >
         <tr>
             <td width="100%" align="left">
-                Cordial Greetings from Caritas Bangladesh!
+                Cordial Greetings from TCL Bangladesh!
             </td>
         </tr>
 
@@ -163,7 +163,7 @@
                 <span>
                     {!! $customBody !!}
                 </span>
-                Thank you very much for your interest in working with Caritas Bangladesh.
+                Thank you very much for your interest in working with TCL Bangladesh.
             </td>
 
         </tr>
@@ -218,9 +218,9 @@
 
                             Tel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: +880-2-8315405-9,8315641<br>
                             Fax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: +880-2-8314993 <br>
-                            E-mail&nbsp;&nbsp;&nbsp;: ed@caritasbd.org<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;info@caritasbd.org, cbgeneral@caritasbd.org<br>
-                            Website: www.caritasbd.org
+                            E-mail&nbsp;&nbsp;&nbsp;: ed@techcloudltd.com<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;info@techcloudltd.com, cbgeneral@techcloudltd.com<br>
+                            Website: www.techcloudltd.com
 
 
                         </td>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>caritas job bank</title>
+    <title>TCL job bank</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Themesdesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -37,7 +37,7 @@
     <div class="card">
         <div class="card-body">
 
-            <h3 align="center">Caritas Job Bank</h3>
+            <h3 align="center">TCL Job Bank</h3>
 
             <h4 class="text-muted text-center font-18"><b>Register</b></h4>
             <div>

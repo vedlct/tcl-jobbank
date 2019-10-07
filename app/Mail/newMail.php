@@ -60,7 +60,7 @@ class newMail extends Mailable
 //                ->attachData($pdf->output(), 'NTERVIEW-CARD.pdf', [
 //                    'mime' => 'application/pdf',
 //                ])
-                ->subject('INTERVIEW CARD From CARITAS BD');
+                ->subject('INTERVIEW CARD From TCL BD');
 
 
 

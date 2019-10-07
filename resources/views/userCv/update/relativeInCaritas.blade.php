@@ -39,10 +39,10 @@
                             <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
                             <a href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a href="{{route('candidate.previousWorkInCB.index')}}">Previous work information in Caritas Bangladesh</a>
+                            <a href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
                             <a href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
                             <a href="{{route('refree.index')}}">Referee</a>
-                            <a class="activeNav" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working in Caritas Bangladesh</a>
+                            <a class="activeNav" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
                         </div>
 
                     </div>
@@ -53,7 +53,7 @@
 
                         <div id="" class="tab">
 
-                            <h2 style="margin-bottom: 30px;">Do you have any relatives working in Caritas Bangladesh?</h2>
+                            <h2 style="margin-bottom: 30px;">Do you have any relatives working in TCL Bangladesh?</h2>
                             @php($tempHr=0)
 
                             @foreach($relativeInCaritas as $relative)

@@ -31,7 +31,7 @@
             <div class="logo">
                 <!-- Image Logo -->
                 <a href="#" class="logo">
-                    <h3>CARITAS JOB BANK</h3>
+                    <h3>TCL JOB BANK</h3>
                 </a>
 
             </div>

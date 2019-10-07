@@ -21,10 +21,10 @@
                             <a href="{{route('candidate.cvTrainingCertificate')}}" class="activeNav">Training certification</a>
                             <a <?php if ($hasTrainingInfo!='0'){?> onclick="return false;" class="incomplete" <?php } ?> href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a onclick="return false;" class="incomplete" href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information in Caritas Bangladesh</a>
+                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
                             <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
                             <a onclick="return false;" class="incomplete" href="{{route('refree.index')}}">Referee</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working in Caritas Bangladesh</a>
+                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
                         </div>
 
                     </div>

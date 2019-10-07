@@ -21,10 +21,10 @@
                             <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
                             <a href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a  href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a class="activeNav" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information in Caritas Bangladesh</a>
+                            <a class="activeNav" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
                             <a <?php if ($hasWorkedInCB!='0'){?> onclick="return false;" class="incomplete"<?php } ?> href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
                             <a onclick="return false;" class="incomplete" href="{{route('refree.index')}}">Referee</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working in Caritas Bangladesh</a>
+                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
                         </div>
 
                     </div>
@@ -35,12 +35,12 @@
 
                         <div id="" class="tab">
 
-                            <h2 style="margin-bottom: 30px;">Previous work information in Caritas Bangladesh</h2>
+                            <h2 style="margin-bottom: 30px;">Previous work information</h2>
 
                             <div class="row">
                                 <div class="form-group">
 
-                                    <label class="control-label">Do you have any work experience in Caritas Bangladesh?<span style="color: red" class="required">*</span></label>
+                                    <label class="control-label">Do you have any work experience in TCL Bangladesh?<span style="color: red" class="required">*</span></label>
 
                                     <div class="col-md-10 mb-3">
                                         <input class="form-check-input" type="radio" required <?php if ($hasWorkedInCB=='1'){?>checked<?php } ?> id="hasWorkedInCBid" name="hasWorkedInCB" value="1"> Yes&nbsp;&nbsp;

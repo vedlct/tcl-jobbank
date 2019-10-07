@@ -86,7 +86,7 @@ define('STATUS',array(
 ));
 
 define('OTHERS',"Others");
-define('CV_COMPLITING_MSG',"Thank you for submiting your CV. All the data submitted here are only for Caritas Bangladesh");
+define('CV_COMPLITING_MSG',"Thank you for submiting your CV. All the data submitted here are only for TCL Bangladesh");
 
 //ComputerSkillAchievement
 define('ComputerSkillAchievement',array(
