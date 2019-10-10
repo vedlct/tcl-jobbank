@@ -60,8 +60,6 @@ class QuestionObjectiveController extends Controller
 
         $employeeCvQuesObjInfo=QuestionObjective::where('empId','=',$employee)->first();
 
-//        return $employeeCvQuesObjInfo;
-
         if ($employeeCvQuesObjInfo){
             $employeeCvQuesObjQues=QuestionObjectiveAndInfo::where('status',1)->orderBy('serial', 'ASC')->get();
 
@@ -69,13 +67,9 @@ class QuestionObjectiveController extends Controller
                 ->leftJoin('emp_ques_objective_and_info', 'emp_ques_objective_and_info.id', '=', 'emp_ques_objective_and_info_ans.fkqusId')
                 ->where('fkemployeeId',$employee)
                 ->get();
-
-          //  return $employeeCvQuesObjQuesAns;
-
             return view('userCv.update.objAndQuesInfo',compact('employeeCvQuesObjInfo','employee','employeeCvQuesObjQuesAns','employeeCvQuesObjQues'));
 
-        }
-        else{
+        }else{
             $employeeCvQuesObjQues=QuestionObjectiveAndInfo::where('status',1)->orderBy('serial', 'ASC')->get();
 
             return view('userCv.insert.objAndQuesInfo',compact('employeeCvQuesObjInfo','employeeCvQuesObjQues'));
@@ -84,21 +78,11 @@ class QuestionObjectiveController extends Controller
     }
     public function insertObjectiveAndQuestion(Request $r)
     {
-       // return $r->CareerQues[$i];
-
-
         $rules = [
-
-            'objective' => 'max:2500',
-
-
+            'objective' => 'max:2500'
         ];
 
-        $customMessages = [
-//            'unique' => 'This User is already been registered.Please Login !'
-        ];
-
-        $this->validate($r, $rules, $customMessages);
+        $this->validate($r, $rules);
 
         $userId=Auth::user()->userId;
 
@@ -106,49 +90,33 @@ class QuestionObjectiveController extends Controller
 
         $employeeCvQuesObjQues=QuestionObjectiveAndInfo::where('status',1)->orderBy('serial', 'ASC')->count();
 
-
         $employeeCareerInfo=new QuestionObjective();
 
         $employeeCareerInfo->objective=$r->objective;
 
-        if ($r->freshers){
-
+        if ($r->hasOtherSkill){
 
             $employeeCareerInfo->currentSalary=$r->currentSalary;
 
             for ($i=1;$i<=$employeeCvQuesObjQues;$i++){
-
-
-
                 $userAggrement=new QuestionObjectiveAns();
-
                 $userAggrement->fkemployeeId=$employee;
                 $userAggrement->fkqusId=$r['qesId'.$i];
                 $userAggrement->ans=$r['CareerQues'.$i];
                 $userAggrement->save();
-
             }
-
         }
-
-
-//        $employeeCareerInfo->ques_1=$r->CareerQues1;
-//        $employeeCareerInfo->ques_2=$r->CareerQues2;
-
 
         $employeeCareerInfo->expectedSalary=$r->expectedSalary;
         $employeeCareerInfo->readyToJoinAfter=$r->readyToJoinAfter;
 
         $employeeCareerInfo->empId=$employee;
 
-
         $employeeCareerInfo->save();
 
         Session::flash('message', 'Career Info Added Successfully');
 
         return redirect()->route('candidate.cvQuesObj');
-
-
     }
 
     public function getQuestionObjectiveEdit(Request $r)

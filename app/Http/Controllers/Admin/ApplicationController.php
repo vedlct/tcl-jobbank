@@ -42,17 +42,8 @@ use PDF;
 use MPDF;
 use Mail;
 
-
-
-
-
 class ApplicationController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -106,8 +97,6 @@ class ApplicationController extends Controller
                 echo "<option value='$mejor->degreeId'>$mejor->degreeName</option>";
             }
         }
-
-
     }
 
     public function applicationStatusChange($id)
@@ -455,10 +444,6 @@ class ApplicationController extends Controller
         $relativeList=RelativeInCb::whereIn('fkemployeeId',$empIds)
             ->get();
 
-
-
-
-
         $check=Excel::create($fileName,function($excel) use($newlist, $ethnicity, $education, $pQualification, $training, $jobExperience, $salaryInfo, $refree,$relativeList,$jobTitle) {
             $excel->sheet('First sheet', function($sheet) use($newlist, $ethnicity, $education, $pQualification, $training, $jobExperience, $salaryInfo, $refree,$relativeList,$jobTitle) {
                 $sheet->loadView('Admin.application.AppliedCandidateList')
@@ -621,10 +606,8 @@ class ApplicationController extends Controller
             $fileInfo=array_merge($fileInfo,$message);
         }
         return $fileInfo;
-
-
-
     }
+
     public function exportAppliedCandidateHrReport02(Request $r)
     {
 
@@ -651,9 +634,7 @@ class ApplicationController extends Controller
             'filePath'=>$fileName,
         );
 
-
-
-         $jobTitle=Jobapply::select('job.title','job.jobId','job.deadline')
+        $jobTitle=Jobapply::select('job.title','job.jobId','job.deadline')
                 ->leftJoin('job', 'job.jobId', '=', 'jobapply.fkjobId')->whereIn('jobapply',$appliedList)->first();
 
         $empIds=Jobapply::select('fkemployeeId')->whereIn('jobapply',$appliedList)
@@ -755,9 +736,6 @@ class ApplicationController extends Controller
             $fileInfo=array_merge($fileInfo,$message);
         }
         return $fileInfo;
-
-
-
     }
 
     public function showAllMajorForEducation(Request $r)

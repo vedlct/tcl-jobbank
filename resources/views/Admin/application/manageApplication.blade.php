@@ -391,6 +391,7 @@
                     cache: false,
                     data: {_token: "{{csrf_token()}}",jobId:jId,employeeId:employeeId},
                     success: function (data) {
+                        table.ajax.reload();
                         $('#jobModal').html(data);
                         $('#jobModalTitle').html($('#jobTitle').val());
                         $('#jobModal').modal();

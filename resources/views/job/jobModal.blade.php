@@ -19,27 +19,31 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="qa1">{{$jobqus->question1}}</label>
                         <input type="text" name="qa1" id="qa1" placeholder="Write your answer here." required >
                     </div>
-                    <div class="form-group col-md-6">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
                         <label for="qa2">{{$jobqus->question2}}</label>
                         <input type="text" name="qa2" id="qa2" placeholder="Write your answer here." required >
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="qa3">{{$jobqus->question3}}</label>
                         <input type="text" name="qa3" id="qa3" placeholder="Write your answer here." required >
                     </div>
-                    <div class="form-group col-md-6">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
                         <label for="qa4">{{$jobqus->question4}}</label>
                         <input type="text" name="qa4" id="qa4" placeholder="Write your answer here." required >
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="qa5">{{$jobqus->question5}}</label>
                         <select class="form-control" name="qa5" id="qa5">
                             <option value="">Select your answer</option>
@@ -53,7 +57,8 @@
                             @endphp
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                </div><div class="row">
+                    <div class="form-group col-md-12">
                         <label for="qa6">{{$jobqus->question6}}</label>
                         <select class="form-control" name="qa6" id="qa6">
                             <option value="">Select your answer</option>
@@ -69,7 +74,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="qa7">{{$jobqus->question7}}</label>
                         <select class="form-control" name="qa7" id="qa7">
                             <option value="">Select your answer</option>
@@ -83,7 +88,9 @@
                             @endphp
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
                         <label for="qa8">{{$jobqus->question8}}</label>
                         <select class="form-control" name="qa8" id="qa8">
                             <option value="">Select your answer</option>

@@ -24,42 +24,47 @@ class JobController extends Controller
         });
     }
 
-   public function index(Request $r){
+   public function index(){
+       $jobs=Job::leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')
+           ->where('job.status',1)
+           ->where('job.deadline','>=',date('Y-m-d'))->paginate(10);
+       return view('job.all',compact('jobs'));
+//   public function index(Request $r){
 
-       $allZone=DB::table('zone')->where('status',1)->get();
-       $jobs=Job::select('job.jobId','job.title','job.details','job.details','job.deadline','job.pdflink')
-                    ->where('job.status',1)
-                    ->where('job.deadline','>=',date('Y-m-d'));
-
-       if($r->search !=""){
-           $jobs=$jobs->where('job.title', 'like', '%' . $r->search . '%');
-       }
-       if ($r->zonefilter){
-           $jobs= $jobs->where('job.fkzoneId',$r->zonefilter);
-       }
-       $jobs=$jobs->paginate(10);
-
-       $empId1=Employee::where('fkuserId',Auth::user()->userId)->first();
-
-       if ($empId1 != null ){
-
-           $cvStatus=$empId1->cvStatus;
-
-           $applyjob = Jobapply::select('fkjobId')
-               ->where('fkemployeeId' , $empId1->employeeId)
-               ->get();
-
-       }else {
-           $cvStatus=null;
-
-           $applyjob = null;
-       }
-
-       if ($r->ajax()) {
-           return view('job.getAllJob',compact('jobs','cvStatus', 'applyjob','allZone'));
-       }
-
-       return view('job.all',compact('allZone','applyjob'));
+//       $allZone=DB::table('zone')->where('status',1)->get();
+//       $jobs=Job::select('job.jobId','job.title','job.details','job.details','job.deadline','job.pdflink')
+//                    ->where('job.status',1)
+//                    ->where('job.deadline','>=',date('Y-m-d'));
+//
+//       if($r->search !=""){
+//           $jobs=$jobs->where('job.title', 'like', '%' . $r->search . '%');
+//       }
+//       if ($r->zonefilter){
+//           $jobs= $jobs->where('job.fkzoneId',$r->zonefilter);
+//       }
+//       $jobs=$jobs->paginate(10);
+//
+//       $empId1=Employee::where('fkuserId',Auth::user()->userId)->first();
+//
+//       if ($empId1 != null ){
+//
+//           $cvStatus=$empId1->cvStatus;
+//
+//           $applyjob = Jobapply::select('fkjobId')
+//               ->where('fkemployeeId' , $empId1->employeeId)
+//               ->get();
+//
+//       }else {
+//           $cvStatus=null;
+//
+//           $applyjob = null;
+//       }
+//
+//       if ($r->ajax()) {
+//           return view('job.getAllJob',compact('jobs','cvStatus', 'applyjob','allZone'));
+//       }
+//
+//       return view('job.all',compact('allZone','applyjob','jobs'));
 
    }
 
@@ -71,20 +76,26 @@ class JobController extends Controller
 
    public function guestGetJobData(Request $r)
    {
-       $allZone=DB::table('zone')->where('status',1)->get();
+//       $allZone=DB::table('zone')->where('status',1)->get();
 
        $jobs=Job::select('job.jobId','job.title','job.details','job.details','job.deadline','job.pdflink')
            ->where('job.status',1)
            ->where('job.deadline','>=',date('Y-m-d'));
-       if($r->search !=""){
-           $jobs=$jobs->where('job.title', 'like', '%' . $r->search . '%');
-       }
-       if ($r->zonefilter){
-           $jobs= $jobs->where('job.fkzoneId',$r->zonefilter);
-       }
+//       if($r->search !=""){
+//           $jobs=$jobs->where('job.title', 'like', '%' . $r->search . '%');
+//       }
+//       if ($r->zonefilter){
+//           $jobs= $jobs->where('job.fkzoneId',$r->zonefilter);
+//       }
 
 
        $jobs=$jobs->paginate(10);
+
+//       if ($r->ajax()) {
+//
+//           return view('presult', compact('jobs'));
+//
+//       }
 
 //       $cvStatus=Employee::where('fkuserId',Auth::user()->userId)->first()->cvStatus;
 
@@ -107,7 +118,7 @@ class JobController extends Controller
 //           $applyjob = null;
 //       }
 
-       return view('job.getAllJob',compact('jobs','allZone'));
+       return view('job.getAllJob',compact('jobs'));
    }
 
    public function getJobData(Request $r){
@@ -161,6 +172,9 @@ class JobController extends Controller
        $jobqus = JobQuestion::where('jobId',$jobId)->first();
        $Jobapplyanswer = Jobapply::leftJoin('jobapplyanswer', 'jobapplyanswer.jobapplyId', '=', 'jobapply.jobapply')
                         ->where('fkemployeeId',$employeeId)->first();
+       $Jobapplyanswer->status = 'Viewed';
+       $Jobapplyanswer->save();
+
        return view('job.jobAnsModal',compact('jobqus','Jobapplyanswer'));
    }
 

@@ -14,8 +14,11 @@ class GuestController extends Controller
 {
     public function guestAvailablejob()
     {
-        $allZone=Zone::where('status',1)->get();
-        return view('guest.availableJob',compact('allZone'));
+//        $allZone=Zone::where('status',1)->get();
+        $jobs=Job::leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')
+            ->where('job.status',1)
+            ->where('job.deadline','>=',date('Y-m-d'))->paginate(13);
+        return view('guest.availableJob',compact('jobs'));
     }
 
     public function guestGetJobData(Request $r)
@@ -39,11 +42,16 @@ class GuestController extends Controller
     {
         if (Auth::check()){
             $employee = Employee::where('fkuserId',Auth::user()->userId)->first();
-            $applyData = Jobapply::where('fkjobId',$jobId)->where('fkemployeeId',$employee->employeeId)->count();
+            if($employee!=null){
+                $applyData = Jobapply::where('fkjobId',$jobId)->where('fkemployeeId',$employee->employeeId)->count();
+            }else{
+                $applyData = false;
+            }
         }else{
             $applyData = false;
         }
-        $jobDetails = Job::find($jobId)->leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')->first();
+        $jobDetails = Job::where('jobId',$jobId)->leftJoin('zone', 'zone.zoneId', '=', 'job.fkzoneId')->first();
+
         return view('guest.detailsJobs',compact('jobDetails','applyData'));
     }
 }

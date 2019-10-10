@@ -250,7 +250,6 @@ Route::post('user/cv/select','UserCvController@getSelectedCv')->name('userCv.sel
 Route::get('user-cv','UserCvController@getUserFullCv')->name('userCv.post');
 Route::get('user-cv-download/{empId}','UserCvController@getUserFullCvdownload')->name('userCv.post1');
 
-
 /*---------------Settings-------------*/
 //Zone
 Route::get('manage/zone','Admin\SettingsController@zone')->name('manage.zone');

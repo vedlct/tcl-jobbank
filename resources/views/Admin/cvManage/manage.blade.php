@@ -176,8 +176,6 @@
                         if ($('#cvStatusFilter').val() != "") {
                             d.cvStatusFilter = $('#cvStatusFilter').val();
                         }
-
-
                     },
                 },
                 columns: [
@@ -273,8 +271,6 @@
 
                 selecteds.splice(index, 1);
             }
-
-
         }
 
         $("#selectall2").click(function () {
@@ -296,18 +292,14 @@
             } else {
                 selecteds = [];
                 $(':checkbox:checked').prop('checked', false);
-
             }
 
         });
-
-
 
         function exportSelectedCv() {
 
             if (selecteds.length > 0) {
                 for (var i = 0; i < selecteds.length; i++) {
-//                    console.log(selecteds[i]);
 
                     $.ajax({
                         type: 'GET',
@@ -553,11 +545,7 @@
                 data: {'id': id, _token: "{{csrf_token()}}"},
                 success: function (data) {
 
-                    console.log(data);
-
                     if (data != 0) {
-
-
                         $.confirm({
                             title: 'Confirm!',
                             content: 'This user allready applied for ' + data + ' job',
@@ -567,7 +555,7 @@
                                         type: 'post',
                                         url: "{!! route('userCv.confirm.delete') !!}",
                                         cache: false,
-                                        data: {'id': id, _token: "{{csrf_token()}}"},
+                                        data: {'id': id, _token: "{{csrf_token()}}",jobapplyid:data.jobapply},
                                         success: function (data) {
                                             $.alert({
                                                 title: 'Success',
@@ -578,20 +566,14 @@
                                                         text: 'Ok',
                                                         btnClass: 'btn-green',
                                                         action: function () {
-
                                                             location.reload();
-
                                                         }
                                                     }
                                                 }
                                             });
                                         }
                                     });
-                                },
-                                cancel: function () {
-                                    //$.alert('Canceled!');
-                                },
-
+                                }
                             }
                         });
 

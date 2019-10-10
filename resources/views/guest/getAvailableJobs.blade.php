@@ -23,4 +23,4 @@
     @endif
     </tbody>
 </table>
-
+{!! $jobs->links() !!}

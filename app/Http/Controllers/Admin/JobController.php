@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\JobQuestion;
+use App\Rules\QAoptionCheck;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Job;
@@ -233,15 +234,15 @@ class JobController extends Controller
            'question3' => 'required',
            'question4' => 'required',
            'question5' => 'required',
-           'answer5' => 'required',
+           'answer5' => ['required',new QAoptionCheck],
            'question6' => 'required',
-           'answer6' => 'required',
+            'answer6' => ['required',new QAoptionCheck],
            'question7' => 'required',
-           'answer7' => 'required',
+            'answer7' => ['required',new QAoptionCheck],
            'question8' => 'required',
-           'answer8' => 'required',
+            'answer8' => ['required',new QAoptionCheck],
            'question9' => 'required',
-           'question10' => 'required',
+           'question10' => 'required'
        ];
 
        $this->validate($r, $rules);

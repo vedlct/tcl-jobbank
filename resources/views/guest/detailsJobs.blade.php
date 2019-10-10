@@ -398,6 +398,9 @@
         </div>
 
         <div class="main-content">
+            @if(Session::has('message'))
+                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+            @endif
             <div class="ui-layout-center">
 
                 <div class="main login">
