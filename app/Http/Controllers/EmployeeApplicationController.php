@@ -43,6 +43,6 @@ class EmployeeApplicationController extends Controller
         if (Jobapplyanswer::where('jobapplyId',$id)->delete()){
             Jobapply::find($id)->delete();
         }
-        return redirect()->back();
+        return;
     }
 }

@@ -36,33 +36,20 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{url('/withdraw-application/'.$applyList->jobapply)}}">Withdraw</a>
+                                <a href="JavaScript:void(0);" onclick="withdraw({{$applyList->jobapply}})">Withdraw</a>
                             </td>
-
                         </tr>
                         @endforeach
-
-
                         </tbody>
 
                     </table>
-
                     </div>
                     @endif
-
-
-
                 </div>
-
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
     </div>
-
-
-
-
-
 
 @endsection
 @section('foot-js')
@@ -75,17 +62,53 @@
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     <script src="{{url('public/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
     <script>
+        function withdraw(id) {
+
+            $.confirm({
+                title: 'Confirm!',
+                content: 'Want to withdraw application.',
+                buttons: {
+                    confirm: function () {
+                        $.ajax({
+                            type: 'get',
+                            url: "{!! url('/withdraw-application/') !!}"+'/'+id,
+                            cache: false,
+                            success: function () {
+                                $.alert({
+                                    title: 'Success',
+                                    type: 'green',
+                                    content: 'Application withdrawn successfully',
+                                    buttons: {
+                                        tryAgain: {
+                                            text: 'Ok',
+                                            btnClass: 'btn-green',
+                                            action: function () {
+                                                location.reload();
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    cancel: {
+                        tryAgain: {
+                            text: 'Cancel',
+                            btnClass: 'btn-red'
+                        }
+                    }
+                }
+            });
+        }
+
         $(document).ready(function() {
             $('#manageapplication').DataTable(
-
                 {
                     "columnDefs": [
                         {
-                            "targets": [0,1,3], //first column / numbering column
-                            "orderable": false, //set not orderable
-
-                        },
-
+                            "targets": [0,1,3],
+                            "orderable": false
+                        }
                     ]
                 }
             );
@@ -101,9 +124,6 @@
                 tryAgain: {
                     text: 'Ok',
                     btnClass: 'btn-green',
-                    action: function () {
-
-                    }
                 }
             }
         });

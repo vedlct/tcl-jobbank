@@ -556,7 +556,7 @@
                                         url: "{!! route('userCv.confirm.delete') !!}",
                                         cache: false,
                                         data: {'id': id, _token: "{{csrf_token()}}",jobapplyid:data.jobapply},
-                                        success: function (data) {
+                                        success: function () {
                                             $.alert({
                                                 title: 'Success',
                                                 type: 'green',
@@ -573,6 +573,12 @@
                                             });
                                         }
                                     });
+                                },
+                                cancel: {
+                                    tryAgain: {
+                                        text: 'Cancel',
+                                        btnClass: 'btn-red'
+                                    }
                                 }
                             }
                         });
