@@ -1,20 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-//Route::get('/RumiTest', function () {
-//    return view('mail.MailBody');
-//});
-//sleep(2);
 Route::get('/','Auth\LoginController@loginForm')->name('/');
 Auth::routes();
 
@@ -185,6 +170,13 @@ Route::post('job/applyJobModal','JobController@applyJobModal')->name('job.applyJ
 Route::post('job/appliedJobModal','JobController@appliedJobModal')->name('job.appliedJobModal');
 Route::post('Candidate-Job-Apply/{jobId}','EmployeeController@applyJob')->name('candidate.ApplyJob');
 Route::post('job-question','JobController@job_question')->name('job.question');
+
+//Job question
+Route::get('job/sample-question','JobController@sampleQuestion')->name('job.sample.question');
+Route::post('sample-question-submit','JobController@sampleQuestionSubmit')->name('job.sample.question.submit');
+Route::post('sample-question-get','JobController@sampleQuestionGet')->name('job.sample.question.get');
+Route::post('sample-question-delete','JobController@sampleQuestionDelete')->name('job.sample.question.delete');
+Route::post('job-sample-question-single','JobController@sampleQuestionSingle')->name('job.sample.question.single');
 
 
 //candidate Application

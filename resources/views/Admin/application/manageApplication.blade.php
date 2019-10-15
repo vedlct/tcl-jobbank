@@ -1653,8 +1653,24 @@
                 type:'get',
                 url:'{{url('/application-status-change/')}}'+'/'+id,
                 cache: false,
-                success:function(data) {
-                    table.ajax.reload();
+                success:function() {
+                    $.alert({
+                        title: 'Warning',
+                        type: 'Green',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Yes',
+                                btnClass: 'btn-green',
+                                action: function () {
+                                    table.ajax.reload();
+                                }
+                            },
+                            tryCancle: {
+                                text: 'Cancel',
+                                btnClass: 'btn-red'
+                            }
+                        }
+                    });
                 }
             });
         }

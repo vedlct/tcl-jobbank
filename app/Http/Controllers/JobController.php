@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Employee;
 use App\Jobapply;
 use App\JobQuestion;
+use App\Jobsamplequestion;
+use App\Rules\QAoptionCheck;
 use Illuminate\Http\Request;
 use App\Job;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables;
 
 class JobController extends Controller
 {
@@ -181,5 +185,64 @@ class JobController extends Controller
    public function job_question(Request $data){
         return job::leftJoin('jobquestion', 'jobquestion.jobId', '=', 'job.jobId')
                     ->where('title',$data->jobTitle)->first();
+   }
+
+   public function sampleQuestion()
+   {
+       return view('Admin.job.sampleQuestion');
+   }
+
+   public function sampleQuestionSubmit(Request $data)
+   {
+       $validator = Validator::make($data->all(), [
+           'modalQuestionType' => 'required',
+           'modalQuestion' => 'required',
+           'modalQuestionAnswer' => ['required_if:modalQuestionType,==,MCQ',new QAoptionCheck]
+       ]);
+
+       if ($validator->passes()) {
+
+           if ($data->questionId){
+               $model = Jobsamplequestion::find($data->questionId);
+               $message = 'Question updated successfully';
+           }else{
+               $model = new Jobsamplequestion;
+               $message = 'Question inserted successfully';
+           }
+           $model->type = $data->modalQuestionType;
+           $model->question = $data->modalQuestion;
+           if (!empty($data->modalQuestionAnswer)){
+               $model->answer = $data->modalQuestionAnswer;
+           }else{
+               $model->answer = 'N/A';
+           }
+           $model->save();
+           return response()->json(['success'=>$message]);
+       }
+       return response()->json(['error'=>$validator->errors()->all()]);
+   }
+
+   public function sampleQuestionGet(Request $data)
+   {
+       $application = Jobsamplequestion::select('*');
+
+       if ($data->questionType){
+           $application= $application->where('type',$data->questionType);
+       }
+       $application = $application->orderBy('sampleQuestionId','desc')->get();
+
+       $datatables = DataTables::of($application);
+       return $datatables->make(true);
+   }
+
+   public function sampleQuestionDelete(Request $data)
+   {
+       Jobsamplequestion::where('sampleQuestionId',$data->id)->delete();
+   }
+
+   public function sampleQuestionSingle(Request $data)
+   {
+       $single = Jobsamplequestion::find($data->id);
+       return $single;
    }
 }

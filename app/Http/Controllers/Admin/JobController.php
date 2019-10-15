@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\JobQuestion;
+use App\Jobsamplequestion;
 use App\Rules\QAoptionCheck;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,7 +41,8 @@ class JobController extends Controller
        }elseif(Auth::user()->fkuserTypeId==USER_TYPE['Admin']){
            $allZone=DB::table('zone')->where('status',1)->get();
        }
-       return view('Admin.job.addJob',compact('allZone'));
+       $questions = Jobsamplequestion::all();
+       return view('Admin.job.addJob',compact('allZone','questions'));
 
    }
 
@@ -234,13 +236,13 @@ class JobController extends Controller
            'question3' => 'required',
            'question4' => 'required',
            'question5' => 'required',
-           'answer5' => ['required',new QAoptionCheck],
+//           'answer5' => ['required',new QAoptionCheck],
            'question6' => 'required',
-            'answer6' => ['required',new QAoptionCheck],
+//            'answer6' => ['required',new QAoptionCheck],
            'question7' => 'required',
-            'answer7' => ['required',new QAoptionCheck],
+//            'answer7' => ['required',new QAoptionCheck],
            'question8' => 'required',
-            'answer8' => ['required',new QAoptionCheck],
+//            'answer8' => ['required',new QAoptionCheck],
            'question9' => 'required',
            'question10' => 'required'
        ];
