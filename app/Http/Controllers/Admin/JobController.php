@@ -236,13 +236,9 @@ class JobController extends Controller
            'question3' => 'required',
            'question4' => 'required',
            'question5' => 'required',
-//           'answer5' => ['required',new QAoptionCheck],
            'question6' => 'required',
-//            'answer6' => ['required',new QAoptionCheck],
            'question7' => 'required',
-//            'answer7' => ['required',new QAoptionCheck],
            'question8' => 'required',
-//            'answer8' => ['required',new QAoptionCheck],
            'question9' => 'required',
            'question10' => 'required'
        ];
@@ -286,13 +282,13 @@ class JobController extends Controller
            $jobquestion->question3 = $r->question3;
            $jobquestion->question4 = $r->question4;
            $jobquestion->question5 = $r->question5;
-           $jobquestion->question5Answer = $r->answer5;
+//           $jobquestion->question5Answer = $r->answer5;
            $jobquestion->question6 = $r->question6;
-           $jobquestion->question6Answer = $r->answer6;
+//           $jobquestion->question6Answer = $r->answer6;
            $jobquestion->question7 = $r->question7;
-           $jobquestion->question7Answer = $r->answer7;
+//           $jobquestion->question7Answer = $r->answer7;
            $jobquestion->question8 = $r->question8;
-           $jobquestion->question8Answer = $r->answer8;
+//           $jobquestion->question8Answer = $r->answer8;
            $jobquestion->question9 = $r->question9;
            $jobquestion->question10 = $r->question10;
            $jobquestion->save();
