@@ -25,49 +25,20 @@ use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-//        $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-
             if (Auth::check()){
-
                 if(Auth::user()->fkuserTypeId==USER_TYPE['Admin'] || Auth::user()->fkuserTypeId==USER_TYPE['Emp'] ){
-
                     return $next($request);
-
                 }else{
-
                     return redirect('/');
                 }
-
             }else{
-
                 return redirect('/');
             }
-
-
-
-
-
         });
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-
-    }
-
 
     public function home()
     {
@@ -92,14 +63,7 @@ class DashboardController extends Controller
         $allZone=DB::table('zone')->where('status',1)->get();
         $religion=Religion::where('status',1)->get();
         $ethnicity=Ethnicity::where('status',1)->get();
-
-
         return view('Admin.dashboard.home',compact('todaysJobApply','allZone','todaysRegisterCv','religion','ethnicity'));
 
     }
-
-
-
-
-
 }

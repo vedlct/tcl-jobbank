@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\JobQuestion;
 use App\Jobsamplequestion;
+use App\QuestionSet;
 use App\Rules\QAoptionCheck;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,15 +43,13 @@ class JobController extends Controller
            $allZone=DB::table('zone')->where('status',1)->get();
        }
        $questions = Jobsamplequestion::all();
-       return view('Admin.job.addJob',compact('allZone','questions'));
-
+       $questionSet = QuestionSet::all();
+       return view('Admin.job.addJob',compact('allZone','questions','questionSet'));
    }
 
-   public function manageJob(){
-
+   public function manageJob()
+   {
        $allZone=DB::table('zone')->where('status',1)->get();
-
-
        return view('Admin.job.manageJob',compact('allZone'));
    }
 
@@ -104,8 +103,9 @@ class JobController extends Controller
        }elseif(Auth::user()->fkuserTypeId==USER_TYPE['Admin']){
            $allZone=DB::table('zone')->where('status',1)->get();
        }
-
-       return view('Admin.job.editJob',compact('info','allZone'));
+       $questions = Jobsamplequestion::all();
+       $questionSet = QuestionSet::all();
+       return view('Admin.job.editJob',compact('info','allZone','questions','questionSet'));
 
    }
    public function jobStatusUpdate(Request $r){
@@ -154,28 +154,10 @@ class JobController extends Controller
            'jobStatus' => 'required',
            'deadline' => 'required|date',
            'zone' => 'required',
-           'status' => 'required',
-           'question1' => 'required',
-           'question2' => 'required',
-           'question3' => 'required',
-           'question4' => 'required',
-           'question5' => 'required',
-           'answer5' => 'required',
-           'question6' => 'required',
-           'answer6' => 'required',
-           'question7' => 'required',
-           'answer7' => 'required',
-           'question8' => 'required',
-           'answer8' => 'required',
-           'question9' => 'required',
-           'question10' => 'required',
+           'status' => 'required'
        ];
 
-       $customMessages = [
-//            'unique' => 'This User is already been registered.Please Login !'
-       ];
-
-       $this->validate($r, $rules, $customMessages);
+       $this->validate($r, $rules);
 
        $jobInfo=Job::findOrFail($r->jobId);
        $jobInfo->title=$r->title;
@@ -199,20 +181,15 @@ class JobController extends Controller
 
        if($jobInfo->save()){
            $jobquestion = jobquestion::where('jobId',$r->jobId)->first();
-           $jobquestion->question1 = $r->question1;
-           $jobquestion->question2 = $r->question2;
-           $jobquestion->question3 = $r->question3;
-           $jobquestion->question4 = $r->question4;
-           $jobquestion->question5 = $r->question5;
-           $jobquestion->question5Answer = $r->answer5;
-           $jobquestion->question6 = $r->question6;
-           $jobquestion->question6Answer = $r->answer6;
-           $jobquestion->question7 = $r->question7;
-           $jobquestion->question7Answer = $r->answer7;
-           $jobquestion->question8 = $r->question8;
-           $jobquestion->question8Answer = $r->answer8;
-           $jobquestion->question9 = $r->question9;
-           $jobquestion->question10 = $r->question10;
+           if ($r->questionset){
+               $jobquestion->questionType = 'SET';
+               $jobquestion->setNumber = $r->questionset;
+               $jobquestion->customQuestion = null;
+           }elseif ($r->questionCustom){
+               $jobquestion->questionType = 'CUSTOM';
+               $jobquestion->customQuestion = implode(",",$r->questionCustom);
+               $jobquestion->setNumber = null;
+           }
            $jobquestion->save();
        }
 
@@ -221,7 +198,6 @@ class JobController extends Controller
 
    }
    public function jobInsert(Request $r){
-
         $rules = [
            'title' => 'required',
            'position' => 'required',
@@ -230,17 +206,7 @@ class JobController extends Controller
            'deadline' => 'required|date',
            'jobDetails' => 'required',
            'zone' => 'required',
-           'status' => 'required',
-           'question1' => 'required',
-           'question2' => 'required',
-           'question3' => 'required',
-           'question4' => 'required',
-           'question5' => 'required',
-           'question6' => 'required',
-           'question7' => 'required',
-           'question8' => 'required',
-           'question9' => 'required',
-           'question10' => 'required'
+           'status' => 'required'
        ];
 
        $this->validate($r, $rules);
@@ -275,22 +241,15 @@ class JobController extends Controller
        }
 
        if($jobInfo->save()){
-           $jobquestion = new jobquestion();
+           $jobquestion = new JobQuestion();
            $jobquestion->jobId = $jobInfo->jobId;
-           $jobquestion->question1 = $r->question1;
-           $jobquestion->question2 = $r->question2;
-           $jobquestion->question3 = $r->question3;
-           $jobquestion->question4 = $r->question4;
-           $jobquestion->question5 = $r->question5;
-//           $jobquestion->question5Answer = $r->answer5;
-           $jobquestion->question6 = $r->question6;
-//           $jobquestion->question6Answer = $r->answer6;
-           $jobquestion->question7 = $r->question7;
-//           $jobquestion->question7Answer = $r->answer7;
-           $jobquestion->question8 = $r->question8;
-//           $jobquestion->question8Answer = $r->answer8;
-           $jobquestion->question9 = $r->question9;
-           $jobquestion->question10 = $r->question10;
+           if ($r->questionset){
+               $jobquestion->questionType = 'SET';
+               $jobquestion->setNumber = $r->questionset;
+           }elseif ($r->questionCustom){
+               $jobquestion->questionType = 'CUSTOM';
+               $jobquestion->customQuestion = implode(",",$r->questionCustom);
+           }
            $jobquestion->save();
        }
 

@@ -6,6 +6,7 @@ use App\Employee;
 use App\Jobapply;
 use App\JobQuestion;
 use App\Jobsamplequestion;
+use App\QuestionSet;
 use App\Rules\QAoptionCheck;
 use Illuminate\Http\Request;
 use App\Job;
@@ -167,7 +168,13 @@ class JobController extends Controller
    public function applyJobModal(Request $r){
         $jobId = $r->jobId;
         $jobqus = JobQuestion::where('jobId',$jobId)->first();
-        return view('job.jobModal',compact('jobId','jobqus'));
+        if ($jobqus->questionType=='SET'){
+            $QuestionSet = QuestionSet::find($jobqus->setNumber);
+            $questions = Jobsamplequestion::whereIn('sampleQuestionId',explode(",",$QuestionSet->setQuestion))->get();
+        }elseif ($jobqus->questionType=='CUSTOM'){
+            $questions = Jobsamplequestion::whereIn('sampleQuestionId',explode(",",$jobqus->customQuestion))->get();
+        }
+        return view('job.jobModal',compact('jobId','questions'));
    }
 
    public function appliedJobModal(Request $r){
@@ -189,7 +196,9 @@ class JobController extends Controller
 
    public function sampleQuestion()
    {
-       return view('Admin.job.sampleQuestion');
+       $questions = Jobsamplequestion::all();
+       $questionsSet = QuestionSet::all();
+       return view('Admin.job.sampleQuestion',compact('questions','questionsSet'));
    }
 
    public function sampleQuestionSubmit(Request $data)
@@ -229,6 +238,10 @@ class JobController extends Controller
        if ($data->questionType){
            $application= $application->where('type',$data->questionType);
        }
+       if($data->questionSet){
+           $questionSet = QuestionSet::find($data->questionSet);
+           $application= $application->whereIn('sampleQuestionId',explode(",",$questionSet->setQuestion));
+       }
        $application = $application->orderBy('sampleQuestionId','desc')->get();
 
        $datatables = DataTables::of($application);
@@ -244,5 +257,42 @@ class JobController extends Controller
    {
        $single = Jobsamplequestion::find($data->id);
        return $single;
+   }
+
+   public function sampleQuestionSetSubmit(Request $data)
+   {
+       $validator = Validator::make($data->all(), [
+           'setName' => 'required',
+           'modalQuestions' => 'required'
+       ]);
+
+       if ($validator->passes()) {
+
+           if ($data->setId){
+               $set = QuestionSet::find($data->setId);
+               $message = 'Set updated successfully';
+           }else{
+               $set = new QuestionSet;
+               $message = 'Set set inserted successfully';
+           }
+
+           $set->setName = $data->setName;
+           $set->setQuestion = implode(",",$data->modalQuestions);
+           $set->save();
+           return response()->json(['success'=>$message]);
+       }
+       return response()->json(['error'=>$validator->errors()->all()]);
+   }
+
+   public function jobSetQuestions(Request $data)
+   {
+       $questions = Jobsamplequestion::all();
+//       $sets = QuestionSet::find($data->id);
+//       foreach ($questions as $question){
+//           foreach ($sets as $set){
+//
+//           }
+//       }
+       return $questions;
    }
 }

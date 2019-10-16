@@ -112,153 +112,45 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="question1">Question 1<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question1') ? ' is-invalid' : '' }}" id="question1" name="question1" value="{{ old('question1') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='Short')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="question2">Question 2<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question2') ? ' is-invalid' : '' }}" id="question2" name="question2" value="{{ old('question2') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='Short')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                        <div class="row" id="questionType">
+                            <div class="form-group col-md-6 offset-3">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label for="question">Question Type<span style="color: red">*</span></label>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="questionType" value="SET" id="questionTypeSet" class="form-control {{ $errors->has('questionType') ? ' is-invalid' : '' }}">Set
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="questionType" value="CUSTOM"  id="questionTypeCustom" class="form-control {{ $errors->has('questionType') ? ' is-invalid' : '' }}">Custom
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="question3">Question 3<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question3') ? ' is-invalid' : '' }}" id="question3" name="question3" value="{{ old('question3') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='Short')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="question4">Question 4<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question4') ? ' is-invalid' : '' }}" id="question4" name="question4" value="{{ old('question4') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='Short')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="question5">Question 5<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question5') ? ' is-invalid' : '' }}" id="question5" name="question5" value="{{ old('question5') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='MCQ')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-{{--                                <input type="text" class="form-control {{ $errors->has('question5') ? ' is-invalid' : '' }}" id="question5" name="question5" value="{{ old('question5') }}" placeholder="Enter Question"><br>--}}
-{{--                                <input type="text" class="form-control {{ $errors->has('answer5') ? ' is-invalid' : '' }}" name="answer5" value="{{ old('answer5') }}" placeholder="Enter answers in comma separated form">--}}
-{{--                                @if ($errors->has('answer5'))--}}
-{{--                                    <span style="color: red">--}}
-{{--                                        <strong>{{ $errors->first('answer5') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="question6">Question 6<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question6') ? ' is-invalid' : '' }}" id="question6" name="question6" value="{{ old('question6') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='MCQ')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
 
-{{--                                <input type="text" class="form-control {{ $errors->has('question6') ? ' is-invalid' : '' }}" id="question6" name="question6" value="{{ old('question6') }}" placeholder="Enter Question"><br>--}}
-{{--                                <input type="text" class="form-control {{ $errors->has('answer6') ? ' is-invalid' : '' }}" name="answer6" value="{{ old('answer6') }}" placeholder="Enter answers in comma separated form">--}}
-{{--                                @if ($errors->has('answer6'))--}}
-{{--                                    <span style="color: red">--}}
-{{--                                        <strong>{{ $errors->first('answer6') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
+                        <div class="row" id="questionSet" style="display: none">
+                            <div class="form-group col-md-6 offset-3" id="jobQuestion">
+                                <label for="question">Question Set<span style="color: red">*</span></label>
+                                <select class="form-control" id="questionSetSelect" name="questionset" >
+                                    <option value="">Select</option>
+                                    @foreach($questionSet as $set)
+                                        <option value="{{$set->questionSetId}}">{{$set->setName}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="question7">Question 7<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question7') ? ' is-invalid' : '' }}" id="question7" name="question7" value="{{ old('question7') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='MCQ')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
 
-{{--                                <input type="text" class="form-control {{ $errors->has('question7') ? ' is-invalid' : '' }}" id="question7" name="question7" value="{{ old('question7') }}" placeholder="Enter Question"><br>--}}
-{{--                                <input type="text" class="form-control {{ $errors->has('answer7') ? ' is-invalid' : '' }}" name="answer7" value="{{ old('answer7') }}" placeholder="Enter answers in comma separated form">--}}
-{{--                                @if ($errors->has('answer7'))--}}
-{{--                                    <span style="color: red">--}}
-{{--                                        <strong>{{ $errors->first('answer7') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="question8">Question 8<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question8') ? ' is-invalid' : '' }}" id="question8" name="question8" value="{{ old('question8') }}" >
+                        <div class="row" id="questionCustom" style="display: none">
+                            <div class="form-group col-md-6 offset-3" id="jobQuestion">
+                                <label for="question">Question Custom<span style="color: red">*</span></label>
+                                <select class="form-control" id="questionCustomSelect" name="questionCustom[]" multiple style="height: 300px">
                                     <option value="">Select</option>
                                     @foreach($questions as $question)
-                                        @if($question->type==='MCQ')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-
-{{--                                <input type="text" class="form-control {{ $errors->has('question8') ? ' is-invalid' : '' }}" id="question8" name="question8" value="{{ old('question8') }}" placeholder="Enter Question"><br>--}}
-{{--                                <input type="text" class="form-control {{ $errors->has('answer8') ? ' is-invalid' : '' }}" name="answer8" value="{{ old('answer8') }}" placeholder="Enter answers in comma separated form">--}}
-{{--                                @if ($errors->has('answer8'))--}}
-{{--                                    <span style="color: red">--}}
-{{--                                        <strong>{{ $errors->first('answer8') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="question9">Question 9<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question9') ? ' is-invalid' : '' }}" id="question9" name="question9" value="{{ old('question9') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='Long')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="question10">Question 10<span style="color: red">*</span></label>
-                                <select class="form-control {{ $errors->has('question10') ? ' is-invalid' : '' }}" id="question10" name="question10" value="{{ old('question10') }}" >
-                                    <option value="">Select</option>
-                                    @foreach($questions as $question)
-                                        @if($question->type==='Long')
-                                            <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
-                                        @endif
+                                        <option value="{{$question->sampleQuestionId}}">{{$question->question}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -276,6 +168,21 @@
 @section('foot-js')
     <script type="text/javascript" src="{{url('public/assets/ckeditor/ckeditor.js')}}"></script>
     <script>
+
+        $("#questionTypeSet").click(function(){
+            $("#questionCustom").css('display','none');
+            $('#questionCustomSelect').prop('disabled', true);
+            $('#questionSetSelect').prop('disabled', false);
+            $("#questionSet").css('display','block');
+        });
+
+        $("#questionTypeCustom").click(function(){
+            $("#questionSet").css('display','none');
+            $('#questionSetSelect').prop('disabled', true);
+            $('#questionCustomSelect').prop('disabled', false);
+            $("#questionCustom").css('display','block');
+        });
+
         $(function () {
             $('.date').datepicker({
                 format: 'yyyy-m-d',
@@ -284,5 +191,6 @@
                 autoclose: true,
             });
         });
+
     </script>
 @endsection

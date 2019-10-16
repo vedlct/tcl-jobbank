@@ -177,6 +177,9 @@ Route::post('sample-question-submit','JobController@sampleQuestionSubmit')->name
 Route::post('sample-question-get','JobController@sampleQuestionGet')->name('job.sample.question.get');
 Route::post('sample-question-delete','JobController@sampleQuestionDelete')->name('job.sample.question.delete');
 Route::post('job-sample-question-single','JobController@sampleQuestionSingle')->name('job.sample.question.single');
+Route::post('job-set-questions','JobController@jobSetQuestions')->name('job.set.questions');
+
+Route::post('job-sample-question-set-submit','JobController@sampleQuestionSetSubmit')->name('job.sample.question.set.submit');
 
 
 //candidate Application
@@ -187,7 +190,7 @@ Route::get('Candidate-Applications','EmployeeApplicationController@getAllApplica
 Route::get('Admin-DB-Backup','Admin\BackupController@wholeDbBackup')->name('backup.wholeDbBackup');
 
 
-Route::get('Admin-Dashboard','Admijob.admin.insertn\DashboardController@home')->name('admin.dashboard');
+Route::get('Admin-Dashboard','Admin\DashboardController@home')->name('admin.dashboard');
 
 Route::get('Admin-Manage-CV','Admin\CvManagementController@manage')->name('cv.admin.manage');
 Route::post('Admin-ManageData-CV','Admin\CvManagementController@manageCvData')->name('cv.admin.manageApplicationData');
