@@ -69,6 +69,7 @@
 
                         <div class=" form-group">
                             <label>Questions</label>
+                            <br><label style="color:green">Press ctrl to select multiple</label>
                             <select name="modalQuestions" id="modalQuestions" class="form-control" multiple style="height: 300px">
                                 <option value="">Select</option>
                                 @foreach($questions as $question)
@@ -113,6 +114,7 @@
 
                         <div class=" form-group">
                             <label>Questions</label>
+                            <br><label style="color:green">Press ctrl to select multiple</label>
                             <select name="modalQuestions" id="modalQuestionsEdit" class="form-control" multiple style="height: 300px">
                                 <option value="">Select</option>
                             </select>

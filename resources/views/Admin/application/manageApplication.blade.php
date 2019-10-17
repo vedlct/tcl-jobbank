@@ -127,32 +127,32 @@
                         <option value="Rejected">Rejected</option>
                     </select>
                 </div>
-                <div id="ques">
-                    <div class=" form-group ">
-                        <label id="q1"></label>
-                        <select name="q1ans" id="q1ans" class="form-control">
-                            <option value="">Select a Answer</option>
-                        </select>
-                    </div>
-                    <div class=" form-group ">
-                        <label id="q2"></label>
-                        <select name="q2ans" id="q2ans" class="form-control">
-                            <option value="">Select a Answer</option>
-                        </select>
-                    </div>
-                    <div class=" form-group ">
-                        <label id="q3"></label>
-                        <select name="q3ans" id="q3ans" class="form-control">
-                            <option value="">Select a Answer</option>
-                        </select>
-                    </div>
-                    <div class=" form-group ">
-                        <label id="q4"></label>
-                        <select name="q4ans" id="q4ans" class="form-control">
-                            <option value="">Select a Answer</option>
-                        </select>
-                    </div>
-                </div>
+{{--                <div id="ques">--}}
+{{--                    <div class=" form-group ">--}}
+{{--                        <label id="q1"></label>--}}
+{{--                        <select name="q1ans" id="q1ans" class="form-control">--}}
+{{--                            <option value="">Select a Answer</option>--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                    <div class=" form-group ">--}}
+{{--                        <label id="q2"></label>--}}
+{{--                        <select name="q2ans" id="q2ans" class="form-control">--}}
+{{--                            <option value="">Select a Answer</option>--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                    <div class=" form-group ">--}}
+{{--                        <label id="q3"></label>--}}
+{{--                        <select name="q3ans" id="q3ans" class="form-control">--}}
+{{--                            <option value="">Select a Answer</option>--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                    <div class=" form-group ">--}}
+{{--                        <label id="q4"></label>--}}
+{{--                        <select name="q4ans" id="q4ans" class="form-control">--}}
+{{--                            <option value="">Select a Answer</option>--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class=" form-group ">
                     <label>Religion</label>
                     <select name="religionFilter" id="religionFilter" class="form-control">
@@ -394,7 +394,7 @@
                         table.ajax.reload();
                         $('#jobModal').html(data);
                         $('#jobModalTitle').html($('#jobTitle').val());
-                        $('#jobModal').modal();
+                        $('#jobModal').modal('toggle');
                     }
                 });
             }
@@ -463,18 +463,18 @@
                         if ($('#applicant_Status').val()!=""){
                             d.applicant_Status=$('#applicant_Status').val();
                         }
-                        if ($('#q1ans').val()!=""){
-                            d.q5ans=$('#q1ans').val();
-                        }
-                        if ($('#q2ans').val()!=""){
-                            d.q6ans=$('#q2ans').val();
-                        }
-                        if ($('#q3ans').val()!=""){
-                            d.q7ans=$('#q3ans').val();
-                        }
-                        if ($('#q4ans').val()!=""){
-                            d.q8ans=$('#q4ans').val();
-                        }
+                        // if ($('#q1ans').val()!=""){
+                        //     d.q5ans=$('#q1ans').val();
+                        // }
+                        // if ($('#q2ans').val()!=""){
+                        //     d.q6ans=$('#q2ans').val();
+                        // }
+                        // if ($('#q3ans').val()!=""){
+                        //     d.q7ans=$('#q3ans').val();
+                        // }
+                        // if ($('#q4ans').val()!=""){
+                        //     d.q8ans=$('#q4ans').val();
+                        // }
                         if ($('#applyDate').val()!=""){
                             d.applyDate=$('#applyDate').val();
                         }
@@ -622,69 +622,69 @@
                     $('#jobTitle').css("background-color", "#7c9").css('color', 'white');
                     $("#applicant_Status").attr("disabled", false);
 
-                    $.ajax({
-                        type: 'POST',
-                        url: "{!! route('job.question') !!}",
-                        cache: false,
-                        data: {_token:"{{csrf_token()}}",jobTitle:$('#jobTitle').val()},
-                        success: function (data) {
-                            $("#q1").html(data.question5);
-                            $('#q1ans').find('option').remove().end();
-                            $('#q1ans').append($("<option></option>").attr("value",'').text('Select'));
-                            $.each(data.question5Answer.split(','), function(key, value) {
-                                $('#q1ans').append($("<option></option>").attr("value",value).text(value));
-                            });
-                            $("#q2").html(data.question6);
-                            $('#q2ans').find('option').remove().end();
-                            $('#q2ans').append($("<option></option>").attr("value",'').text('Select'));
-                            $.each(data.question6Answer.split(','), function(key, value) {
-                                $('#q2ans').append($("<option></option>").attr("value",value).text(value));
-                            });
-                            $("#q3").html(data.question7);
-                            $('#q3ans').find('option').remove().end();
-                            $('#q3ans').append($("<option></option>").attr("value",'').text('Select'));
-                            $.each(data.question7Answer.split(','), function(key, value) {
-                                $('#q3ans').append($("<option></option>").attr("value",value).text(value));
-                            });
-                            $("#q4").html(data.question8);
-                            $('#q4ans').find('option').remove().end();
-                            $('#q4ans').append($("<option></option>").attr("value",'').text('Select'));
-                            $.each(data.question8Answer.split(','), function(key, value) {
-                                $('#q4ans').append($("<option></option>").attr("value",value).text(value));
-                            });
-                            $("#ques").css("display", "block");
-                        }
-                    });
+                    {{--$.ajax({--}}
+                    {{--    type: 'POST',--}}
+                    {{--    url: "{!! route('job.question') !!}",--}}
+                    {{--    cache: false,--}}
+                    {{--    data: {_token:"{{csrf_token()}}",jobTitle:$('#jobTitle').val()},--}}
+                    {{--    success: function (data) {--}}
+                            // $("#q1").html(data.question5);
+                            // $('#q1ans').find('option').remove().end();
+                            // $('#q1ans').append($("<option></option>").attr("value",'').text('Select'));
+                            // $.each(data.question5Answer.split(','), function(key, value) {
+                            //     $('#q1ans').append($("<option></option>").attr("value",value).text(value));
+                            // });
+                            // $("#q2").html(data.question6);
+                            // $('#q2ans').find('option').remove().end();
+                            // $('#q2ans').append($("<option></option>").attr("value",'').text('Select'));
+                            // $.each(data.question6Answer.split(','), function(key, value) {
+                            //     $('#q2ans').append($("<option></option>").attr("value",value).text(value));
+                            // });
+                            // $("#q3").html(data.question7);
+                            // $('#q3ans').find('option').remove().end();
+                            // $('#q3ans').append($("<option></option>").attr("value",'').text('Select'));
+                            // $.each(data.question7Answer.split(','), function(key, value) {
+                            //     $('#q3ans').append($("<option></option>").attr("value",value).text(value));
+                            // });
+                            // $("#q4").html(data.question8);
+                            // $('#q4ans').find('option').remove().end();
+                            // $('#q4ans').append($("<option></option>").attr("value",'').text('Select'));
+                            // $.each(data.question8Answer.split(','), function(key, value) {
+                            //     $('#q4ans').append($("<option></option>").attr("value",value).text(value));
+                            // });
+                            // $("#ques").css("display", "block");
+                    //     }
+                    // });
                 }else {
                     $('#jobTitle').css("background-color", "#FFF").css('color', 'black');
                     $("#applicant_Status").attr("disabled", true);
-                    $("#ques").css("display", "none");
-                    $('#q1ans').prop('selectedIndex',0);
-                    $('#q2ans').prop('selectedIndex',0);
-                    $('#q3ans').prop('selectedIndex',0);
-                    $('#q4ans').prop('selectedIndex',0);
+                    // $("#ques").css("display", "none");
+                    // $('#q1ans').prop('selectedIndex',0);
+                    // $('#q2ans').prop('selectedIndex',0);
+                    // $('#q3ans').prop('selectedIndex',0);
+                    // $('#q4ans').prop('selectedIndex',0);
                 }
             });
 
-            $('#q1ans').change(function(){
-                table.ajax.reload();
-                emptySelect();
-            });
+            // $('#q1ans').change(function(){
+            //     table.ajax.reload();
+            //     emptySelect();
+            // });
 
-            $('#q2ans').change(function(){
-                table.ajax.reload();
-                emptySelect();
-            });
+            // $('#q2ans').change(function(){
+            //     table.ajax.reload();
+            //     emptySelect();
+            // });
 
-            $('#q3ans').change(function(){
-                table.ajax.reload();
-                emptySelect();
-            });
+            // $('#q3ans').change(function(){
+            //     table.ajax.reload();
+            //     emptySelect();
+            // });
 
-            $('#q4ans').change(function(){
-                table.ajax.reload();
-                emptySelect();
-            });
+            // $('#q4ans').change(function(){
+            //     table.ajax.reload();
+            //     emptySelect();
+            // });
 
             $('#applyDate').change(function(){
                 table.ajax.reload();
@@ -700,7 +700,6 @@
                 emptySelect();
                 if ($('#jobExperienceFromFilter').val()!="") {
 
-
                     if ($('#jobExperienceToFilter').val() != "") {
 
                         if (Date.parse($('#jobExperienceToFilter').val()) < Date.parse($('#jobExperienceFromFilter').val())) {
@@ -714,13 +713,9 @@
                             $('#jobExperienceFromFilter').css("background-color", "#7c9").css('color', 'white');
                             table.ajax.reload();
                         }
-
-
                     } else {
                         $('#jobExperienceFromFilter').css("background-color", "#7c9").css('color', 'white');
                         table.ajax.reload();
-
-
                     }
                 }else {
                     table.ajax.reload();  //just reload table
@@ -746,13 +741,10 @@
                             table.ajax.reload();
 
                         }
-
-
                     } else {
                         // $("#age").css('background-color', 'green');
                         $('#jobExperienceToFilter').css("background-color", "#7c9").css('color', 'white');
                         table.ajax.reload();
-
                     }
                 }else {
                     table.ajax.reload();  //just reload table

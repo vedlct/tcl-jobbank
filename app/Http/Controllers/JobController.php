@@ -181,12 +181,21 @@ class JobController extends Controller
        $jobId = $r->jobId;
        $employeeId = $r->employeeId;
        $jobqus = JobQuestion::where('jobId',$jobId)->first();
+
+       if ($jobqus->questionType=='SET'){
+           $QuestionSet = QuestionSet::find($jobqus->setNumber);
+           $questions = Jobsamplequestion::whereIn('sampleQuestionId',explode(",",$QuestionSet->setQuestion))->get();
+       }elseif ($jobqus->questionType=='CUSTOM'){
+           $questions = Jobsamplequestion::whereIn('sampleQuestionId',explode(",",$jobqus->customQuestion))->get();
+       }
+
        $Jobapplyanswer = Jobapply::leftJoin('jobapplyanswer', 'jobapplyanswer.jobapplyId', '=', 'jobapply.jobapply')
-                        ->where('fkemployeeId',$employeeId)->first();
+                        ->where('fkemployeeId',$employeeId)->where('fkjobId',$jobId)->first();
+
        $Jobapplyanswer->status = 'Viewed';
        $Jobapplyanswer->save();
 
-       return view('job.jobAnsModal',compact('jobqus','Jobapplyanswer'));
+       return view('job.jobAnsModal',compact('jobqus','Jobapplyanswer','questions'));
    }
 
    public function job_question(Request $data){

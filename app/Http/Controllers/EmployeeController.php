@@ -15,10 +15,13 @@ use App\Ethnicity;
 use App\Jobapply;
 use App\Jobapplyanswer;
 use App\JobExperience;
+use App\JobQuestion;
+use App\Jobsamplequestion;
 use App\MembershipInSocialNetwork;
 use App\Nationality;
 use App\ProfessionalQualification;
 use App\QuestionObjective;
+use App\QuestionSet;
 use App\Refree;
 use App\RelativeInCb;
 use App\Religion;
@@ -34,35 +37,17 @@ use Mail;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-//        $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-
             if (Auth::check()){
-
                 return $next($request);
-
-
             }else{
-
                 return redirect('/');
             }
-
-
         });
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('home');
@@ -70,11 +55,9 @@ class EmployeeController extends Controller
 
     public function getEmployeeCvCareerObjective()
     {
-        $userId=Auth::user()->userId;
         return view('userCv.careerObjective');
-
-
     }
+
     public function applyJob($jobId,Request $r)
     {
         $empId=Employee::where('fkuserId',Auth::user()->userId)->first();
@@ -92,16 +75,22 @@ class EmployeeController extends Controller
                     $Jobapplyanswer = new Jobapplyanswer;
                     $Jobapplyanswer->jobId = $jobId;
                     $Jobapplyanswer->jobapplyId = $jobApply->jobapply;
-                    $Jobapplyanswer->qa1 = $r->qa1;
-                    $Jobapplyanswer->qa2 = $r->qa2;
-                    $Jobapplyanswer->qa3 = $r->qa3;
-                    $Jobapplyanswer->qa4 = $r->qa4;
-                    $Jobapplyanswer->qa5 = $r->qa5;
-                    $Jobapplyanswer->qa6 = $r->qa6;
-                    $Jobapplyanswer->qa7 = $r->qa7;
-                    $Jobapplyanswer->qa8 = $r->qa8;
-                    $Jobapplyanswer->qa9 = $r->qa9;
-                    $Jobapplyanswer->qa10 = $r->qa10;
+
+                    $jobqus = JobQuestion::where('jobId',$jobId)->first();
+                    if (!empty($jobqus)){
+                        if ($jobqus->questionType=='SET'){
+                            $QuestionSet = QuestionSet::find($jobqus->setNumber);
+                            $questions = Jobsamplequestion::whereIn('sampleQuestionId',explode(",",$QuestionSet->setQuestion))->get();
+                        }elseif ($jobqus->questionType=='CUSTOM'){
+                            $questions = Jobsamplequestion::whereIn('sampleQuestionId',explode(",",$jobqus->customQuestion))->get();
+                        }
+                        $answer = array();
+                        foreach ($questions as $question){
+                            $answer[] = $question->sampleQuestionId.'=>'.$r->question[$question->sampleQuestionId];
+                        }
+                        $Jobapplyanswer->answers = implode("&%TCL%&",$answer);
+                    }
+
                     if ($Jobapplyanswer->save()){
                         $email = Auth::user()->email;
                         $customBody = email::where('emailfor','Acknowledgement')->first();

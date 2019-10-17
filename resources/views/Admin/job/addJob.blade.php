@@ -146,7 +146,8 @@
 
                         <div class="row" id="questionCustom" style="display: none">
                             <div class="form-group col-md-6 offset-3" id="jobQuestion">
-                                <label for="question">Question Custom<span style="color: red">*</span></label>
+                                <label for="questionCustomSelect">Question Custom<span style="color: red">*</span></label><br>
+                                <label style="color:green;text-size:20px">Press ctrl to select multiple</label>
                                 <select class="form-control" id="questionCustomSelect" name="questionCustom[]" multiple style="height: 300px">
                                     <option value="">Select</option>
                                     @foreach($questions as $question)

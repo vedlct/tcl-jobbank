@@ -19,16 +19,16 @@
                 </div>
                 <hr>
                 @if(count($questions)>0)
-                    @foreach($questions as $question)
+                    @foreach($questions as $key => $question)
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label for="qa">{{$question->question}}</label>
+                                <label for="qa">{{($key+1).': '.$question->question}}</label>
                                 @if($question->type=='Short')
-                                    <input type="text" id="qa" placeholder="Write your answer here." required >
+                                    <input type="text" id="qa" name="question[{{$question->sampleQuestionId}}]" placeholder="Write your answer here." required >
                                 @elseif($question->type=='Long')
-                                    <textarea type="text" class="form-control" id="qa" placeholder="Write your answer here." rows="5" required ></textarea>
+                                    <textarea type="text" class="form-control" name="question[{{$question->sampleQuestionId}}]" id="qa" placeholder="Write your answer here." rows="5" required ></textarea>
                                 @elseif($question->type=='MCQ')
-                                    <select class="form-control" id="qa">
+                                    <select class="form-control" name="question[{{$question->sampleQuestionId}}]" id="qa" required>
                                         <option value="">Select your answer</option>
                                         @php
                                             $anss = explode(",",$question->answer);
