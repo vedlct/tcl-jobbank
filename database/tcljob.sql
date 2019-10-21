@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 17, 2019 at 12:57 PM
+-- Generation Time: Oct 21, 2019 at 06:10 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -919,9 +919,9 @@ CREATE TABLE `job` (
 
 INSERT INTO `job` (`jobId`, `title`, `position`, `salary`, `deadline`, `details`, `status`, `jobstatus`, `postBy`, `postDate`, `createBy`, `createDate`, `fkzoneId`, `updateBy`, `updateTime`, `pdflink`) VALUES
 (5, 'asd', 'sdf', 'asd', '2019-11-09', '<p>asdasdasd</p>', 1, 1, 1, '2019-10-16 12:32:13', 1, '2019-10-16 12:32:13', 4, 1, '2019-10-16 12:32:13', NULL),
-(6, 'asd', 'asd', '4343', '2019-11-06', '<h1>asssssssss</h1>', 1, 4, 1, '2019-10-16 12:33:14', 1, '2019-10-16 12:33:14', 5, 1, '2019-10-16 13:20:44', NULL),
+(6, 'test', 'asd', '4343', '2019-11-06', '<h1>asssssssss</h1>', 1, 4, 1, '2019-10-16 12:33:14', 1, '2019-10-16 12:33:14', 5, 1, '2019-10-16 13:20:44', NULL),
 (7, 'dg', 'dfdg', 'fg', '2019-11-02', '<h1>dfgfdg</h1>', 2, 2, NULL, NULL, 1, '2019-10-16 12:41:58', 6, 1, '2019-10-16 12:41:58', NULL),
-(8, 'asd', 'asd', 'asd', '2019-11-08', '<h2>asdasd</h2>', 1, 2, 1, '2019-10-16 12:56:19', 1, '2019-10-16 12:56:19', 6, 1, '2019-10-16 12:56:19', NULL);
+(8, 'test-2', 'asd', 'asd', '2019-11-08', '<h2>asdasd</h2>', 1, 2, 1, '2019-10-16 12:56:19', 1, '2019-10-16 12:56:19', 6, 1, '2019-10-16 12:56:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -949,8 +949,7 @@ CREATE TABLE `jobapply` (
 --
 
 INSERT INTO `jobapply` (`jobapply`, `applydate`, `fkjobId`, `fkemployeeId`, `status`, `statuschangeBy`, `currentSalary`, `expectedSalary`, `readyToJoinAfter`, `mailTamplateId`, `interviewCallDate`, `interviewCallDateTime`) VALUES
-(10, '2019-10-17', 5, 1, 'Viewed', NULL, 6, 456, NULL, NULL, NULL, NULL),
-(11, '2019-10-17', 6, 1, 'Viewed', NULL, 10, 20, NULL, NULL, NULL, NULL);
+(12, '2019-10-21', 6, 1, 'Pending', NULL, 10, 20, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -970,8 +969,7 @@ CREATE TABLE `jobapplyanswer` (
 --
 
 INSERT INTO `jobapplyanswer` (`jobanswerId`, `jobId`, `jobapplyId`, `answers`) VALUES
-(10, 5, 10, '4=>dfg&%TCL%&8=>dfg&%TCL%&9=>dfg&%TCL%&12=>dfg&%TCL%&14=>12&%TCL%&15=>dgdf&%TCL%&18=>dfgdfgfdg'),
-(11, 6, 11, '3=>option-2&%TCL%&4=>123456');
+(12, 6, 12, '3=>option-1&%TCL%&4=>fff');
 
 -- --------------------------------------------------------
 
@@ -1487,9 +1485,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userId`, `name`, `email`, `password`, `status`, `fkuserTypeId`, `register`, `created_at`, `remember_token`, `token`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$9bvWIarfmTXlMYnLUNyB/.QZfF19xXIYHEw9fEXA9HVHlNcKPlLn2', NULL, 'admin', 'Y', '2019-10-17 12:56:53', 'yXscXqxEcM3rf6rt7jBmQmGYchCSmsEd6gEsDVDyTIYN3Pi22IKMDRvqHY0l', NULL),
+(1, 'admin', 'admin@gmail.com', '$2y$10$9bvWIarfmTXlMYnLUNyB/.QZfF19xXIYHEw9fEXA9HVHlNcKPlLn2', NULL, 'admin', 'Y', '2019-10-21 06:09:47', 'i74UaKX6vswsLco0Y8CuN1ByndvFWX4b2fWAXi4ZFNBdgncSZRoy2wmlMuj4', NULL),
 (6, 'Sakib Rahman', 'sakibtcl@gmail.com', '$2y$10$z/KBBYCiOUUNgtHhrW.qj.G6oiu75VV5i1atAOwA6ttwOOctZZjd6', NULL, 'user', 'Y', '2019-10-17 05:47:06', 'h1bRN6fTnsPqHXRX1NaIPiW24gpCju5PItCgZQydAWtcqLKDHT5Z0Opc7I7q', NULL),
-(65, 'shraboni Jade', 'yyyyyy@gmail.com', '$2y$10$H7p/qRqJexa/5xju3TFIruCfQRKY/hig/NnAgwhOaBqjy0TR60HCG', NULL, 'user', 'Y', '2019-10-17 11:16:43', 'no0FCpBjMcOCUefUTwShWhFoji1k0wzKscMd78BVhv69qkn9y3Z5Lhv1aT3v', 'sPDPfKunNZPj6HIXJt8lZix65Sma9TFlIkXvQZROd3NmpcBwASJHgtwvNPji0DxV'),
+(65, 'shraboni Jade', 'yyyyyy@gmail.com', '$2y$10$H7p/qRqJexa/5xju3TFIruCfQRKY/hig/NnAgwhOaBqjy0TR60HCG', NULL, 'user', 'Y', '2019-10-18 06:34:20', 'MtO7L6SWpl0ygGaNwu3AFflnacUzVQCr9lHbUCFRzWoVniSjmNLom8pU8qoo', 'sPDPfKunNZPj6HIXJt8lZix65Sma9TFlIkXvQZROd3NmpcBwASJHgtwvNPji0DxV'),
 (66, 'adam', 'hg@gmail.com', '$2y$10$H7p/qRqJexa/5xju3TFIruCfQRKY/hig/NnAgwhOaBqjy0TR60HCG', NULL, 'admin', 'Y', '2019-10-11 07:09:22', 'wYX0RQpUduJUQKkAlYw4IeZoKDdV051i3Ulk8ByPT9b1JM0qhR6NpF5Uu1BZ', NULL),
 (67, 'i', 'h2g@gmail.com', '$2y$10$jE8DoENQ9veFIBOj0Mi9juKnXVGWuPIF6Lxzr1LG1ASeb4BQY2KqW', NULL, 'cbEmp', 'Y', '2019-10-11 06:13:52', NULL, NULL);
 
@@ -2018,13 +2016,13 @@ ALTER TABLE `job`
 -- AUTO_INCREMENT for table `jobapply`
 --
 ALTER TABLE `jobapply`
-  MODIFY `jobapply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `jobapply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `jobapplyanswer`
 --
 ALTER TABLE `jobapplyanswer`
-  MODIFY `jobanswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `jobanswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `jobexperience`

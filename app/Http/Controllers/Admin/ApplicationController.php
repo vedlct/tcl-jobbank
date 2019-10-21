@@ -132,18 +132,12 @@ class ApplicationController extends Controller
         if ($r->applicant_Status){
             $application= $application->where('jobapply.status',$r->applicant_Status);
         }
-//        if ($r->q5ans){
-//            $application= $application->where('jobapplyanswer.qa5',$r->q5ans);
-//        }
-//        if ($r->q6ans){
-//            $application= $application->where('jobapplyanswer.qa6',$r->q6ans);
-//        }
-//        if ($r->q7ans){
-//            $application= $application->where('jobapplyanswer.qa7',$r->q7ans);
-//        }
-//        if ($r->q8ans){
-//            $application= $application->where('jobapplyanswer.qa8',$r->q8ans);
-//        }
+        if ($r->qans){
+            foreach ($r->qans as $anss){
+                $ans = explode('%',$anss);
+                $application= $application->where('jobapplyanswer.answers','LIKE','%' . $ans['0'].'=>'.$ans['1'] . '%');
+            }
+        }
         if ($r->genderFilter){
             $application= $application->where('employee.gender',$r->genderFilter);
         }
@@ -216,7 +210,6 @@ class ApplicationController extends Controller
                 ->first();
             $application= $application->where('job.fkzoneId',$myZone->fkzoneId);
         }
-
         $datatables = DataTables::of($application);
         return $datatables->make(true);
     }

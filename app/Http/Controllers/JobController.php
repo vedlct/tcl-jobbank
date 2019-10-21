@@ -199,8 +199,17 @@ class JobController extends Controller
    }
 
    public function job_question(Request $data){
-        return job::leftJoin('jobquestion', 'jobquestion.jobId', '=', 'job.jobId')
-                    ->where('title',$data->jobTitle)->first();
+        $job_data = job::leftJoin('jobquestion', 'jobquestion.jobId', '=', 'job.jobId')
+                        ->where('title',$data->jobTitle)->first();
+        if (!empty($job_data->questionType)) {
+            if ($job_data->questionType == 'SET') {
+                $QuestionSet = QuestionSet::find($job_data->setNumber);
+                $questions = Jobsamplequestion::whereIn('sampleQuestionId', explode(",", $QuestionSet->setQuestion))->get();
+            } elseif ($job_data->questionType == 'CUSTOM') {
+                $questions = Jobsamplequestion::whereIn('sampleQuestionId', explode(",", $job_data->customQuestion))->get();
+            }
+            return view('Admin.application.manageJobQuestion',compact('questions'));
+        }
    }
 
    public function sampleQuestion()
