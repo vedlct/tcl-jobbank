@@ -29,20 +29,12 @@ class UserCvController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-
             if (Auth::check()){
-
                 return $next($request);
-
-
             }else{
-
                 return redirect('/');
             }
-
-
         });
     }
 
@@ -78,6 +70,18 @@ class UserCvController extends Controller
 //       $pdf = PDF::loadView('test',compact('personalInfo','education','professionalCertificate','jobExperience','trainingCertificate','refree','relativeCb'));
 //       return $pdf->stream('Curriculam Vitae of '.$personalInfo->firstName." ".$personalInfo->lastName.'.pdf',array('Attachment'=>0));
    }
+
+    public function getresume($applyId){
+        $data = jobapply::find($applyId);
+        if (!empty($data->resume) && file_exists( public_path(). "/jobApplyResume/".$data->resume)){
+            $extension = substr($data->resume, strpos($data->resume, ".") + 1);
+            $header = array(
+                'Content-Type: application/'.$extension,
+            );
+            $file= public_path(). "/jobApplyResume/".$data->resume;
+            return response()->download($file, 'resume.'.$extension, $header);
+        }
+    }
 
    public function getFullCv($empId){
 

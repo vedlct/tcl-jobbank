@@ -500,10 +500,17 @@
                     // { title:'Schedule Date', data: 'interviewCallDate', name: 'jobapply.interviewCallDate', "orderable": true, "searchable":true },
                     // { title:'Schedule Time', data: 'interviewCallDateTime', name: 'jobapply.interviewCallDateTime', "orderable": true, "searchable":true },
                     { title:'Action',"data": function(data){
-                        return '<button class="btn btn-sm btn-primary" onclick="qusview('+data.employeeId+','+data.jId+')"><i class="fa fa-eye"></i></button>'
-                            +'&nbsp;' +'<button class="btn btn-sm btn-smbtn-info" onclick="getEmpCv('+data.employeeId+')"><i class="fa fa-file-pdf-o"></i></button>'
-                            +'&nbsp;' +'<button class="btn btn-sm btn-danger" onclick="empReject('+data.employeeId+')"><i class="fa fa-trash-o"></i></button>'
-                            ;},
+                            if (!!data.resume) {
+                                var actionButton = '<button class="btn btn-sm btn-primary" onclick="qusview('+data.employeeId+','+data.jId+')"><i class="fa fa-eye"></i></button>'
+                                    +'&nbsp;' +'<button class="btn btn-sm btn-smbtn-info" onclick="getEmpCv('+data.applyId+')"><i class="fa fa-file-pdf-o"></i></button>'
+                                    +'&nbsp;' +'<button class="btn btn-sm btn-danger" onclick="empReject('+data.employeeId+')"><i class="fa fa-trash-o"></i></button>';
+                            } else {
+                                var actionButton = '<button class="btn btn-sm btn-primary" onclick="qusview('+data.employeeId+','+data.jId+')"><i class="fa fa-eye"></i></button>'
+                                    +'&nbsp;' +'<button class="btn btn-sm btn-danger" onclick="empReject('+data.employeeId+')"><i class="fa fa-trash-o"></i></button>';
+                            }
+
+                        return actionButton;
+                            },
                         "orderable": false, "searchable":false
                     }
                 ]
@@ -1512,22 +1519,12 @@
                         tryAgain: {
                             text: 'Ok',
                             btnClass: 'btn-blue',
-                            action: function () {
-
-
-                            }
                         }
-
                     }
                 });
-
             }
-
-
-
         }
 
-        // add multiple select / deselect functionality
         $("#selectall2").click(function () {
 
             if($('#selectall2').is(":checked")) {

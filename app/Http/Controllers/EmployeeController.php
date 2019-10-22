@@ -70,6 +70,13 @@ class EmployeeController extends Controller
                 $jobApply->fkemployeeId=$empId->employeeId;
                 $jobApply->currentSalary=$r->currentSalary;
                 $jobApply->expectedSalary=$r->expectedSalary;
+                if($r->hasFile('resume')){
+                    $resume = $r->file('resume');
+                    $filename= $empId->employeeId.'_'.$jobId.'_'.'Resume'.'.'.$resume->getClientOriginalExtension();
+                    $location = public_path('jobApplyResume');
+                    $resume->move($location, $filename);
+                    $jobApply->resume=$filename;
+                }
                 if ($jobApply->save())
                 {
                     $Jobapplyanswer = new Jobapplyanswer;

@@ -4,17 +4,24 @@
             <h4 class="modal-title" id="jobModalTitle"></h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form method="post" action="{{route('candidate.ApplyJob',['jobId'=>$jobId])}}">
+        <form method="post" action="{{route('candidate.ApplyJob',['jobId'=>$jobId])}}" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="modal-body" id="jobModalBody">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="currentSalary">Current Salary</label>
-                        <input type="number" id="currentSalary" placeholder="current salary" name="currentSalary">
+                        <input type="number" class="form-control" id="currentSalary" placeholder="current salary" name="currentSalary">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="expectedSalary">Expected Salary</label>
-                        <input type="number" placeholder="expected salary" id="expectedSalary" name="expectedSalary" required>
+                        <input type="number" class="form-control" placeholder="expected salary" id="expectedSalary" name="expectedSalary" required>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="resume">Resume</label>
+                        <input type="file" id="resume" class="form-control-file" name="resume">
                     </div>
                 </div>
                 <hr>
