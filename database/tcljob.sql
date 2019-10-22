@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 21, 2019 at 06:10 AM
+-- Generation Time: Oct 22, 2019 at 07:19 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -938,6 +938,7 @@ CREATE TABLE `jobapply` (
   `statuschangeBy` int(11) DEFAULT NULL,
   `currentSalary` int(11) DEFAULT NULL,
   `expectedSalary` int(11) DEFAULT NULL,
+  `resume` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `readyToJoinAfter` varchar(11) DEFAULT NULL,
   `mailTamplateId` int(11) DEFAULT NULL,
   `interviewCallDate` date DEFAULT NULL,
@@ -948,8 +949,8 @@ CREATE TABLE `jobapply` (
 -- Dumping data for table `jobapply`
 --
 
-INSERT INTO `jobapply` (`jobapply`, `applydate`, `fkjobId`, `fkemployeeId`, `status`, `statuschangeBy`, `currentSalary`, `expectedSalary`, `readyToJoinAfter`, `mailTamplateId`, `interviewCallDate`, `interviewCallDateTime`) VALUES
-(12, '2019-10-21', 6, 1, 'Pending', NULL, 10, 20, NULL, NULL, NULL, NULL);
+INSERT INTO `jobapply` (`jobapply`, `applydate`, `fkjobId`, `fkemployeeId`, `status`, `statuschangeBy`, `currentSalary`, `expectedSalary`, `resume`, `readyToJoinAfter`, `mailTamplateId`, `interviewCallDate`, `interviewCallDateTime`) VALUES
+(15, '2019-10-22', 5, 1, 'Viewed', NULL, 123, 123, '1_5_Resume.jpg', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -969,7 +970,7 @@ CREATE TABLE `jobapplyanswer` (
 --
 
 INSERT INTO `jobapplyanswer` (`jobanswerId`, `jobId`, `jobapplyId`, `answers`) VALUES
-(12, 6, 12, '3=>option-1&%TCL%&4=>fff');
+(15, 5, 15, '4=>asd&%TCL%&8=>asd&%TCL%&9=>sad&%TCL%&12=>sad&%TCL%&14=>12&%TCL%&15=>asd&%TCL%&18=>asdasd');
 
 -- --------------------------------------------------------
 
@@ -1485,9 +1486,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userId`, `name`, `email`, `password`, `status`, `fkuserTypeId`, `register`, `created_at`, `remember_token`, `token`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$9bvWIarfmTXlMYnLUNyB/.QZfF19xXIYHEw9fEXA9HVHlNcKPlLn2', NULL, 'admin', 'Y', '2019-10-21 06:09:47', 'i74UaKX6vswsLco0Y8CuN1ByndvFWX4b2fWAXi4ZFNBdgncSZRoy2wmlMuj4', NULL),
-(6, 'Sakib Rahman', 'sakibtcl@gmail.com', '$2y$10$z/KBBYCiOUUNgtHhrW.qj.G6oiu75VV5i1atAOwA6ttwOOctZZjd6', NULL, 'user', 'Y', '2019-10-17 05:47:06', 'h1bRN6fTnsPqHXRX1NaIPiW24gpCju5PItCgZQydAWtcqLKDHT5Z0Opc7I7q', NULL),
-(65, 'shraboni Jade', 'yyyyyy@gmail.com', '$2y$10$H7p/qRqJexa/5xju3TFIruCfQRKY/hig/NnAgwhOaBqjy0TR60HCG', NULL, 'user', 'Y', '2019-10-18 06:34:20', 'MtO7L6SWpl0ygGaNwu3AFflnacUzVQCr9lHbUCFRzWoVniSjmNLom8pU8qoo', 'sPDPfKunNZPj6HIXJt8lZix65Sma9TFlIkXvQZROd3NmpcBwASJHgtwvNPji0DxV'),
+(1, 'admin', 'admin@gmail.com', '$2y$10$9bvWIarfmTXlMYnLUNyB/.QZfF19xXIYHEw9fEXA9HVHlNcKPlLn2', NULL, 'admin', 'Y', '2019-10-22 07:00:54', 'AxBsVtTZNXNFY7XsmomgiYeqsG6iYFHpPDKMhyWipuV5cDkdp2FjbB5irnoU', NULL),
+(6, 'Sakib Rahman', 'sakibtcl@gmail.com', '$2y$10$z/KBBYCiOUUNgtHhrW.qj.G6oiu75VV5i1atAOwA6ttwOOctZZjd6', NULL, 'user', 'Y', '2019-10-22 05:22:59', 'NogKzhP2kWqFcNo8320PMp5NpmFU47sbce6kjMTT7Qr5J5sV2U3x9Ioja5cT', NULL),
+(65, 'shraboni Jade', 'yyyyyy@gmail.com', '$2y$10$H7p/qRqJexa/5xju3TFIruCfQRKY/hig/NnAgwhOaBqjy0TR60HCG', NULL, 'user', 'Y', '2019-10-22 06:58:19', 'AjrlD4NUgTidzYTfUH3bn9ZBi5fsgBuhHD857ApmUCFYfSU14gaLoyCYpO5u', 'sPDPfKunNZPj6HIXJt8lZix65Sma9TFlIkXvQZROd3NmpcBwASJHgtwvNPji0DxV'),
 (66, 'adam', 'hg@gmail.com', '$2y$10$H7p/qRqJexa/5xju3TFIruCfQRKY/hig/NnAgwhOaBqjy0TR60HCG', NULL, 'admin', 'Y', '2019-10-11 07:09:22', 'wYX0RQpUduJUQKkAlYw4IeZoKDdV051i3Ulk8ByPT9b1JM0qhR6NpF5Uu1BZ', NULL),
 (67, 'i', 'h2g@gmail.com', '$2y$10$jE8DoENQ9veFIBOj0Mi9juKnXVGWuPIF6Lxzr1LG1ASeb4BQY2KqW', NULL, 'cbEmp', 'Y', '2019-10-11 06:13:52', NULL, NULL);
 
@@ -2016,13 +2017,13 @@ ALTER TABLE `job`
 -- AUTO_INCREMENT for table `jobapply`
 --
 ALTER TABLE `jobapply`
-  MODIFY `jobapply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `jobapply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `jobapplyanswer`
 --
 ALTER TABLE `jobapplyanswer`
-  MODIFY `jobanswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `jobanswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `jobexperience`
