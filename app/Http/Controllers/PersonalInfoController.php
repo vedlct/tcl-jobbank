@@ -6,8 +6,8 @@ namespace App\Http\Controllers;
 use App\Employee;
 use App\Ethnicity;
 use App\Nationality;
+use App\QuestionObjective;
 use App\Religion;
-
 use Illuminate\Http\Request;
 use Artisan;
 use Session;
@@ -54,12 +54,12 @@ class PersonalInfoController extends Controller
     {
         $userId=Auth::user()->userId;
         $employeeCvPersonalInfo=Employee::where('fkuserId','=',$userId)->get();
-
         $religion=Religion::where('status',1)->get();
         $ethnicity=Ethnicity::where('status',1)->get();
         $natinality=Nationality::where('status',1)->get();
+        $employeeCareerInfo = QuestionObjective::where('empId',$employeeCvPersonalInfo[0]->employeeId)->first()->objective;
 
-        return view('userCv.edit.personalInfo',compact('religion','ethnicity','natinality','employeeCvPersonalInfo'));
+        return view('userCv.edit.personalInfo',compact('religion','ethnicity','natinality','employeeCvPersonalInfo','employeeCareerInfo'));
 
     }
 
@@ -71,21 +71,15 @@ class PersonalInfoController extends Controller
         $religion=Religion::where('status',1)->get();
         $ethnicity=Ethnicity::where('status',1)->get();
         $natinality=Nationality::where('status',1)->get();
-
-//        return view('userCv.insert.personalInfo',compact('religion','ethnicity','natinality'));
+        $employeeCareerInfo = QuestionObjective::where('empId',$employeeCvPersonalInfo[0]->employeeId)->first()->objective;
 
         if (!$employeeCvPersonalInfo->isEmpty()){
-
-
-            return view('userCv.update.personalInfo',compact('religion','ethnicity','natinality','employeeCvPersonalInfo'));
-
-
+            return view('userCv.update.personalInfo',compact('religion','ethnicity','natinality','employeeCvPersonalInfo','employeeCareerInfo'));
         }else{
-
             return view('userCv.insert.personalInfo',compact('religion','ethnicity','natinality'));
         }
-
     }
+
     public function insertPersonalInfo(Request $r)
     {
 
@@ -118,8 +112,7 @@ class PersonalInfoController extends Controller
             'permanentAddress' => 'required',
             'image' => 'image|mimes:jpeg,jpg,png|max:100',
             'sign' => 'image|mimes:jpeg,jpg,png|max:50',
-
-
+            'objective' => 'max:2500'
         ];
 
         $customMessages = [
@@ -166,8 +159,9 @@ class PersonalInfoController extends Controller
         $employee->passport=$r->passport;
         $employee->save();
 
-
-
+        $employeeCareerInfo=new QuestionObjective();
+        $employeeCareerInfo->objective=$r->objective;
+        $employeeCareerInfo->save();
 
 
         if($r->hasFile('image')){
@@ -204,8 +198,6 @@ class PersonalInfoController extends Controller
     }
     public function updatePersonalInfo(Request $r)
     {
-
-
         $rules = [
             'firstName' => 'required|max:50',
             'lastName' => 'required|max:50',
@@ -235,8 +227,7 @@ class PersonalInfoController extends Controller
             'permanentAddress' => 'required',
             'image' => 'image|mimes:jpeg,jpg,png|max:100',
             'sign' => 'image|mimes:jpeg,jpg,png|max:50',
-
-
+            'objective' => 'max:2500'
         ];
 
         $customMessages = [
@@ -244,9 +235,6 @@ class PersonalInfoController extends Controller
         ];
 
         $this->validate($r, $rules, $customMessages);
-
-//        $empId=Employee::where('fkuserId',Auth::user()->userId)->first()->employeeId;
-
         $employee=Employee::where('fkuserId',Auth::user()->userId)->first();
 
         $employee->firstName=$r->firstName;
@@ -285,7 +273,9 @@ class PersonalInfoController extends Controller
 
         $employee->save();
 
-
+        $employeeCareerInfo = QuestionObjective::where('empId',$employee->employeeId)->first();
+        $employeeCareerInfo->objective=$r->objective;
+        $employeeCareerInfo->save();
 
 
 

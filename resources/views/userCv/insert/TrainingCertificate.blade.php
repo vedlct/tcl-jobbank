@@ -12,19 +12,19 @@
 
                         <div class="sidenav">
                             <a href="{{route('candidate.cvPersonalInfo')}}">Personal details</a>
-                            <a href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>
+{{--                            <a href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>--}}
                             <a href="{{route('candidate.cvEducation')}}">Education</a>
                             <a href="{{route('candidate.language.index')}}" >Language</a>
-                            <a href="{{route('candidate.computerSkill.index')}}" >Computer-skill</a>
+{{--                            <a href="{{route('candidate.computerSkill.index')}}" >Computer-skill</a>--}}
                             {{--<a href="{{route('candidate.skill.index')}}" >Other Skill Information</a>--}}
-                            <a href="{{route('cv.OthersInfo')}}" >Other information</a>
-                            <a href="{{route('candidate.cvTrainingCertificate')}}" class="activeNav">Training certification</a>
+{{--                            <a href="{{route('cv.OthersInfo')}}" >Other information</a>--}}
+{{--                            <a href="{{route('candidate.cvTrainingCertificate')}}" class="activeNav">Training certification</a>--}}
                             <a <?php if ($hasTrainingInfo!='0'){?> onclick="return false;" class="incomplete" <?php } ?> href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a onclick="return false;" class="incomplete" href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>--}}
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>--}}
                             <a onclick="return false;" class="incomplete" href="{{route('refree.index')}}">Referee</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>--}}
                         </div>
 
                     </div>
@@ -74,7 +74,6 @@
                                                 <option value="">Select country</option>
                                                 @foreach($countries as $country)
                                                     <option value="{{$country->countryId}}">{{$country->countryName}}</option>
-
                                                 @endforeach
                                             </select>
                                         </div>
@@ -87,9 +86,6 @@
                                             <label for="inputPassword4">End date</label>
                                             <input type="text" class="form-control date" name="endDate[]" id="end" placeholder="date">
                                         </div>
-
-
-
 
                                         <div class="form-group col-md-4">
                                             <label for="inputPassword4">Status<span style="color: red">*</span></label>
@@ -146,22 +142,15 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputPassword4">Year</label>
-                                            <select  class="form-control js-example-basic-single"id="trainingCertificateyear" name="year[]">
-
+                                            <label for="trainingCertificateyear">Year</label>
+                                            <select class="form-control js-example-basic-single" id="trainingCertificateyear" name="year[]">
                                                 <option value="">Select year</option>
                                                 @for($i = 1 ; $i <51 ; $i++)
                                                     <option value="{{$i}}">{{$i}}</option>
                                                 @endfor
                                             </select>
                                         </div>
-
-
-
                                     </div>
-
-
-
                                 </div>
 
 
@@ -177,7 +166,6 @@
                                     @if($hasTrainingInfo == '1' || $hasTrainingInfo == '0')
                                         <a href="{{route('candidate.cvProfessionalCertificate')}}"><button type="button" id="btnNext" >Next</button></a>
                                     @endif
-
                                 </div>
                             </div>
 

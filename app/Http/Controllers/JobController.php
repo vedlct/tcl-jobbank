@@ -221,6 +221,7 @@ class JobController extends Controller
 
    public function sampleQuestionSubmit(Request $data)
    {
+//       dd($data);
        $validator = Validator::make($data->all(), [
            'modalQuestionType' => 'required',
            'modalQuestion' => 'required',

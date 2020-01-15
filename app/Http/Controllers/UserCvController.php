@@ -279,15 +279,10 @@ class UserCvController extends Controller
            ->leftJoin('computerskill','computerskill.id','empcomputerskill.computerSkillId')
            ->get();
 
-
-
-
-
        $professionalCertificate = ProfessionalQualification::where('fkemployeeId', $empId)
            ->get();
 
        $jobExperience = JobExperience::where('fkemployeeId', $empId)
-//           ->orderBy('startDate', 'desc')
            ->get();
 
        $trainingCertificate = Traning::where('fkemployeeId', $empId)
@@ -301,11 +296,7 @@ class UserCvController extends Controller
        $empOtherInfo=EmployeeOtherInfo::where('fk_empId', $empId)
            ->first();
 
-
        $memberShip=MembershipInSocialNetwork::where('fkemployeeId',$empId)->get();
-
-
-//                return $memberShip;
 
        $languageNames=EmployeeLanguage::select('fklanguageHead','languagename')
            ->where('fkemployeeId',$empId)
@@ -317,20 +308,13 @@ class UserCvController extends Controller
            ->leftJoin('languageskill','languageskill.id','emp_language.fklanguageSkill')
            ->get();
 
-
-
-//                return $languages;
        $salary=QuestionObjective::where('empId',$empId)->first();
 
-
-
-        $pdf = PDF::loadView('test',compact('allEmp', 'personalInfo', 'education',
+       $pdf = PDF::loadView('test',compact('allEmp', 'personalInfo', 'education',
             'professionalCertificate', 'jobExperience', 'trainingCertificate', 'refree',
             'relativeCb','empOtherSkillls','empComputerSkill','empOtherInfo','memberShip','languageNames','languages','salary'));
 
        return $pdf->download('Curriculam Vitae of '.$personalInfo->firstName." ".$personalInfo->lastName.'.pdf',array('Attachment'=>false));
-
-
    }
 
     public function getSelectedCv(Request $r){

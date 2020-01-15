@@ -35,7 +35,7 @@
                         <div class="form-group" id="modalQuestionAnswer">
                             <label>Answer</label>
                             <input type="text" class="form-control" name="modalQuestionAnswer" id="modalQuestionAnswerField">
-                            <small>If more than one then put it in comma separated from.</small>
+                            <small>If more than one then put it in comma separated from and add <span style="font-size: 25px;color: #77ee77;">|C</span> after correct answer</small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -246,7 +246,7 @@
             $.ajax({
                 type: "POST",
                 url: '{{route('job.sample.question.submit')}}',
-                data: {'_token':"{{csrf_token()}}", modalQuestionType:$("#modalQuestionType").val(), modalQuestionAnswer:$("#modalQuestionAnswerField").val(), modalQuestion:$("#modalQuestion").val()},
+                data: {'_token':"{{csrf_token()}}", questionId:$("#modalQuestionId").val(), modalQuestionType:$("#modalQuestionType").val(), modalQuestionAnswer:$("#modalQuestionAnswerField").val(), modalQuestion:$("#modalQuestion").val()},
                 success: function( data ) {
                     if($.isEmptyObject(data.error)){
                         $(".print-error-msg").css('display','none');

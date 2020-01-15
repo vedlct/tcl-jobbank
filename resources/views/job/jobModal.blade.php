@@ -41,7 +41,12 @@
                                             $anss = explode(",",$question->answer);
                                             if (count($anss)>0){
                                                 foreach ($anss as $ans){
-                                                    echo "<option value=".$ans.">".$ans."</option>";
+                                                    if (strpos($ans, '|C') !== false) {
+                                                        $ansss = explode("|C",$ans);
+                                                        echo "<option value=".$ansss[0].">".$ansss[0]."</option>";
+                                                    }else{
+                                                        echo "<option value=".$ans.">".$ans."</option>";
+                                                    }
                                                 }
                                             }
                                         @endphp

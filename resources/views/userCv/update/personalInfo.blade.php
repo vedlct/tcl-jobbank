@@ -28,19 +28,19 @@
 
                         <div class="sidenav">
                             <a href="{{route('candidate.cvPersonalInfo')}}" class="activeNav">Personal details</a>
-                            <a href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>
+{{--                            <a href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>--}}
                             <a href="{{route('candidate.cvEducation')}}">Education</a>
                             <a href="{{route('candidate.language.index')}}">Language</a>
-                            <a href="{{route('candidate.computerSkill.index')}}">Computer-skill</a>
+{{--                            <a href="{{route('candidate.computerSkill.index')}}">Computer-skill</a>--}}
                             {{--<a href="{{route('candidate.skill.index')}}">Other Skill Information</a>--}}
-                            <a href="{{route('cv.OthersInfo')}}">Other information</a>
-                            <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
+{{--                            <a href="{{route('cv.OthersInfo')}}">Other information</a>--}}
+{{--                            <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>--}}
                             <a href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
-                            <a href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
+{{--                            <a href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>--}}
+{{--                            <a href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>--}}
                             <a href="{{route('refree.index')}}">Referee</a>
-                            <a href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
+{{--                            <a href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>--}}
                         </div>
 
                     </div>
@@ -228,6 +228,11 @@
                                         <label for="">Permanent address</label>
                                         <br>
                                         {{$personalInfo->parmanentAddress }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="">Career Objective </label>
+                                        <br>
+                                        {{$employeeCareerInfo}}
                                     </div>
 
                                 </div>

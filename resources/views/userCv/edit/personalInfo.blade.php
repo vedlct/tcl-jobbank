@@ -26,12 +26,7 @@
                     @foreach($employeeCvPersonalInfo as $personalInfo)
                         <form  id="regForm" enctype="multipart/form-data" method="post"  action="{{route('cv.updatePersonalInfo')}}">
 
-                        {{csrf_field()}}
-                        <!-- One "tab" for each step in the form: -->
-
-                            {{--<div class="tab">--}}
-
-
+                            {{csrf_field()}}
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="">Given name<span style="color: red">*</span></label>
@@ -234,16 +229,12 @@
                                             </span>
                                         @endif
                                     </div>
-
-
-
-
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="">Email<span style="color: red">*</span></label>
-                                        <input required type="text" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{$personalInfo->email }}" id="" placeholder="">
+                                        <input required type="text" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{$personalInfo->email }}" readonly>
                                         @if ($errors->has('email'))
                                             <span class="">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -361,6 +352,20 @@
                                             <span class="">
                                         <strong>{{ $errors->first('permanentAddress') }}</strong>
                                     </span>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label for="objective">Career Objective <span
+                                                    style="color: blue">(Max Limit 2500 character)</span></label>
+                                        <textarea type="text" name="objective" maxlength="2500" rows="10"
+                                                  class="form-control{{ $errors->has('objective') ? ' is-invalid' : '' }}"
+                                                  id="objective"
+                                                  placeholder="Career Objective">{{ $employeeCareerInfo }}</textarea>
+                                        @if ($errors->has('objective'))
+                                            <span>
+                                                <strong>{{ $errors->first('objective') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
 

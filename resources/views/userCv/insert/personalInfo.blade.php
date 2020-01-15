@@ -13,9 +13,6 @@
             color: #3276b1;
             background-color: #fff;
         }
-        /*#imageMsg,#signMsg{*/
-            /*display: none;*/
-        /*}*/
     </style>
 
     <div class="row ">
@@ -29,19 +26,19 @@
 
                         <div class="sidenav">
                             <a href="{{route('candidate.cvPersonalInfo')}}" class="activeNav">Personal details</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>--}}
                             <a onclick="return false;" class="incomplete" href="{{route('candidate.cvEducation')}}">Education</a>
                             <a onclick="return false;" class="incomplete" href="{{route('candidate.language.index')}}">Language</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.computerSkill.index')}}">Computer-skill</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.computerSkill.index')}}">Computer-skill</a>--}}
                             {{--<a onclick="return false;" class="incomplete" href="{{route('candidate.skill.index')}}">Other Skill Information</a>--}}
-                            <a onclick="return false;" class="incomplete" href="{{route('cv.OthersInfo')}}">Other information</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('cv.OthersInfo')}}">Other information</a>--}}
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>--}}
                             <a onclick="return false;" class="incomplete" href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a onclick="return false;" class="incomplete" href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>--}}
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>--}}
                             <a onclick="return false;" class="incomplete" href="{{route('refree.index')}}">Referee</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>--}}
                         </div>
 
                     </div>
@@ -116,7 +113,6 @@
                                         @foreach($religion as $reli)
                                         <option @if (old('religion') == $reli->religionId) selected @endif value="{{$reli->religionId}}">{{$reli->religionName}}</option>
                                         @endforeach
-
                                     </select>
                                 </div>
                             </div>
@@ -272,9 +268,8 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="">Email<span style="color: red">*</span></label>
-                                    <input type="text" required name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" id="" placeholder="Email">
+                                    <input type="text" required name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ Auth::user()->email }}" readonly>
                                     @if ($errors->has('email'))
-
                                         <span class="">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
@@ -284,7 +279,6 @@
                                     <label for="">Alternate email</label>
                                     <input type="text" name="alternateEmail"  class="form-control {{ $errors->has('alternateEmail') ? ' is-invalid' : '' }}" value="{{ old('alternateEmail') }}" id="" placeholder="Alternate email">
                                     @if ($errors->has('alternateEmail'))
-
                                         <span class="">
                                         <strong>{{ $errors->first('alternateEmail') }}</strong>
                                     </span>
@@ -393,9 +387,22 @@
                                     <textarea required placeholder="" rows="3" name="permanentAddress" class="form-control {{ $errors->has('permanentAddress') ? ' is-invalid' : '' }}">{{ old('permanentAddress') }}</textarea>
                                     {{--<input type="text" name="permanentAddress" class="form-control {{ $errors->has('permanentAddress') ? ' is-invalid' : '' }}" value="{{ old('permanentAddress') }}" id="" placeholder="">--}}
                                     @if ($errors->has('permanentAddress'))
-
                                         <span class="">
                                         <strong>{{ $errors->first('permanentAddress') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="objective">Objective <span
+                                                style="color: blue">(Max Limit 2500 character)</span></label>
+                                    <textarea type="text" name="objective" maxlength="2500" rows="10"
+                                              class="form-control{{ $errors->has('objective') ? ' is-invalid' : '' }}"
+                                              id="objective"
+                                              placeholder="Career Objective">{{ old('objective') }}</textarea>
+                                    @if ($errors->has('objective'))
+                                        <span class="">
+                                        <strong>{{ $errors->first('objective') }}</strong>
                                     </span>
                                     @endif
                                 </div>

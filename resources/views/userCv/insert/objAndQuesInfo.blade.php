@@ -12,29 +12,29 @@
 
                         <div class="sidenav">
                             <a href="{{route('candidate.cvPersonalInfo')}}">Personal details</a>
-                            <a href="{{route('candidate.cvQuesObj')}}" class="activeNav">Career objective and
-                                application information</a>
+{{--                            <a href="{{route('candidate.cvQuesObj')}}" class="activeNav">Career objective and--}}
+{{--                                application information</a>--}}
                             <a onclick="return false;" class="incomplete" href="{{route('candidate.cvEducation')}}">Education</a>
                             <a onclick="return false;" class="incomplete" href="{{route('candidate.language.index')}}">Language</a>
-                            <a onclick="return false;" class="incomplete"
-                               href="{{route('candidate.computerSkill.index')}}">Computer-skill</a>
+{{--                            <a onclick="return false;" class="incomplete"--}}
+{{--                               href="{{route('candidate.computerSkill.index')}}">Computer-skill</a>--}}
                             {{--<a onclick="return false;" class="incomplete" href="{{route('candidate.skill.index')}}">Other Skill Information</a>--}}
-                            <a onclick="return false;" class="incomplete" href="{{route('cv.OthersInfo')}}">Other
-                                information</a>
-                            <a onclick="return false;" class="incomplete"
-                               href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('cv.OthersInfo')}}">Other--}}
+{{--                                information</a>--}}
+{{--                            <a onclick="return false;" class="incomplete"--}}
+{{--                               href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>--}}
                             <a onclick="return false;" class="incomplete"
                                href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a onclick="return false;" class="incomplete" href="{{route('JobExperience.index')}}">Job
                                 experience</a>
-                            <a onclick="return false;" class="incomplete"
-                               href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
-                            <a onclick="return false;" class="incomplete"
-                               href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership
-                                in professional network/ forum</a>
+{{--                            <a onclick="return false;" class="incomplete"--}}
+{{--                               href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>--}}
+{{--                            <a onclick="return false;" class="incomplete"--}}
+{{--                               href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership--}}
+{{--                                in professional network/ forum</a>--}}
                             <a onclick="return false;" class="incomplete" href="{{route('refree.index')}}">Referee</a>
-                            <a onclick="return false;" class="incomplete"
-                               href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
+{{--                            <a onclick="return false;" class="incomplete"--}}
+{{--                               href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>--}}
                         </div>
 
                     </div>
@@ -47,14 +47,13 @@
                                 information</h2>
 
                             <div class="form-group">
-                                <label for="">Objective <span
+                                <label for="objective">Objective <span
                                             style="color: blue">(Max Limit 2500 character)</span></label>
                                 <textarea type="text" name="objective" maxlength="2500" rows="10"
                                           class="form-control{{ $errors->has('objective') ? ' is-invalid' : '' }}"
                                           id="objective"
                                           placeholder="Career Objective">{{ old('objective') }}</textarea>
                                 @if ($errors->has('objective'))
-
                                     <span class="">
                                         <strong>{{ $errors->first('objective') }}</strong>
                                     </span>

@@ -12,19 +12,19 @@
 
                         <div class="sidenav">
                             <a href="{{route('candidate.cvPersonalInfo')}}">Personal details</a>
-                            <a href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>
+{{--                            <a href="{{route('candidate.cvQuesObj')}}">Career objective and application information</a>--}}
                             <a href="{{route('candidate.cvEducation')}}">Education</a>
                             <a href="{{route('candidate.language.index')}}" >Language</a>
-                            <a href="{{route('candidate.computerSkill.index')}}" >Computer-skill</a>
+{{--                            <a href="{{route('candidate.computerSkill.index')}}" >Computer-skill</a>--}}
                             {{--<a href="{{route('candidate.skill.index')}}" >Other Skill Information</a>--}}
-                            <a href="{{route('cv.OthersInfo')}}" >Other information</a>
-                            <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>
+{{--                            <a href="{{route('cv.OthersInfo')}}" >Other information</a>--}}
+{{--                            <a href="{{route('candidate.cvTrainingCertificate')}}">Training certification</a>--}}
                             <a class="activeNav" href="{{route('candidate.cvProfessionalCertificate')}}">Professional certification</a>
                             <a <?php if ($hasProfCertificate!='0'){?> onclick="return false;" class="incomplete" <?php } ?> href="{{route('JobExperience.index')}}">Job experience</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.previousWorkInCB.index')}}">Previous work information</a>--}}
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('candidate.membershipInSocialNetwork.index')}}">Certification of membership in professional network/ forum</a>--}}
                             <a onclick="return false;" class="incomplete" href="{{route('refree.index')}}">Referee</a>
-                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>
+{{--                            <a onclick="return false;" class="incomplete" href="{{route('relativeInCaritas.getRelationInfo')}}">Relatives working</a>--}}
                         </div>
 
                     </div>
