@@ -172,7 +172,7 @@
 
                                     <div style="overflow:auto;">
                                         <div style="float:right;">
-                                            <a href="{{route('candidate.cvTrainingCertificate')}}">
+                                            <a href="{{url('/Candidate-CV-Language')}}">
                                                 <button type="button" id="btnPevious">Back</button>
                                             </a>
                                             <button type="submit" id="submitBtn">Save</button>

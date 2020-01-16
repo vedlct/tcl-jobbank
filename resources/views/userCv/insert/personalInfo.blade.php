@@ -366,8 +366,7 @@
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="">Current address<span style="color: red">*</span></label>
-                                    <textarea required placeholder="Current Address" rows="3" name="currentAddress" class="form-control {{ $errors->has('currentAddress') ? ' is-invalid' : '' }}">{{ old('currentAddress') }}</textarea>
-                                    {{--<input type="text" name="currentAddress" class="form-control {{ $errors->has('currentAddress') ? ' is-invalid' : '' }}" value="{{ old('currentAddress') }}" id="" placeholder="">--}}
+                                    <textarea required placeholder="Current Address" rows="3" id="currentAddress" name="currentAddress" class="form-control {{ $errors->has('currentAddress') ? ' is-invalid' : '' }}">{{ old('currentAddress') }}</textarea>
                                     @if ($errors->has('currentAddress'))
 
                                         <span class="">
@@ -377,15 +376,23 @@
                                 </div>
 
                             </div>
-
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">Permanent address<span style="color: red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1" style="margin-left: -1%;">
+                                    <input type="checkbox" class="" id="sameAddress">
+                                </div>
+                                <div class="col-md-3" style="margin-left: -4%;">
+                                    <label>Same as current address</label>
+                                </div>
+                            </div>
 
                             <div class="row">
-
                                 <div class="form-group col-md-12">
-                                    <label for="">Permanent address<span style="color: red">*</span></label>
-                                    <textarea required placeholder="" rows="3" name="permanentAddress" class="form-control {{ $errors->has('permanentAddress') ? ' is-invalid' : '' }}">{{ old('permanentAddress') }}</textarea>
-                                    {{--<input type="text" name="permanentAddress" class="form-control {{ $errors->has('permanentAddress') ? ' is-invalid' : '' }}" value="{{ old('permanentAddress') }}" id="" placeholder="">--}}
+                                    <textarea required placeholder="" rows="3" id="permanentAddress" name="permanentAddress" class="form-control {{ $errors->has('permanentAddress') ? ' is-invalid' : '' }}">{{ old('permanentAddress') }}</textarea>
                                     @if ($errors->has('permanentAddress'))
                                         <span class="">
                                         <strong>{{ $errors->first('permanentAddress') }}</strong>
@@ -393,7 +400,7 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-12">
                                     <label for="objective">Objective <span
                                                 style="color: blue">(Max Limit 2500 character)</span></label>
                                     <textarea type="text" name="objective" maxlength="2500" rows="10"
@@ -458,12 +465,7 @@
 
                 </div>
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
-
-    </div> <!-- end container -->
-    </div>
-    <!-- end wrapper -->
+        </div>
 
 
 @endsection
@@ -484,13 +486,24 @@
             for (i = 0; i < x.length; i++) {
                 x[i].className = x[i].className.replace(" active", "");
             }
-            //... and adds the "active" class on the current step:
             x[n].className += " active";
         }
-    </script>
 
 
-    <script type="text/javascript">
+        $('#sameAddress').change(function() {
+            if (this.checked) {
+                if($('#currentAddress').val() !== ''){
+                    $('#permanentAddress').val($('#currentAddress').val());
+                }else{
+                    $('#sameAddress').prop('checked', false);
+                    alert('Need to fill up current address.');
+                }
+            } else {
+                $('#permanentAddress').val('');
+            }
+        });
+
+
         $(function () {
             $('#dob').datepicker({
                 format: 'yyyy-m-d'

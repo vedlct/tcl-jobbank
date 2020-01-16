@@ -180,7 +180,7 @@
                                 <a href="{{route('candidate.cvProfessionalCertificate')}}"><button type="button" id="btnPevious" >Back</button></a>
                                 <button type="submit" id="submitBtn">Save</button>
                                 {{--<a href="{{route('refree.index')}}"><button type="button" id="nextBtn" >Next</button></a>--}}
-                                <a href="{{route('candidate.previousWorkInCB.index')}}"><button type="button" id="nextBtn" >Next</button></a>
+                                <a href="{{url('/Candidate-CV-Referee')}}"><button type="button" id="nextBtn" >Next</button></a>
 
                             </div>
                         </div>

@@ -177,7 +177,7 @@
 
                             <div style="overflow:auto;">
                                 <div style="float:right;">
-                                    <a href="{{route('candidate.cvQuesObj')}}"><button type="button" id="btnPevious">Back</button></a>
+                                    <a href="{{url('/Candidate-CV')}}"><button type="button" id="btnPevious">Back</button></a>
                                     <button type="submit" id="submitBtn">Save</button>
                                     <a href="{{route('candidate.language.index')}}"><button type="button" id="nextBtn" >Next</button></a>
                                 </div>

@@ -138,13 +138,6 @@
 
 
 
-                        <div style="overflow:auto;">
-                            <div style="float:right;">
-                                <a href="{{route('candidate.membershipInSocialNetwork.index')}}"><button type="button" id="btnPevious" >Back</button></a>
-                                <button type="submit" id="submitBtn">Save</button>
-                                <a <?php if ($tempHr < 2){?> onclick="return alert('atleast 2 refree needed')"  class="incomplete" <?php }else{?> href="{{route('relativeInCaritas.getRelationInfo')}}" <?php } ?> ><button type="button" id="nextBtn" >Next</button></a>
-                            </div>
-                        </div>
                         </form>
 
 

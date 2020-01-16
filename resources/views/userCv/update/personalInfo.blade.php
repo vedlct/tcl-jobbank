@@ -268,7 +268,7 @@
 
                                         <a href="{{route('personalInfo.edit')}}"><button type="submit"  id="submitBtn">Edit</button></a>
                                         {{--<a href="{{route('candidate.cvEducation')}}"><button type="button" id="nextBtn">Next</button></a>--}}
-                                        <a href="{{route('candidate.cvQuesObj')}}"><button type="button" id="nextBtn">Next</button></a>
+                                        <a href="{{url('/Candidate-CV-Education')}}"><button type="button" id="nextBtn">Next</button></a>
                                     </div>
                                 </div>
                                 @endforeach

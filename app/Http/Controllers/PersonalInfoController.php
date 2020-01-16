@@ -57,8 +57,11 @@ class PersonalInfoController extends Controller
         $religion=Religion::where('status',1)->get();
         $ethnicity=Ethnicity::where('status',1)->get();
         $natinality=Nationality::where('status',1)->get();
-        $employeeCareerInfo = QuestionObjective::where('empId',$employeeCvPersonalInfo[0]->employeeId)->first()->objective;
-
+        if (count($employeeCvPersonalInfo)>0){
+            $employeeCareerInfo = QuestionObjective::where('empId',$employeeCvPersonalInfo[0]->employeeId)->first()->objective;
+        }else{
+            $employeeCareerInfo = '';
+        }
         return view('userCv.edit.personalInfo',compact('religion','ethnicity','natinality','employeeCvPersonalInfo','employeeCareerInfo'));
 
     }
@@ -67,11 +70,15 @@ class PersonalInfoController extends Controller
     {
         $userId=Auth::user()->userId;
         $employeeCvPersonalInfo=Employee::where('fkuserId','=',$userId)->get();
-
+//dd($employeeCvPersonalInfo);
         $religion=Religion::where('status',1)->get();
         $ethnicity=Ethnicity::where('status',1)->get();
         $natinality=Nationality::where('status',1)->get();
-        $employeeCareerInfo = QuestionObjective::where('empId',$employeeCvPersonalInfo[0]->employeeId)->first()->objective;
+        if (count($employeeCvPersonalInfo)>0){
+            $employeeCareerInfo = QuestionObjective::where('empId',$employeeCvPersonalInfo[0]->employeeId)->first()->objective;
+        }else{
+            $employeeCareerInfo = '';
+        }
 
         if (!$employeeCvPersonalInfo->isEmpty()){
             return view('userCv.update.personalInfo',compact('religion','ethnicity','natinality','employeeCvPersonalInfo','employeeCareerInfo'));
@@ -160,6 +167,7 @@ class PersonalInfoController extends Controller
         $employee->save();
 
         $employeeCareerInfo=new QuestionObjective();
+        $employeeCareerInfo->empId=$employee->employeeId;
         $employeeCareerInfo->objective=$r->objective;
         $employeeCareerInfo->save();
 
